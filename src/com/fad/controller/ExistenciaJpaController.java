@@ -32,6 +32,7 @@ public class ExistenciaJpaController implements Serializable {
     public ExistenciaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("FADPU");
 
     public EntityManager getEntityManager() {
