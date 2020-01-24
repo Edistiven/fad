@@ -6,7 +6,7 @@ public class UsuarioTest {
 
     public static void main(String[] args) {
         usuarioDAO usuarioI = new usuarioDAO();
-        usuarioI.insertar("Prueba", "Prueba");
+        //usuarioI.insertar("Prueba", "Prueba");
         //usuarioI.modificar(2, "Pruebas", "Pruebas");
         //usuarioI.eliminar(2);
     }

@@ -1,11 +1,17 @@
 package com.fad.dao;
 
+import com.fad.controller.CategoriaJpaController;
 import com.fad.controller.UsuarioJpaController;
+import com.fad.entities.Categoria;
 import com.fad.entities.Producto;
 import com.fad.entities.Usuario;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,15 +24,17 @@ public class usuarioDAO {
 
     private Usuario usuario = new Usuario();
     private UsuarioJpaController ujc = new UsuarioJpaController();
+    private CategoriaJpaController cjc = new CategoriaJpaController();
 
     /**
      * Funciones basicas CRUD*
      */
-    public void insertar(String nombreU, String passwordU) {
+    public void insertar(String nombreU, String passwordU, int rol) {
         try {
             usuario.setIdUsuario(Integer.MIN_VALUE);
             usuario.setNombreUser(nombreU);
             usuario.setPasswordUser(passwordU);
+            usuario.setRolUser(rol);
             ujc.create(usuario);
             System.out.println("Se ha guardado con exito!!!");
 
@@ -64,6 +72,7 @@ public class usuarioDAO {
             datosU[0] = u.getIdUsuario().toString();
             datosU[1] = u.getNombreUser();
             datosU[2] = u.getPasswordUser();
+            datosU[3] = findCategoriaById(u.getRolUser()).getNombreCat();
 
             model.addRow(datosU);
         }
@@ -119,4 +128,46 @@ public class usuarioDAO {
         }
         return valor;
     }
+
+    public void getRolCmb(JComboBox<Categoria> cmbCategoria) {
+        EntityManager em = ujc.getEntityManager(); //
+        Iterator it = em.createQuery("SELECT c FROM Categoria c").getResultList().iterator();
+        Categoria categoria;
+        try {
+            while (it.hasNext()) {
+                categoria = (Categoria) it.next();
+                cmbCategoria.addItem(categoria);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("No pudo cargar el combo");
+        }
+
+    }
+
+    public Categoria findCategoriaById(int id) {
+//        System.out.println("Este es el id Categoria: " + idCategoria);
+//        EntityManager em = cjc.getEntityManager();
+//        StringBuilder querys = new StringBuilder("SELECT c FROM Categoria c WHERE c.idCategoria = " + idCategoria);
+//        Query query = em.createQuery(querys.toString());
+//        //query.setParameter("idCategoria", idCategoria);
+//        query.setMaxResults(1);
+//
+//        try {
+//            Categoria categoria = (Categoria) query.getSingleResult();
+//            return categoria;
+//        } catch (NoResultException nre) {
+//            return null;
+//        } catch (NonUniqueResultException nure) {
+//            return null;
+//        }
+        
+        EntityManager em = ujc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria");
+        sql.setParameter("idCategoria", id);
+        Categoria c = (Categoria) sql.getSingleResult();
+
+        return c;
+    }
+
 }

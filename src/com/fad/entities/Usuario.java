@@ -44,6 +44,8 @@ public class Usuario implements Serializable {
     private String nombreUser;
     @Column(name = "password_user")
     private String passwordUser;
+    @Column(name = "rol")
+    private Integer rolUser;
     @OneToMany(mappedBy = "idUsuario")
     private Collection<Ordeninventario> ordeninventarioCollection;
 
@@ -78,6 +80,14 @@ public class Usuario implements Serializable {
         this.passwordUser = passwordUser;
     }
 
+    public Integer getRolUser() {
+        return rolUser;
+    }
+
+    public void setRolUser(Integer rolUser) {
+        this.rolUser = rolUser;
+    }
+    
     @XmlTransient
     public Collection<Ordeninventario> getOrdeninventarioCollection() {
         return ordeninventarioCollection;

@@ -126,7 +126,11 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "com.fad.entities.Categoria[ idCategoria=" + idCategoria + " ]";
+        return nombreCat;
     }
+
+    
+    
+    
     
 }
