@@ -84,7 +84,7 @@ public class usuarioDAO {
 
         Usuario u;
         EntityManager em = ujc.getEntityManager(); //
-        Query sql = em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUser LIKE :user");
+        Query sql = em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUser LIKE :user ORDER BY u.nombreUser");
         sql.setParameter("user", user + "%");
         List<Usuario> lista = sql.getResultList();
 

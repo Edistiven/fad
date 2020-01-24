@@ -182,7 +182,7 @@ public class login extends javax.swing.JFrame {
             if (valor == true) {
                 
                 JOptionPane.showMessageDialog(null, "Bienvenido " + txtUser.getText());
-                inicio ini = new inicio();
+                inicio ini = new inicio ();
                 ini.setVisible(true);
                 this.dispose();
                 
