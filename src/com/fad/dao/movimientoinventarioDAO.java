@@ -13,7 +13,7 @@ public class movimientoinventarioDAO {
     private Tipordeninv tipordeninv = new Tipordeninv();
     
     /**Funciones basicas CRUD**/
-    public void instertar(String nombreToi, String descripcionToi) {
+    public void insertar(String nombreToi, String descripcionToi) {
         try {
             tipordeninv.setIdTipordeninv(Integer.BYTES);
             tipordeninv.setNombreToi(nombreToi);
