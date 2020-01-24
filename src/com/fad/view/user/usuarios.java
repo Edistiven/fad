@@ -8,6 +8,7 @@ package com.fad.view.user;
 import com.fad.dao.usuarioDAO;
 import com.fad.view.existencia.existencias;
 import com.fad.view.inicio;
+import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
 import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
@@ -38,12 +39,14 @@ public class usuarios extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
-
+        setIdPro("0");
         listarUsuarios("");
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+
+        validarBtn();
 
     }
 
@@ -264,6 +267,11 @@ public class usuarios extends javax.swing.JFrame {
         });
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         txtBusqueda.setBackground(new java.awt.Color(255, 255, 255));
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
@@ -647,13 +655,13 @@ public class usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        System.exit(0);
+        login log = new login();
+        log.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        usuarios ex = new usuarios();
-        ex.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -661,12 +669,14 @@ public class usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        guardarUsuario();
+        guardarU();
         limpiarCampos();
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarCampos();
+
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
@@ -687,27 +697,28 @@ public class usuarios extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         modificarU();
-        limpiarCampos();
-        listarUsuarios("");
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarPro();
-        limpiarCampos();
+        eliminarU();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+
         int select = jTable1.getSelectedRow();
         setIdPro((String) jTable1.getValueAt(select, 0));
         txtNombre.setText((String) jTable1.getValueAt(select, 1));
         txtPassword.setText((String) jTable1.getValueAt(select, 2));
-        
+        validarBtn();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        buscarU();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     //Mensajes Personalizados
     private void mensajeInfo(String mensaje) {
@@ -724,13 +735,20 @@ public class usuarios extends javax.swing.JFrame {
     }
 
     public void limpiarCampos() {
+        setIdPro("0");
         txtBusqueda.setText("");
         txtNombre.setText("");
         txtPassword.setText("");
 
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+
+        validarBtn();
     }
 
-    private void guardarUsuario() {
+    private void guardarU() {
         //Setteo De valores
         String nombreU = txtNombre.getText();
         String password = txtPassword.getText();
@@ -740,6 +758,7 @@ public class usuarios extends javax.swing.JFrame {
         mensajeInfo("Se ha guardado el Usuario (" + nombreU + ").");
 
         listarUsuarios("");
+        limpiarCampos();
     }
 
     private void modificarU() {
@@ -750,15 +769,45 @@ public class usuarios extends javax.swing.JFrame {
         usuarioI.modificar(id, nombreU, password);
 
         mensajeInfo("Se ha modificado el producto (" + nombreU + ").");
+        listarUsuarios("");
+        limpiarCampos();
     }
 
-    private void eliminarPro() {
+    private void eliminarU() {
 
         int id = Integer.parseInt(getIdPro());
         String nombreU = txtNombre.getText();
         usuarioI.eliminar(id);
 
         mensajeInfo("Se ha eliminado el producto (" + nombreU + ").");
+        listarUsuarios("");
+        limpiarCampos();
+    }
+
+    private void buscarU() {
+
+        if (txtBusqueda.getText().equals("")) {
+            listarUsuarios("");
+        } else {
+            listarUsuarios(txtBusqueda.getText());
+        }
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+
+    }
+
+    private void validarBtn() {
+        if (Integer.parseInt(getIdPro()) == 0) {
+            btnGuardar.setEnabled(true);
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } else {
+            btnGuardar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+        }
     }
 
     /**

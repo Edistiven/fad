@@ -6,6 +6,7 @@ import com.fad.entities.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,8 +16,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class usuarioDAO {
 
-    private UsuarioJpaController ujc = new UsuarioJpaController();
     private Usuario usuario = new Usuario();
+    private UsuarioJpaController ujc = new UsuarioJpaController();
 
     /**
      * Funciones basicas CRUD*
@@ -53,17 +54,17 @@ public class usuarioDAO {
 
     public void listarUsuarios(JTable tablaP, String nombreUser) {
         DefaultTableModel model;
-        String[] titulosU = {"ID", "Nombre", "Password"};
+        String[] titulosU = {"Id", "Nombre", "Password", "Rol"};
         model = new DefaultTableModel(null, titulosU);
         List<Usuario> usuarios = buscarUsuario(nombreUser);
 
-        String[] datosU = new String[3];
+        String[] datosU = new String[4];
 
         for (Usuario u : usuarios) {
             datosU[0] = u.getIdUsuario().toString();
             datosU[1] = u.getNombreUser();
             datosU[2] = u.getPasswordUser();
-            //datosP[3] = u.get
+
             model.addRow(datosU);
         }
         tablaP.setModel(model);
@@ -91,15 +92,17 @@ public class usuarioDAO {
 
     }
 
-    public boolean login(String usuario, String password) {
+    public boolean login(String nombreUser, String passwordUser) {
 
         EntityManager em = ujc.getEntityManager();
 
         boolean valor;
         try {
-            Query sql = em.createQuery("SELECT u.nombreUser, u.passwordUser FROM Usuario u WHERE u.nombreUser = :usuario AND u.passwordUser = :password");
-            sql.setParameter("usuario", usuario);
-            sql.setParameter("password", password);
+
+            Query sql = em.createQuery("SELECT u.nombreUser, u.passwordUser FROM Usuario u WHERE u.nombreUser = :nombreUser AND u.passwordUser = :passwordUser");
+            sql.setParameter("nombreUser", nombreUser);
+            sql.setParameter("passwordUser", passwordUser);
+
             List resultado = sql.getResultList();
 
             if (!resultado.isEmpty()) {
@@ -107,7 +110,7 @@ public class usuarioDAO {
 
             } else {
                 valor = false;
-                    
+
             }
 
         } catch (Exception e) {

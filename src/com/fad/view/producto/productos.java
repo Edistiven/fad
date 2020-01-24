@@ -54,7 +54,7 @@ public class productos extends javax.swing.JFrame {
         listarProductos("");
         //
         txtValor = new JFormattedTextField(getMaskFormatter("######.##"));
-        
+
         //
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
@@ -670,9 +670,7 @@ public class productos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        productos ex = new productos();
-        ex.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -711,7 +709,10 @@ public class productos extends javax.swing.JFrame {
         } else {
             listarProductos(txtBusqueda.getText());
         }
-
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -817,17 +818,17 @@ public class productos extends javax.swing.JFrame {
             btnEliminar.setEnabled(true);
         }
     }
-    
+
     private MaskFormatter getMaskFormatter(String format) {
-    MaskFormatter mask = null;
-    try {
-        mask = new MaskFormatter(format);
-        mask.setPlaceholderCharacter('0');
-    }catch (ParseException ex) {
-        ex.printStackTrace();
+        MaskFormatter mask = null;
+        try {
+            mask = new MaskFormatter(format);
+            mask.setPlaceholderCharacter('0');
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return mask;
     }
-    return mask;
-}
 
     /**
      * @param args the command line arguments

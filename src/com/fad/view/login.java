@@ -6,29 +6,22 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import rojerusan.RSNotifyFade;
 
 public class login extends javax.swing.JFrame {
-
+    
     public usuarioDAO usuarioI = new usuarioDAO();
-
+    
     public login() {
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
-
+        
     }
-
-    public void mensajeInfo(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    public void mensajeError(String mensaje) {
-
-        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,6 +37,8 @@ public class login extends javax.swing.JFrame {
         btnHome2 = new javax.swing.JLabel();
         btnHome3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -137,11 +132,29 @@ public class login extends javax.swing.JFrame {
         jPanel1.add(btnHome3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 40, 40));
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, -1));
 
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/minimize-window-24.png"))); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 30, 30));
+
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close-window-24 (1).png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 30, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,22 +171,27 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        
         if (txtUser.getText().equals("") || txtPassword.getText().equals("")) {
-            mensajeError("Los Campos estan vacíos");
+            
+            JOptionPane.showMessageDialog(null, "Los Campos estan vacíos");
+            
         } else {
+            
             Boolean valor = usuarioI.login(txtUser.getText(), txtPassword.getText());
-            if (valor = true) {
-
+            if (valor == true) {
+                
+                JOptionPane.showMessageDialog(null, "Bienvenido " + txtUser.getText());
                 inicio ini = new inicio();
                 ini.setVisible(true);
                 this.dispose();
-
-            } else{
-            
-                mensajeError("Usuario o Contraseña Incorrectos");
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Usuario u contraseña Incorrectos");
+                
             }
         }
-
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
@@ -190,17 +208,20 @@ public class login extends javax.swing.JFrame {
 
     private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
 
-        mensajeInfo("Bienvenido");
-
-        inicio ini = new inicio();
-        ini.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnIngresarMouseClicked
 
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        setState(JFrame.ICONIFIED);        
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel10MouseClicked
+    
     public static void main(String args[]) {
-
+        
         try {
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -219,8 +240,10 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel btnHome3;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txtPassword;
