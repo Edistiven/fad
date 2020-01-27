@@ -5,6 +5,7 @@
  */
 package com.fad.view.existencia;
 
+import com.fad.dao.existenciaDAO;
 import com.fad.view.inicio;
 import com.fad.view.movimiento.movimientos;
 import com.fad.view.producto.productos;
@@ -20,10 +21,14 @@ public class existencias extends javax.swing.JFrame {
     /**
      * Creates new form movimientos
      */
+    existenciaDAO existenciaI = new existenciaDAO();
+
     public existencias() {
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
+        
+        listarExistencias("");
     }
 
     /**
@@ -56,10 +61,10 @@ public class existencias extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableE = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField11 = new javax.swing.JTextField();
+        txtBusqueda = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -231,8 +236,8 @@ public class existencias extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Existencias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableE.setBackground(new java.awt.Color(255, 255, 255));
+        jTableE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -251,9 +256,9 @@ public class existencias extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(186, 197, 206));
-        jTable1.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane1.setViewportView(jTable1);
+        jTableE.setGridColor(new java.awt.Color(186, 197, 206));
+        jTableE.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane1.setViewportView(jTableE);
 
         jButton4.setBackground(new java.awt.Color(0, 154, 251));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,10 +273,10 @@ public class existencias extends javax.swing.JFrame {
 
         jButton2.setText("Buscar");
 
-        jTextField11.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        txtBusqueda.setBackground(new java.awt.Color(255, 255, 255));
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                txtBusquedaActionPerformed(evt);
             }
         });
 
@@ -287,7 +292,7 @@ public class existencias extends javax.swing.JFrame {
                 .addGap(80, 80, 80)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11)
+                .addComponent(txtBusqueda)
                 .addGap(97, 97, 97))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(143, 143, 143)
@@ -300,7 +305,7 @@ public class existencias extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
@@ -573,41 +578,41 @@ public class existencias extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome4MouseClicked
 
     private void btnHome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome1MouseClicked
-    productos pro = new productos ();
-    pro.setVisible(true);
-    this.dispose();
+        productos pro = new productos();
+        pro.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHome1MouseClicked
 
     private void btnHome2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome2MouseClicked
-    inicio ini = new inicio ();
-    ini.setVisible(true);
-    this.dispose();
+        inicio ini = new inicio();
+        ini.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHome2MouseClicked
 
     private void btnHome3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome3MouseClicked
-    usuarios user = new usuarios ();
-    user.setVisible(true);
-    this.dispose();
+        usuarios user = new usuarios();
+        user.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHome3MouseClicked
 
     private void btnHome5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome5MouseClicked
-   
+
     }//GEN-LAST:event_btnHome5MouseClicked
 
     private void btnHome6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome6MouseClicked
-    movimientos mov = new movimientos();
-    mov.setVisible(true);
-    this.dispose();
+        movimientos mov = new movimientos();
+        mov.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHome6MouseClicked
 
     private void btnHome7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome7MouseClicked
-    reportes report = new reportes ();
-    report.setVisible(true);
-    this.dispose();
+        reportes report = new reportes();
+        report.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -636,9 +641,9 @@ public class existencias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_txtBusquedaActionPerformed
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
 
@@ -647,6 +652,23 @@ public class existencias extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5MouseClicked
+
+    /**
+     * Metodos*
+     */
+    private void listarExistencias(String nombreP) {
+        existenciaI.listarExistencias(jTableE, nombreP);
+    }
+
+    private void buscarU() {
+
+        if (txtBusqueda.getText().equals("")) {
+            listarExistencias("");
+        } else {
+            listarExistencias(txtBusqueda.getText());
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -728,10 +750,10 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableE;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }
