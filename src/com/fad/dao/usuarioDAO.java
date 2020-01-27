@@ -111,6 +111,7 @@ public class usuarioDAO {
             Query sql = em.createQuery("SELECT u.nombreUser, u.passwordUser FROM Usuario u WHERE u.nombreUser = :nombreUser AND u.passwordUser = :passwordUser");
             sql.setParameter("nombreUser", nombreUser);
             sql.setParameter("passwordUser", passwordUser);
+            //sql.setParameter("rol", rolUser);
 
             List resultado = sql.getResultList();
 

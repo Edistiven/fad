@@ -30,42 +30,42 @@ public class usuarios extends javax.swing.JFrame {
      * Creates new form movimientos
      */
     private usuarioDAO usuarioI = new usuarioDAO();
-
+    
     private String idPro;
-
+    
     public String getIdPro() {
         return idPro;
     }
-
+    
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
-
+    
     public usuarios() {
-
+        
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
         setIdPro("0");
         listarUsuarios("");
-        jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+      
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setColumnSelectionAllowed(false);
         TableColumn col = jTable1.getColumnModel().getColumn(0);
-
+        
         col.setPreferredWidth(200);
         col = jTable1.getColumnModel().getColumn(1);
         col.setPreferredWidth(200);
         col = jTable1.getColumnModel().getColumn(2);
         col.setPreferredWidth(200);
-
+        
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
         
         getCmbCategoria(cmbCategoria);
-
+        
         validarBtn();
     }
 
@@ -238,7 +238,7 @@ public class usuarios extends javax.swing.JFrame {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel18);
 
-        btnHome3.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome3.setBackground(new java.awt.Color(0, 102, 255));
         btnHome3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         btnHome3.setForeground(new java.awt.Color(255, 255, 255));
         btnHome3.setText("Usuarios");
@@ -713,8 +713,8 @@ public class usuarios extends javax.swing.JFrame {
         setIdPro((String) jTable1.getValueAt(select, 0));
         txtNombre.setText((String) jTable1.getValueAt(select, 1));
         txtPassword.setText((String) jTable1.getValueAt(select, 2));
-        //txtSigla.setText((String) jTable1.getValueAt(select, 3));
-
+        cmbCategoria.setSelectedItem((String) jTable1.getValueAt(select, 3));
+        
         validarBtn();
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -751,7 +751,7 @@ public class usuarios extends javax.swing.JFrame {
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
-
+    
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
@@ -760,8 +760,8 @@ public class usuarios extends javax.swing.JFrame {
     private void listarUsuarios(String nombreU) {
         usuarioI.listarUsuarios(jTable1, nombreU);
     }
-
-    private void getCmbCategoria(JComboBox cmbCategoria){
+    
+    private void getCmbCategoria(JComboBox cmbCategoria) {
         usuarioI.getRolCmb(cmbCategoria);
     }
     
@@ -770,11 +770,11 @@ public class usuarios extends javax.swing.JFrame {
         txtBusqueda.setText("");
         txtNombre.setText("");
         txtPassword.setText("");
-
+        
         jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setColumnSelectionAllowed(false);
-
+        
         TableColumn col = jTable1.getColumnModel().getColumn(0);
         col.setPreferredWidth(200);
         col = jTable1.getColumnModel().getColumn(1);
@@ -787,46 +787,46 @@ public class usuarios extends javax.swing.JFrame {
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
         validarBtn();
     }
-
+    
     private void guardarU() {
         //Setteo De valores
         String nombreU = txtNombre.getText();
         String password = txtPassword.getText();
         int rol = cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getIdCategoria();
-
+        
         usuarioI.insertar(nombreU, password, rol);
-
+        
         mensajeInfo("Se ha guardado el Usuario (" + nombreU + ").");
-
+        
         listarUsuarios("");
         limpiarCampos();
     }
-
+    
     private void modificarU() {
         int id = Integer.parseInt(getIdPro());
         String nombreU = txtNombre.getText();
         String password = txtPassword.getText();
-
+        
         usuarioI.modificar(id, nombreU, password);
-
+        
         mensajeInfo("Se ha modificado el producto (" + nombreU + ").");
         listarUsuarios("");
         limpiarCampos();
     }
-
+    
     private void eliminarU() {
-
+        
         int id = Integer.parseInt(getIdPro());
         String nombreU = txtNombre.getText();
         usuarioI.eliminar(id);
-
+        
         mensajeInfo("Se ha eliminado el producto (" + nombreU + ").");
         listarUsuarios("");
         limpiarCampos();
     }
-
+    
     private void buscarU() {
-
+        
         if (txtBusqueda.getText().equals("")) {
             listarUsuarios("");
         } else {
@@ -836,9 +836,9 @@ public class usuarios extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-
+        
     }
-
+    
     private void validarBtn() {
         if (Integer.parseInt(getIdPro()) == 0) {
             btnGuardar.setEnabled(true);
@@ -865,21 +865,21 @@ public class usuarios extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(usuarios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(usuarios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(usuarios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(usuarios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

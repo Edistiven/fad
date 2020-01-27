@@ -1,10 +1,12 @@
 package com.fad.view;
 
 import com.fad.dao.usuarioDAO;
+import com.fad.entities.Categoria;
 import com.fad.view.movimiento.movimientos;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -12,16 +14,16 @@ import javax.swing.UIManager;
 import rojerusan.RSNotifyFade;
 
 public class login extends javax.swing.JFrame {
-    
+
     public usuarioDAO usuarioI = new usuarioDAO();
-    
+
     public login() {
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
-        
+        getCmbCategoria(cmbCategoria);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -39,6 +41,8 @@ public class login extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cmbCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -80,7 +84,7 @@ public class login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+        jPanel1.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
 
         btnHome.setBackground(new java.awt.Color(24, 45, 49));
         btnHome.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -150,11 +154,22 @@ public class login extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 30, 30));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel4.setText("Rol");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, -1, -1));
+
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 140, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,25 +186,25 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
+
         if (txtUser.getText().equals("") || txtPassword.getText().equals("")) {
-            
+
             JOptionPane.showMessageDialog(null, "Los Campos estan vacíos");
-            
+
         } else {
-            
+
             Boolean valor = usuarioI.login(txtUser.getText(), txtPassword.getText());
             if (valor == true) {
-                
+
                 JOptionPane.showMessageDialog(null, "Bienvenido " + txtUser.getText());
-                inicio ini = new inicio ();
+                inicio ini = new inicio();
                 ini.setVisible(true);
                 this.dispose();
-                
+
             } else {
-                
+
                 JOptionPane.showMessageDialog(null, "Usuario u contraseña Incorrectos");
-                
+
             }
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
@@ -211,17 +226,25 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        setState(JFrame.ICONIFIED);        
+        setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel10MouseClicked
-    
+
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void getCmbCategoria(JComboBox cmbCategoria) {
+        usuarioI.getRolCmb(cmbCategoria);
+    }
+
     public static void main(String args[]) {
-        
+
         try {
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -239,10 +262,12 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel btnHome2;
     private javax.swing.JLabel btnHome3;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JComboBox<Categoria> cmbCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

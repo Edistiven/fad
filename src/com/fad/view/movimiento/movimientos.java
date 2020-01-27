@@ -182,7 +182,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel17);
 
-        btnHome6.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome6.setBackground(new java.awt.Color(0, 102, 255));
         btnHome6.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         btnHome6.setForeground(new java.awt.Color(255, 255, 255));
         btnHome6.setText("Movimientos");

@@ -164,7 +164,7 @@ public class existencias extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel16);
 
-        btnHome5.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome5.setBackground(new java.awt.Color(0, 102, 255));
         btnHome5.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         btnHome5.setForeground(new java.awt.Color(255, 255, 255));
         btnHome5.setText("Existencias");

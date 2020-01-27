@@ -250,7 +250,7 @@ public class categorias extends javax.swing.JFrame {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel20);
 
-        btnHome8.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome8.setBackground(new java.awt.Color(0, 102, 255));
         btnHome8.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         btnHome8.setForeground(new java.awt.Color(255, 255, 255));
         btnHome8.setText("Categorías");

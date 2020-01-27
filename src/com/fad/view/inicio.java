@@ -129,7 +129,7 @@ public class inicio extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
-        btnHome2.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome2.setBackground(new java.awt.Color(0, 102, 255));
         btnHome2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         btnHome2.setForeground(new java.awt.Color(255, 255, 255));
         btnHome2.setText("Inicio");
