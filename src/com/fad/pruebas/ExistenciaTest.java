@@ -7,6 +7,7 @@ public class ExistenciaTest {
 
     public static void main(String[] args) {
         existenciaDAO existenciaI = new existenciaDAO();
-        existenciaI.instertar(1, 1, 1);
+        //existenciaI.insertar(1, 1, 1);
+        existenciaI.modificar("1", 5, 5, 5);
     }
 }
