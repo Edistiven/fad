@@ -5,9 +5,11 @@
  */
 package com.fad.view;
 
-import com.fad.dao.productoDAO;
-import com.fad.view.categoria.categorias;
-import com.fad.view.existencia.existencias;
+import com.fad.view.categoria.*;
+import com.fad.dao.categoriaDAO;
+import com.fad.view.existencia.*;
+import com.fad.dao.existenciaDAO;
+import com.fad.view.inicio;
 import com.fad.view.movimiento.movimientos;
 import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
@@ -20,22 +22,8 @@ import rojerusan.RSNotifyFade;
  */
 public class inicio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form movimientos
-     */
-    private productoDAO productoI = new productoDAO();
-    private String idPro;
-
-    public String getIdPro() {
-        return idPro;
-    }
-
-    public void setIdPro(String idPro) {
-        this.idPro = idPro;
-    }
-
     public inicio() {
-        
+
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
@@ -67,10 +55,10 @@ public class inicio extends javax.swing.JFrame {
         btnHome6 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         btnHome3 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        btnHome8 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         btnHome7 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        btnHome8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         btnHome4 = new javax.swing.JLabel();
@@ -101,10 +89,10 @@ public class inicio extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(26, 120, 174));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("SISTEMA DE GESTION DE INVENTARIOS \"FAD\"");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 450, 30));
+        jLabel1.setText("SISTEMA DE GESTIÓN DE INVENTARIOS \"FAD\"");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 870, 50));
 
         btnHome.setBackground(new java.awt.Color(24, 45, 49));
         btnHome.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -117,16 +105,15 @@ public class inicio extends javax.swing.JFrame {
                 btnHomeMouseClicked(evt);
             }
         });
-        jPanel2.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1130, 61));
+        jPanel2.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1030, 61));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1140, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1040, -1));
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setForeground(new java.awt.Color(153, 153, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 154, 251));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         btnHome2.setBackground(new java.awt.Color(0, 102, 255));
@@ -205,6 +192,22 @@ public class inicio extends javax.swing.JFrame {
         });
         jPanel4.add(btnHome3);
 
+        jLabel21.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
+        jPanel4.add(jLabel21);
+
+        btnHome8.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome8.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
+        btnHome8.setForeground(new java.awt.Color(255, 255, 255));
+        btnHome8.setText("Categorías");
+        btnHome8.setOpaque(true);
+        btnHome8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHome8MouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnHome8);
+
         jLabel19.setForeground(new java.awt.Color(102, 102, 102));
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel19);
@@ -221,23 +224,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jPanel4.add(btnHome7);
 
-        jLabel20.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel4.add(jLabel20);
-
-        btnHome8.setBackground(new java.awt.Color(0, 154, 251));
-        btnHome8.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
-        btnHome8.setForeground(new java.awt.Color(255, 255, 255));
-        btnHome8.setText("Categorías");
-        btnHome8.setOpaque(true);
-        btnHome8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHome8MouseClicked(evt);
-            }
-        });
-        jPanel4.add(btnHome8);
-
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1100, 30));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1010, 30));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -245,16 +232,16 @@ public class inicio extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1090, 450));
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1000, 440));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1130, 530));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1030, 500));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -273,11 +260,11 @@ public class inicio extends javax.swing.JFrame {
 
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gear-2-16.png"))); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, -1, -1));
 
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, -1, 40));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, 40));
 
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
@@ -287,25 +274,25 @@ public class inicio extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, -1));
 
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/group-16.png"))); // NOI18N
         jLabel11.setText("Rol:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, -1));
 
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
         jLabel13.setText("Bienvenido:");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, -1));
 
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, -1, 40));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, -1, 40));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1130, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1030, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -315,15 +302,13 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome4MouseClicked
 
     private void btnHome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome1MouseClicked
-        productos pro = new productos ();
+        productos pro = new productos();
         pro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHome1MouseClicked
 
     private void btnHome2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome2MouseClicked
-        inicio ini = new inicio();
-        ini.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_btnHome2MouseClicked
 
     private void btnHome3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome3MouseClicked
@@ -333,8 +318,8 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome3MouseClicked
 
     private void btnHome5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome5MouseClicked
-        existencias exi = new existencias();
-        exi.setVisible(true);
+        existencias ex = new existencias();
+        ex.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHome5MouseClicked
 
@@ -351,9 +336,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        login log = new login();
-        log.setVisible(true);
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
@@ -361,11 +344,14 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnHome8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome8MouseClicked
-        categorias cat = new categorias ();
+        categorias cat = new categorias();
         cat.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHome8MouseClicked
 
+    /**
+     * Metodos*
+     */
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
@@ -431,102 +417,6 @@ public class inicio extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -556,7 +446,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

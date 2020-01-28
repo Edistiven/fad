@@ -68,10 +68,10 @@ public class categorias extends javax.swing.JFrame {
         btnHome6 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         btnHome3 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        btnHome7 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         btnHome8 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        btnHome7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
@@ -148,7 +148,6 @@ public class categorias extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 154, 251));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         btnHome2.setBackground(new java.awt.Color(0, 154, 251));
@@ -227,22 +226,6 @@ public class categorias extends javax.swing.JFrame {
         });
         jPanel4.add(btnHome3);
 
-        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel4.add(jLabel19);
-
-        btnHome7.setBackground(new java.awt.Color(0, 154, 251));
-        btnHome7.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
-        btnHome7.setForeground(new java.awt.Color(255, 255, 255));
-        btnHome7.setText("Reportes");
-        btnHome7.setOpaque(true);
-        btnHome7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHome7MouseClicked(evt);
-            }
-        });
-        jPanel4.add(btnHome7);
-
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel21);
@@ -258,6 +241,22 @@ public class categorias extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnHome8);
+
+        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
+        jPanel4.add(jLabel19);
+
+        btnHome7.setBackground(new java.awt.Color(0, 154, 251));
+        btnHome7.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
+        btnHome7.setForeground(new java.awt.Color(255, 255, 255));
+        btnHome7.setText("Reportes");
+        btnHome7.setOpaque(true);
+        btnHome7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHome7MouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnHome7);
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1010, 30));
 
@@ -430,17 +429,16 @@ public class categorias extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))

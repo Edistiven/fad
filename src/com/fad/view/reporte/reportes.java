@@ -58,10 +58,10 @@ public class reportes extends javax.swing.JFrame {
         btnHome6 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         btnHome3 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        btnHome7 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         btnHome8 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        btnHome7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
@@ -123,7 +123,6 @@ public class reportes extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 154, 251));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         btnHome2.setBackground(new java.awt.Color(0, 154, 251));
@@ -202,22 +201,6 @@ public class reportes extends javax.swing.JFrame {
         });
         jPanel4.add(btnHome3);
 
-        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel4.add(jLabel19);
-
-        btnHome7.setBackground(new java.awt.Color(0, 102, 255));
-        btnHome7.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
-        btnHome7.setForeground(new java.awt.Color(255, 255, 255));
-        btnHome7.setText("Reportes");
-        btnHome7.setOpaque(true);
-        btnHome7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHome7MouseClicked(evt);
-            }
-        });
-        jPanel4.add(btnHome7);
-
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel4.add(jLabel21);
@@ -233,6 +216,22 @@ public class reportes extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnHome8);
+
+        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
+        jPanel4.add(jLabel19);
+
+        btnHome7.setBackground(new java.awt.Color(0, 102, 255));
+        btnHome7.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
+        btnHome7.setForeground(new java.awt.Color(255, 255, 255));
+        btnHome7.setText("Reportes");
+        btnHome7.setOpaque(true);
+        btnHome7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHome7MouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnHome7);
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1010, 30));
 
@@ -413,7 +412,7 @@ public class reportes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome4MouseClicked
 
     private void btnHome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome1MouseClicked
-        reportes pro = new reportes();
+        productos pro = new productos();
         pro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHome1MouseClicked
@@ -443,9 +442,7 @@ public class reportes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome6MouseClicked
 
     private void btnHome7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome7MouseClicked
-        reportes report = new reportes();
-        report.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
