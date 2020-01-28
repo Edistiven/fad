@@ -6,9 +6,11 @@ import com.fad.entities.Existencia;
 import com.fad.entities.Producto;
 import com.fad.entities.Usuario;
 import java.math.BigInteger;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,10 +28,10 @@ public class existenciaDAO {
     /**
      * Funciones basicas CRUD*
      */
-    public void insertar(int existenciaIni, int existenciaAct, int valorTotal) {
+    public void insertar(int idPro, int idCat, int existenciaIni, int existenciaAct, int valorTotal) {
         try {
-            producto = buscarProducto(54);
-            categoria = buscarCategoria(7);
+            producto = buscarProducto(idPro);
+            categoria = buscarCategoria(idCat);
 
             existencia.setIdProducto(producto);
             existencia.setIdCategoria(categoria);
@@ -151,6 +153,22 @@ public class existenciaDAO {
         Existencia e = (Existencia) sql.getSingleResult();
 
         return e;
+
+    }
+    
+    public void getRolCmb(JComboBox<Categoria> cmbCategoria) {
+        EntityManager em = ejc.getEntityManager(); //
+        Iterator it = em.createQuery("SELECT c FROM Categoria c").getResultList().iterator();
+        Categoria categoria;
+        try {
+            while (it.hasNext()) {
+                categoria = (Categoria) it.next();
+                cmbCategoria.addItem(categoria);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("No pudo cargar el combo");
+        }
 
     }
 

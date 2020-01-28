@@ -27,19 +27,20 @@ import rojerusan.RSNotifyFade;
 public class listaProductos extends javax.swing.JFrame {
 
     private productoDAO productoI = new productoDAO();
-    private String idPro;
+    public static String idPro ="";
+    public static String idProd ="";
+    public static String nombrePro ="";
+    public static String valorU = "";
 
-    public String getIdPro() {
-        return idPro;
-    }
-
-    public void setIdPro(String idPro) {
-        this.idPro = idPro;
-    }
-
+    private static String idProTemp;
+    private static String nombreProTemp;
+    private static String valorUTemp;
+    
     public listaProductos() {
 
         initComponents();
+        
+        System.out.println("Este es el dato: " + nombrePro);        
         setIdPro("0");
         setLocationRelativeTo(null);
         this.setResizable(false);
@@ -63,12 +64,14 @@ public class listaProductos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        btnLimpiar = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnLimpiar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtNombrePro = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -99,14 +102,19 @@ public class listaProductos extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        btnLimpiar.setBackground(new java.awt.Color(0, 154, 251));
-        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
-        btnLimpiar.setText("Seleccionar Producto");
-        btnLimpiar.setBorder(null);
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionar.setBackground(new java.awt.Color(0, 154, 251));
+        btnSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
+        btnSeleccionar.setText("Seleccionar Producto");
+        btnSeleccionar.setBorder(null);
+        btnSeleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSeleccionarMouseClicked(evt);
+            }
+        });
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                btnSeleccionarActionPerformed(evt);
             }
         });
 
@@ -169,10 +177,24 @@ public class listaProductos extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Se ha seleccionado: ");
+
+        txtNombrePro.setText("_");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -181,14 +203,11 @@ public class listaProductos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombrePro, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,12 +217,16 @@ public class listaProductos extends javax.swing.JFrame {
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombrePro))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -232,11 +255,14 @@ public class listaProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
-        listarProductos("");
-        limpiarCampos();
-    }//GEN-LAST:event_btnLimpiarActionPerformed
+        existencias ex = new existencias();
+        
+        ex.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
@@ -258,17 +284,29 @@ public class listaProductos extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         //System.out.println("Entra al clic");
+
         int select = jTable1.getSelectedRow();
-        setIdPro((String) jTable1.getValueAt(select, 0));
+        
+        idProd = (String) jTable1.getValueAt(select, 0);
+        nombrePro = (String) jTable1.getValueAt(select, 1);
+        valorU = (String) jTable1.getValueAt(select, 3);
+        
+        System.out.println("id pro: " + (String) jTable1.getValueAt(select, 0));
+        txtNombrePro.setText((String) jTable1.getValueAt(select, 1));
 
         //System.out.println(getIdPro());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
         existencias ex = new existencias();
+        limpiarCampos();
         ex.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
+
+    private void btnSeleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeleccionarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarMouseClicked
 
     //Metodos
     private void listarProductos(String nombreP) {
@@ -276,8 +314,8 @@ public class listaProductos extends javax.swing.JFrame {
     }
 
     public void limpiarCampos() {
-        setIdPro("0");
-        ;
+        existencias ex = new existencias();
+       
     }
 
     private void guardarProducto() {
@@ -304,6 +342,40 @@ public class listaProductos extends javax.swing.JFrame {
         }
         return mask;
     }
+
+    public String getIdPro() {
+        return idPro;
+    }
+
+    public void setIdPro(String idPro) {
+        this.idPro = idPro;
+    }
+
+    public static String getIdProTemp() {
+        return idProTemp;
+    }
+
+    public static void setIdProTemp(String idProTemp) {
+        listaProductos.idProTemp = idProTemp;
+    }
+
+    public static String getNombreProTemp() {
+        return nombreProTemp;
+    }
+
+    public static void setNombreProTemp(String nombreProTemp) {
+        listaProductos.nombreProTemp = nombreProTemp;
+    }
+
+    public static String getValorUTemp() {
+        return valorUTemp;
+    }
+
+    public static void setValorUTemp(String valorUTemp) {
+        listaProductos.valorUTemp = valorUTemp;
+    }
+    
+    
 
     /**
      * @param args the command line arguments
@@ -405,9 +477,10 @@ public class listaProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLimpiar1;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -416,5 +489,6 @@ public class listaProductos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JLabel txtNombrePro;
     // End of variables declaration//GEN-END:variables
 }
