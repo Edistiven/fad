@@ -6,6 +6,8 @@
 package com.fad.view.existencia;
 
 import com.fad.dao.existenciaDAO;
+import com.fad.entities.Categoria;
+import com.fad.entities.Producto;
 import com.fad.view.categoria.categorias;
 import com.fad.view.inicio;
 import com.fad.view.movimiento.movimientos;
@@ -13,6 +15,7 @@ import com.fad.view.producto.listaProductos;
 import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
 import com.fad.view.user.usuarios;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -24,11 +27,31 @@ public class existencias extends javax.swing.JFrame {
      * Creates new form movimientos
      */
     existenciaDAO existenciaI = new existenciaDAO();
+    private static String valorIni;
+    private static String valorActual;
+
+    public static String idPro;
+    public static String nombrePro;
+    private static String valorU;
 
     public existencias() {
         initComponents();
+
+        /*Init de valores para el registro*/
+        listaProductos p = new listaProductos();
+        txtValorIni.setText(getValorIni());
+        txtValorActual.setText(getValorActual());
+
+        txtNombrePro.setText(p.nombrePro);
+        idPro = p.idProd;
+        valorU = p.valorU;
+
+        System.out.println("Ayudaa: " + p.nombrePro + p.idProd);
+
         setLocationRelativeTo(null);
         this.setResizable(false);
+        
+        getCmbCategoria(cmbCategoria);
 
         listarExistencias("");
     }
@@ -79,9 +102,9 @@ public class existencias extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        txtValorActual = new javax.swing.JTextField();
+        txtValorIni = new javax.swing.JTextField();
+        txtValorT = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
@@ -89,7 +112,7 @@ public class existencias extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jTextField11 = new javax.swing.JTextField();
+        txtNombrePro = new javax.swing.JTextField();
         cmbCategoria = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         btnHome4 = new javax.swing.JLabel();
@@ -416,24 +439,24 @@ public class existencias extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtValorActual.setBackground(new java.awt.Color(255, 255, 255));
+        txtValorActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtValorActualActionPerformed(evt);
             }
         });
 
-        jTextField9.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        txtValorIni.setBackground(new java.awt.Color(255, 255, 255));
+        txtValorIni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                txtValorIniActionPerformed(evt);
             }
         });
 
-        jTextField10.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtValorT.setBackground(new java.awt.Color(255, 255, 255));
+        txtValorT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtValorTActionPerformed(evt);
             }
         });
 
@@ -444,19 +467,19 @@ public class existencias extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                    .addComponent(jTextField7))
+                    .addComponent(txtValorT, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtValorIni, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtValorActual))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtValorIni, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtValorActual, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtValorT, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -548,14 +571,13 @@ public class existencias extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField11.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        txtNombrePro.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombrePro.setEnabled(false);
+        txtNombrePro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                txtNombreProActionPerformed(evt);
             }
         });
-
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -564,13 +586,13 @@ public class existencias extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtNombrePro, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombrePro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addContainerGap())
@@ -742,17 +764,17 @@ public class existencias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5MouseClicked
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtValorTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtValorTActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void txtValorIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorIniActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_txtValorIniActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txtValorActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txtValorActualActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         existencias ex = new existencias();
@@ -762,11 +784,12 @@ public class existencias extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        guardar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void txtNombreProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_txtNombreProActionPerformed
 
     private void btnHome8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome8MouseClicked
         categorias cat = new categorias();
@@ -775,13 +798,15 @@ public class existencias extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome8MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        listaProductos list = new listaProductos();
-        list.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        listaProductos list = new listaProductos();
+        list.setVisible(true);
+        this.setVisible(false);
+        setValorIni(txtValorIni.getText());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -799,6 +824,64 @@ public class existencias extends javax.swing.JFrame {
             listarExistencias(txtBusqueda.getText());
         }
 
+    }
+    
+    private void guardar(){
+        
+        System.out.println(idPro);
+        
+        int idProducto = Integer.valueOf(idPro);
+        int idCategoria = cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getIdCategoria();
+        int valorInicial = Integer.valueOf(txtValorIni.getText());
+        int valorActual = Integer.valueOf(txtValorActual.getText());
+        int valorTotal = Integer.valueOf(txtValorT.getText());
+        
+        existenciaI.insertar(idProducto, idCategoria, valorInicial, valorInicial, valorTotal);
+        
+    }
+    
+    private void getCmbCategoria(JComboBox cmbCategoria) {
+        existenciaI.getRolCmb(cmbCategoria);
+    }
+
+    public static String getValorIni() {
+        return valorIni;
+    }
+
+    public static void setValorIni(String valorIni) {
+        existencias.valorIni = valorIni;
+    }
+
+    public static String getValorActual() {
+        return valorActual;
+    }
+
+    public static void setValorActual(String valorActual) {
+        existencias.valorActual = valorActual;
+    }
+
+    public static String getIdPro() {
+        return idPro;
+    }
+
+    public static void setIdPro(String idPro) {
+        existencias.idPro = idPro;
+    }
+
+    public static String getNombrePro() {
+        return nombrePro;
+    }
+
+    public static void setNombrePro(String nombrePro) {
+        existencias.nombrePro = nombrePro;
+    }
+
+    public static String getValorU() {
+        return valorU;
+    }
+
+    public static void setValorU(String valorU) {
+        existencias.valorU = valorU;
     }
 
     /**
@@ -847,7 +930,7 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JLabel btnHome6;
     private javax.swing.JLabel btnHome7;
     private javax.swing.JLabel btnHome8;
-    private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JComboBox<Categoria> cmbCategoria;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -890,10 +973,10 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableE;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JTextField txtNombrePro;
+    private javax.swing.JTextField txtValorActual;
+    private javax.swing.JTextField txtValorIni;
+    private javax.swing.JTextField txtValorT;
     // End of variables declaration//GEN-END:variables
 }
