@@ -8,6 +8,7 @@ import com.fad.entities.Usuario;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -87,9 +88,54 @@ public class existenciaDAO {
     public String obtenerId(Categoria c) {
 
         String codigoAux = maxIdExistencia(c.getSiglaCat());
+        String estructura;
 
         if (codigoAux == null) {
-            codigoAux = ("FAD." + c.getSiglaCat() + ".0" + c.getIdCategoria() + ".000");
+            if (c.getIdCategoria() < 10) {
+                codigoAux = ("FAD." + c.getSiglaCat() + ".0" + c.getIdCategoria() + ".000");
+            } else {
+                codigoAux = ("FAD." + c.getSiglaCat() + "." + c.getIdCategoria() + ".000");
+            }
+        } else {
+            if (c.getIdCategoria() < 10) {
+                estructura = ("FAD." + c.getSiglaCat() + ".0" + c.getIdCategoria() + ".");
+            } else {
+                estructura = ("FAD." + c.getSiglaCat() + "." + c.getIdCategoria() + ".");
+            }
+            
+            System.out.println("Este es el id que trae: " + codigoAux);
+
+            String separador = Pattern.quote(".");
+            String[] partsId = codigoAux.split(separador);
+            System.out.println("Este es el id que trae: " + partsId);
+            String codigoCortado = partsId[3];
+
+            System.out.println("Este es el id convertido en numero: " + codigoCortado);
+
+            Integer codigo = Integer.parseInt(codigoCortado);
+            codigo = codigo + 1;
+
+            System.out.println("Este es el id oficial: " + codigo);
+
+            String codigoEx = codigo.toString();
+
+            switch (codigoEx.length()) {
+                case 1:
+                    codigoAux = (estructura + "00" + codigoEx);
+                    break;
+                case 2:
+                    codigoAux = (estructura + "0" + codigoEx);
+                    break;
+                case 3:
+                    codigoAux = (estructura + codigoEx);
+                    break;
+
+                default:
+                    break;
+            }
+            
+            System.out.println("Este es el id: " + codigoAux);
+
         }
 
         return codigoAux;
