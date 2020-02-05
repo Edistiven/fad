@@ -33,11 +33,12 @@ public class existencias extends javax.swing.JFrame {
     public static String idPro;
     public static String nombrePro;
     private static String valorU;
+    private String idEx;
 
     public existencias() {
         initComponents();
-
         /*Init de valores para el registro*/
+        setIdEx("");
         listaProductos p = new listaProductos();
         txtValorIni.setText(getValorIni());
         txtValorActual.setText(getValorActual());
@@ -50,9 +51,10 @@ public class existencias extends javax.swing.JFrame {
 
         setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
         getCmbCategoria(cmbCategoria);
 
+        validarBtn();
         listarExistencias("");
     }
 
@@ -89,14 +91,14 @@ public class existencias extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableE = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -105,8 +107,8 @@ public class existencias extends javax.swing.JFrame {
         txtValorActual = new javax.swing.JTextField();
         txtValorIni = new javax.swing.JTextField();
         txtValorT = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnProducto = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -307,9 +309,14 @@ public class existencias extends javax.swing.JFrame {
         });
         jTableE.setGridColor(new java.awt.Color(186, 197, 206));
         jTableE.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        jTableE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableE);
 
-        jButton2.setText("Buscar");
+        btnBuscar.setText("Buscar");
 
         txtBusqueda.setBackground(new java.awt.Color(255, 255, 255));
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
@@ -318,14 +325,14 @@ public class existencias extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 154, 251));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
-        jButton4.setText("Limpiar");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setBackground(new java.awt.Color(0, 154, 251));
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(null);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
 
@@ -339,13 +346,13 @@ public class existencias extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(jButton2)
+                .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtBusqueda)
                 .addGap(72, 72, 72))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(207, 207, 207))
         );
         jPanel7Layout.setVerticalGroup(
@@ -353,12 +360,12 @@ public class existencias extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnBuscar)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -391,25 +398,25 @@ public class existencias extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Valor Total:");
 
-        jButton3.setBackground(new java.awt.Color(0, 154, 251));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
-        jButton3.setText("Guardar");
-        jButton3.setBorder(null);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(0, 154, 251));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setBorder(null);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 154, 251));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
-        jButton1.setText("Eliminar");
-        jButton1.setBorder(null);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEliminar.setBackground(new java.awt.Color(0, 154, 251));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBorder(null);
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnEliminarMouseClicked(evt);
             }
         });
 
@@ -483,14 +490,19 @@ public class existencias extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jButton5.setBackground(new java.awt.Color(0, 154, 251));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        jButton5.setText("Editar");
-        jButton5.setBorder(null);
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditar.setBackground(new java.awt.Color(0, 154, 251));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setBorder(null);
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                btnEditarMouseClicked(evt);
+            }
+        });
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -508,11 +520,11 @@ public class existencias extends javax.swing.JFrame {
                         .addGap(209, 209, 209))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -531,21 +543,21 @@ public class existencias extends javax.swing.JFrame {
                             .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jButton6.setText("Productos");
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnProducto.setText("Productos");
+        btnProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton6MouseClicked(evt);
+                btnProductoMouseClicked(evt);
             }
         });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnProductoActionPerformed(evt);
             }
         });
 
@@ -627,7 +639,7 @@ public class existencias extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(153, 153, 153)
-                        .addComponent(jButton6))
+                        .addComponent(btnProducto))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -640,7 +652,7 @@ public class existencias extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jButton6)
+                .addComponent(btnProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
@@ -748,9 +760,11 @@ public class existencias extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel9MouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        limpiarCampos();
+        validarBtn();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
         // TODO add your handling code here:
@@ -760,9 +774,9 @@ public class existencias extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnHomeMouseClicked
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_btnEditarMouseClicked
 
     private void txtValorTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTActionPerformed
         // TODO add your handling code here:
@@ -776,16 +790,18 @@ public class existencias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorActualActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         existencias ex = new existencias();
         ex.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         guardar();
-    }//GEN-LAST:event_jButton3ActionPerformed
+        limpiarCampos();
+        listarExistencias("");
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProActionPerformed
         // TODO add your handling code here:
@@ -797,17 +813,36 @@ public class existencias extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHome8MouseClicked
 
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+    private void btnProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductoMouseClicked
 
-    }//GEN-LAST:event_jButton6MouseClicked
+    }//GEN-LAST:event_btnProductoMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductoActionPerformed
         // TODO add your handling code here:
         listaProductos list = new listaProductos();
         list.setVisible(true);
         this.setVisible(false);
         setValorIni(txtValorIni.getText());
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnProductoActionPerformed
+
+    private void jTableEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEMouseClicked
+        // TODO add your handling code here:
+        int select = jTableE.getSelectedRow();
+        setIdEx((String) jTableE.getValueAt(select, 0));
+        txtNombrePro.setText((String) jTableE.getValueAt(select, 1));
+        txtValorIni.setText((String) jTableE.getValueAt(select, 4));
+        txtValorActual.setText((String) jTableE.getValueAt(select, 5));
+        txtValorT.setText((String) jTableE.getValueAt(select, 7));
+        cmbCategoria.setSelectedIndex(buscarCombo((String) jTableE.getValueAt(select, 3)));
+
+        validarBtn();
+
+    }//GEN-LAST:event_jTableEMouseClicked
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * Metodos*
@@ -825,21 +860,73 @@ public class existencias extends javax.swing.JFrame {
         }
 
     }
-    
-    private void guardar(){
-        
+
+    private void guardar() {
+
         System.out.println(idPro);
-        
+
         int idProducto = Integer.valueOf(idPro);
         int idCategoria = cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getIdCategoria();
         int valorInicial = Integer.valueOf(txtValorIni.getText());
         int valorActual = Integer.valueOf(txtValorActual.getText());
         int valorTotal = Integer.valueOf(txtValorT.getText());
-        
+
         existenciaI.insertar(idProducto, idCategoria, valorInicial, valorInicial, valorTotal);
-        
+
+    }
+
+    private void limpiarCampos() {
+        setIdEx("");
+        txtBusqueda.setText("");
+        txtNombrePro.setText("");
+        txtValorActual.setText("");
+        txtValorIni.setText("");
+        txtValorT.setText("");
+
+    }
+
+    private void validarBtn() {
+        if (idEx.equals("")) {
+            btnGuardar.setEnabled(true);
+            btnProducto.setEnabled(true);
+            cmbCategoria.enable();
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } else {
+
+            btnGuardar.setEnabled(false);
+            btnProducto.setEnabled(false);
+            cmbCategoria.disable();
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+
+        }
     }
     
+    private int buscarCombo(String valor){
+        Categoria c;
+        int n = 99;
+        for (int i = 0; i < cmbCategoria.getItemCount(); i++) {
+            c = (Categoria) cmbCategoria.getItemAt(i);
+            if(c.getNombreCat().equals(valor)){
+                n = i;
+                break;
+            }
+            else{
+                n=9999;
+            }
+        }
+        return n;
+    }
+
+    public String getIdEx() {
+        return idEx;
+    }
+
+    public void setIdEx(String idEx) {
+        this.idEx = idEx;
+    }
+
     private void getCmbCategoria(JComboBox cmbCategoria) {
         existenciaI.getRolCmb(cmbCategoria);
     }
@@ -921,6 +1008,10 @@ public class existencias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnHome;
     private javax.swing.JLabel btnHome1;
     private javax.swing.JLabel btnHome2;
@@ -930,13 +1021,9 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JLabel btnHome6;
     private javax.swing.JLabel btnHome7;
     private javax.swing.JLabel btnHome8;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnProducto;
     private javax.swing.JComboBox<Categoria> cmbCategoria;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -715,7 +715,7 @@ public class usuarios extends javax.swing.JFrame {
         setIdPro((String) jTable1.getValueAt(select, 0));
         txtNombre.setText((String) jTable1.getValueAt(select, 1));
         txtPassword.setText((String) jTable1.getValueAt(select, 2));
-        cmbCategoria.setSelectedItem((String) jTable1.getValueAt(select, 3));
+        cmbCategoria.setSelectedIndex(buscarCombo((String) jTable1.getValueAt(select, 3)));
 
         validarBtn();
     }//GEN-LAST:event_jTable1MouseClicked
@@ -850,6 +850,22 @@ public class usuarios extends javax.swing.JFrame {
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }
+    }
+    
+     private int buscarCombo(String valor){
+        Categoria c;
+        int n = 99;
+        for (int i = 0; i < cmbCategoria.getItemCount(); i++) {
+            c = (Categoria) cmbCategoria.getItemAt(i);
+            if(c.getNombreCat().equals(valor)){
+                n = i;
+                break;
+            }
+            else{
+                n=9999;
+            }
+        }
+        return n;
     }
 
     /**
