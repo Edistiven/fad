@@ -14,6 +14,7 @@ import com.fad.view.movimiento.movimientos;
 import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
 import com.fad.view.user.usuarios;
+import javax.swing.JOptionPane;
 import rojerusan.RSNotifyFade;
 
 /**
@@ -336,7 +337,18 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        System.exit(0);
+
+        int option = JOptionPane.YES_NO_OPTION;
+
+        JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", option);
+
+        System.out.println("opcion:" + option);
+        if (option == 1) {
+            login log = new login();
+            log.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked

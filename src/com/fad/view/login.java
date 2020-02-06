@@ -49,17 +49,17 @@ public class login extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204), 2));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 204));
         jLabel1.setText("Iniciar Sesión");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Usuario");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Contraseña");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
@@ -70,10 +70,12 @@ public class login extends javax.swing.JFrame {
                 txtUserActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 141, -1));
+        jPanel1.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 110, -1));
 
-        btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnIngresar.setBackground(new java.awt.Color(0, 154, 251));
+        btnIngresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnIngresar.setText("Iniciar Sesión");
+        btnIngresar.setBorder(null);
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnIngresarMouseClicked(evt);
@@ -84,7 +86,12 @@ public class login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
+        btnIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnIngresarKeyPressed(evt);
+            }
+        });
+        jPanel1.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 100, 30));
 
         btnHome.setBackground(new java.awt.Color(24, 45, 49));
         btnHome.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -121,7 +128,7 @@ public class login extends javax.swing.JFrame {
                 btnHome2MouseClicked(evt);
             }
         });
-        jPanel1.add(btnHome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 40, 40));
+        jPanel1.add(btnHome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 40, 40));
 
         btnHome3.setBackground(new java.awt.Color(255, 255, 255));
         btnHome3.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -133,8 +140,8 @@ public class login extends javax.swing.JFrame {
                 btnHome3MouseClicked(evt);
             }
         });
-        jPanel1.add(btnHome3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 40, 40));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 140, -1));
+        jPanel1.add(btnHome3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 40, 40));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 110, -1));
 
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/minimize-window-24.png"))); // NOI18N
@@ -143,7 +150,7 @@ public class login extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 30, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 30, 30));
 
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close-window-24 (1).png"))); // NOI18N
@@ -152,13 +159,15 @@ public class login extends javax.swing.JFrame {
                 jLabel10MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, -1, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +203,7 @@ public class login extends javax.swing.JFrame {
 
         if (txtUser.getText().equals("") || txtPassword.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(null, "Los Campos estan vacíos");
+            JOptionPane.showMessageDialog(null, "Los Campos estan vacíos","ERROR!", JOptionPane.ERROR_MESSAGE);
 
         } else {
 
@@ -222,6 +231,31 @@ public class login extends javax.swing.JFrame {
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
+
+    private void btnIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIngresarKeyPressed
+        if (txtUser.getText().equals("") || txtPassword.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Los Campos estan vacíos");
+
+        } else {
+
+            Boolean valor = usuarioI.login(txtUser.getText(), txtPassword.getText());
+            if (valor == true) {
+
+                JOptionPane.showMessageDialog(null, "Bienvenido " + txtUser.getText());
+                inicio ini = new inicio();
+                ini.setVisible(true);
+                this.dispose();
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Usuario u contraseña Incorrectos",
+                        "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+                  
+    }//GEN-LAST:event_btnIngresarKeyPressed
 
     private void getCmbCategoria(JComboBox cmbCategoria) {
         usuarioI.getRolCmb(cmbCategoria);
