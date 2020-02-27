@@ -6,17 +6,18 @@
 package com.fad.view.user;
 
 import com.fad.view.categoria.*;
-import com.fad.dao.categoriaDAO;
 import com.fad.view.existencia.*;
-import com.fad.dao.existenciaDAO;
 import com.fad.dao.usuarioDAO;
 import com.fad.entities.Categoria;
 import com.fad.view.inicio;
+import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
 import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
-import com.fad.view.user.usuarios;
+import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import rojerusan.RSNotifyFade;
 
@@ -64,6 +65,16 @@ public class usuarios extends javax.swing.JFrame {
         getCmbCategoria(cmbCategoria);
 
         validarBtn();
+    }
+
+    public void setColor(JButton b) {
+
+        b.setBackground(new Color(51, 102, 255));
+    }
+
+    public void resetColor(JButton bu) {
+
+        bu.setBackground(new Color(0, 154, 251));
     }
 
     /**
@@ -114,7 +125,7 @@ public class usuarios extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
-        cmbCategoria = new javax.swing.JComboBox<>();
+        cmbCategoria = new javax.swing.JComboBox<Categoria>();
         jPanel5 = new javax.swing.JPanel();
         btnHome4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -291,6 +302,14 @@ public class usuarios extends javax.swing.JFrame {
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(null);
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseExited(evt);
+            }
+        });
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -410,6 +429,14 @@ public class usuarios extends javax.swing.JFrame {
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(null);
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseExited(evt);
+            }
+        });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -424,6 +451,12 @@ public class usuarios extends javax.swing.JFrame {
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEliminarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseExited(evt);
             }
         });
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -440,6 +473,12 @@ public class usuarios extends javax.swing.JFrame {
         btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarMouseExited(evt);
             }
         });
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -684,7 +723,13 @@ public class usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        System.exit(0);
+        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        System.out.println("opcion:" + option);
+        if (option == 0) {
+            login log = new login();
+            log.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
@@ -748,6 +793,38 @@ public class usuarios extends javax.swing.JFrame {
         modificarU();
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
+        setColor(btnLimpiar);
+    }//GEN-LAST:event_btnLimpiarMouseEntered
+
+    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
+        resetColor(btnLimpiar);
+    }//GEN-LAST:event_btnLimpiarMouseExited
+
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        setColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardarMouseEntered
+
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        resetColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardarMouseExited
+
+    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
+        setColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseEntered
+
+    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
+        resetColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseExited
+
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
+        setColor(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseEntered
+
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
+        resetColor(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseExited
+
     //Mensajes Personalizados
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
@@ -785,7 +862,7 @@ public class usuarios extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-        
+
         validarBtn();
     }
 
@@ -851,18 +928,17 @@ public class usuarios extends javax.swing.JFrame {
             btnEliminar.setEnabled(true);
         }
     }
-    
-     private int buscarCombo(String valor){
+
+    private int buscarCombo(String valor) {
         Categoria c;
         int n = 99;
         for (int i = 0; i < cmbCategoria.getItemCount(); i++) {
             c = (Categoria) cmbCategoria.getItemAt(i);
-            if(c.getNombreCat().equals(valor)){
+            if (c.getNombreCat().equals(valor)) {
                 n = i;
                 break;
-            }
-            else{
-                n=9999;
+            } else {
+                n = 9999;
             }
         }
         return n;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fad.view.producto;
+package com.fad.view.existencia;
 
 import com.fad.view.categoria.*;
 import com.fad.dao.categoriaDAO;
@@ -12,10 +12,12 @@ import com.fad.dao.existenciaDAO;
 import com.fad.dao.productoDAO;
 import com.fad.view.inicio;
 import com.fad.view.movimiento.movimientos;
-import com.fad.view.producto.listaProductos;
+import com.fad.view.existencia.listaProductos;
 import com.fad.view.reporte.reportes;
 import com.fad.view.user.usuarios;
+import java.awt.Color;
 import java.text.ParseException;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import rojerusan.RSNotifyFade;
@@ -25,28 +27,38 @@ import rojerusan.RSNotifyFade;
  * @author edist
  */
 public class listaProductos extends javax.swing.JFrame {
-
+    
     private productoDAO productoI = new productoDAO();
-    public static String idPro ="";
-    public static String idProd ="";
-    public static String nombrePro ="";
+    public static String idPro = "";
+    public static String idProd = "";
+    public static String nombrePro = "";
     public static String valorU = "";
-
+    
     private static String idProTemp;
     private static String nombreProTemp;
     private static String valorUTemp;
     
     public listaProductos() {
-
+        
         initComponents();
         
-        System.out.println("Este es el dato: " + nombrePro);        
+        System.out.println("Este es el dato: " + nombrePro);
         setIdPro("0");
         setLocationRelativeTo(null);
         this.setResizable(false);
         listarProductos("");
         //
 
+    }
+    
+    public void setColor(JButton b) {
+        
+        b.setBackground(new Color(51, 102, 255));
+    }
+    
+    public void resetColor(JButton bu) {
+        
+        bu.setBackground(new Color(0, 154, 251));
     }
 
     /**
@@ -111,6 +123,12 @@ public class listaProductos extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSeleccionarMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSeleccionarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSeleccionarMouseExited(evt);
+            }
         });
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +189,14 @@ public class listaProductos extends javax.swing.JFrame {
         btnLimpiar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
         btnLimpiar1.setText("Atras");
         btnLimpiar1.setBorder(null);
+        btnLimpiar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimpiar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimpiar1MouseExited(evt);
+            }
+        });
         btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiar1ActionPerformed(evt);
@@ -261,11 +287,11 @@ public class listaProductos extends javax.swing.JFrame {
         
         ex.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        
         if (txtBusqueda.getText().equals("")) {
             listarProductos("");
         } else {
@@ -308,30 +334,46 @@ public class listaProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSeleccionarMouseClicked
 
+    private void btnSeleccionarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeleccionarMouseEntered
+        setColor(btnSeleccionar);       
+    }//GEN-LAST:event_btnSeleccionarMouseEntered
+
+    private void btnSeleccionarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeleccionarMouseExited
+        resetColor(btnSeleccionar); 
+    }//GEN-LAST:event_btnSeleccionarMouseExited
+
+    private void btnLimpiar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiar1MouseEntered
+        setColor(btnLimpiar1); 
+    }//GEN-LAST:event_btnLimpiar1MouseEntered
+
+    private void btnLimpiar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiar1MouseExited
+        resetColor(btnLimpiar1);
+    }//GEN-LAST:event_btnLimpiar1MouseExited
+
     //Metodos
     private void listarProductos(String nombreP) {
         productoI.listarProductos(jTable1, nombreP);
     }
-
+    
     public void limpiarCampos() {
         existencias ex = new existencias();
-       
+        
     }
-
+    
     private void guardarProducto() {
         //Setteo De valores
 
         listarProductos("");
     }
-
+    
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
-
+    
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
-
+    
     private MaskFormatter getMaskFormatter(String format) {
         MaskFormatter mask = null;
         try {
@@ -342,40 +384,38 @@ public class listaProductos extends javax.swing.JFrame {
         }
         return mask;
     }
-
+    
     public String getIdPro() {
         return idPro;
     }
-
+    
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
-
+    
     public static String getIdProTemp() {
         return idProTemp;
     }
-
+    
     public static void setIdProTemp(String idProTemp) {
         listaProductos.idProTemp = idProTemp;
     }
-
+    
     public static String getNombreProTemp() {
         return nombreProTemp;
     }
-
+    
     public static void setNombreProTemp(String nombreProTemp) {
         listaProductos.nombreProTemp = nombreProTemp;
     }
-
+    
     public static String getValorUTemp() {
         return valorUTemp;
     }
-
+    
     public static void setValorUTemp(String valorUTemp) {
         listaProductos.valorUTemp = valorUTemp;
     }
-    
-    
 
     /**
      * @param args the command line arguments

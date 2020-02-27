@@ -12,12 +12,14 @@ import com.fad.view.existencia.*;
 import com.fad.dao.existenciaDAO;
 import com.fad.dao.productoDAO;
 import com.fad.view.inicio;
+import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
 
 import com.fad.view.reporte.reportes;
 import com.fad.view.user.usuarios;
 import java.text.ParseException;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import rojerusan.RSNotifyFade;
 
@@ -446,7 +448,13 @@ public class reportes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHome7MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        System.exit(0);
+        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        System.out.println("opcion:" + option);
+        if (option == 0) {
+            login log = new login();
+            log.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked

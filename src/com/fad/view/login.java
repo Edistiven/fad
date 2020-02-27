@@ -1,17 +1,11 @@
 package com.fad.view;
 
 import com.fad.dao.usuarioDAO;
-import com.fad.entities.Categoria;
-import com.fad.view.movimiento.movimientos;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import rojerusan.RSNotifyFade;
 
 public class login extends javax.swing.JFrame {
 
@@ -22,6 +16,16 @@ public class login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setResizable(false);
 
+    }
+
+    public void setColor(JButton b) {
+
+        b.setBackground(new Color(51, 102, 255));
+    }
+
+    public void resetColor(JButton bu) {
+
+        bu.setBackground(new Color(0, 154, 251));
     }
 
     @SuppressWarnings("unchecked")
@@ -79,6 +83,12 @@ public class login extends javax.swing.JFrame {
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnIngresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnIngresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnIngresarMouseExited(evt);
             }
         });
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +213,7 @@ public class login extends javax.swing.JFrame {
 
         if (txtUser.getText().equals("") || txtPassword.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(null, "Los Campos estan vacíos","ERROR!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los Campos estan vacíos", "ERROR!", JOptionPane.ERROR_MESSAGE);
 
         } else {
 
@@ -254,8 +264,16 @@ public class login extends javax.swing.JFrame {
 
             }
         }
-                  
+
     }//GEN-LAST:event_btnIngresarKeyPressed
+
+    private void btnIngresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseEntered
+        setColor(btnIngresar);
+    }//GEN-LAST:event_btnIngresarMouseEntered
+
+    private void btnIngresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseExited
+        resetColor(btnIngresar);
+    }//GEN-LAST:event_btnIngresarMouseExited
 
     private void getCmbCategoria(JComboBox cmbCategoria) {
         usuarioI.getRolCmb(cmbCategoria);

@@ -10,6 +10,7 @@
     <class>com.fad.entities.Existencia</class>
     <class>com.fad.entities.Tipordeninv</class>
     <class>com.fad.entities.Usuario</class>
+    <class>com.fad.controller.botones</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/fad"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

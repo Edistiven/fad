@@ -338,12 +338,9 @@ public class inicio extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
 
-        int option = JOptionPane.YES_NO_OPTION;
-
-        JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", option);
-
+        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         System.out.println("opcion:" + option);
-        if (option == 1) {
+        if (option == 0) {
             login log = new login();
             log.setVisible(true);
             this.dispose();
