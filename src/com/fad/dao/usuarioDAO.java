@@ -72,7 +72,7 @@ public class usuarioDAO {
             datosU[0] = u.getIdUsuario().toString();
             datosU[1] = u.getNombreUser();
             datosU[2] = u.getPasswordUser();
-            datosU[3] = findCategoriaById(u.getRolUser()).getNombreCat();
+            datosU[3] = categoria(u.getRolUser());
 
             model.addRow(datosU);
         }
@@ -89,6 +89,28 @@ public class usuarioDAO {
         }
     }
 
+    public String categoria(int id) {
+        String nombre = "";
+
+        Categoria c = new Categoria();
+
+        c = findCategoriaById(id);
+
+        if (c == null) {
+            nombre = "N/A";
+        } else {
+            nombre = c.getNombreCat();
+        }
+
+        return nombre;
+    }
+
+    /**
+     * Consultas
+     *
+     * @param user
+     * @return
+     */
     private List<Usuario> buscarUsuario(String user) {
 
         Usuario u;
@@ -147,28 +169,20 @@ public class usuarioDAO {
     }
 
     public Categoria findCategoriaById(int id) {
-//        System.out.println("Este es el id Categoria: " + idCategoria);
-//        EntityManager em = cjc.getEntityManager();
-//        StringBuilder querys = new StringBuilder("SELECT c FROM Categoria c WHERE c.idCategoria = " + idCategoria);
-//        Query query = em.createQuery(querys.toString());
-//        //query.setParameter("idCategoria", idCategoria);
-//        query.setMaxResults(1);
-//
-//        try {
-//            Categoria categoria = (Categoria) query.getSingleResult();
-//            return categoria;
-//        } catch (NoResultException nre) {
-//            return null;
-//        } catch (NonUniqueResultException nure) {
-//            return null;
-//        }
-        
+
         EntityManager em = ujc.getEntityManager(); //
         Query sql = em.createQuery("SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria");
         sql.setParameter("idCategoria", id);
-        Categoria c = (Categoria) sql.getSingleResult();
+        sql.setMaxResults(1);
+        try {
+            Categoria categoria = (Categoria) sql.getSingleResult();
+            return categoria;
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }
 
-        return c;
     }
 
 }
