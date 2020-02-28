@@ -25,6 +25,7 @@ public class usuarioDAO {
     private Usuario usuario = new Usuario();
     private UsuarioJpaController ujc = new UsuarioJpaController();
     private CategoriaJpaController cjc = new CategoriaJpaController();
+    private static Usuario usuarioSession = new Usuario();
 
     /**
      * Funciones basicas CRUD*
@@ -104,7 +105,7 @@ public class usuarioDAO {
 
         return nombre;
     }
-
+    
     /**
      * Consultas
      *
@@ -139,6 +140,7 @@ public class usuarioDAO {
 
             if (!resultado.isEmpty()) {
                 valor = true;
+                setUsuarioSession(findUsuarioById(nombreUser));
 
             } else {
                 valor = false;
@@ -184,5 +186,30 @@ public class usuarioDAO {
         }
 
     }
+    
+    public Usuario findUsuarioById(String user) {
 
+        EntityManager em = ujc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUser = :nombreUser");
+        sql.setParameter("nombreUser", user);
+        sql.setMaxResults(1);
+        try {
+            Usuario usuario = (Usuario) sql.getSingleResult();
+            return usuario;
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }
+
+    }
+
+    public static Usuario getUsuarioSession() {
+        return usuarioSession;
+    }
+
+    public static void setUsuarioSession(Usuario usuarioSession) {
+        usuarioDAO.usuarioSession = usuarioSession;
+    }
+    
 }
