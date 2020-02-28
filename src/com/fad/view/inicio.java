@@ -5,6 +5,7 @@
  */
 package com.fad.view;
 
+import com.fad.dao.usuarioDAO;
 import com.fad.view.categoria.*;
 import com.fad.view.existencia.*;
 import com.fad.view.inicio;
@@ -24,10 +25,16 @@ import rojerusan.RSNotifyFade;
  */
 public class inicio extends javax.swing.JFrame {
 
+    usuarioDAO usuarioI = new usuarioDAO();
+    
     public inicio() {
 
         initComponents();
+        txtUserSession1.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
+        txtRolSession.setText(usuarioI.categoria(usuarioI.getUsuarioSession().getRolUser()));
         setLocationRelativeTo(null);
+        System.out.println("este es el usuario que se logeo: " + usuarioI.getUsuarioSession().getNombreUser());
+        
         this.setResizable(false);
 
     }
@@ -78,8 +85,10 @@ public class inicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        txtRolSession = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtUserSession1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -335,14 +344,22 @@ public class inicio extends javax.swing.JFrame {
         jLabel11.setText("Rol:");
         jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
 
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
-        jLabel13.setText("Bienvenido:");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        txtRolSession.setForeground(new java.awt.Color(102, 102, 102));
+        txtRolSession.setText("Bienvenido:");
+        jPanel5.add(txtRolSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
 
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
         jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 40));
+
+        jLabel20.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
+        jLabel20.setText("Bienvenido:");
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+
+        txtUserSession1.setForeground(new java.awt.Color(102, 102, 102));
+        txtUserSession1.setText("Bienvenido:");
+        jPanel5.add(txtUserSession1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1190, 40));
 
@@ -548,13 +565,13 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -572,6 +589,8 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblReporte;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel txtRolSession;
+    private javax.swing.JLabel txtUserSession1;
     // End of variables declaration//GEN-END:variables
 
 }

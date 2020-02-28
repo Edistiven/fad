@@ -132,6 +132,21 @@ public class productos extends javax.swing.JFrame {
         txtDescripcion = new javax.swing.JTextArea();
         txtValor = new javax.swing.JFormattedTextField();
         btnEditar = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnGuardar1 = new javax.swing.JButton();
+        btnEliminar1 = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        txtNombre1 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtDescripcion1 = new javax.swing.JTextArea();
+        txtValor1 = new javax.swing.JFormattedTextField();
+        btnEditar1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnHome4 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -628,6 +643,167 @@ public class productos extends javax.swing.JFrame {
         jPanel8.add(jPanel9);
         jPanel9.setBounds(26, 30, 499, 0);
 
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
+        jPanel12.setLayout(null);
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Existencia Inicial:");
+        jPanel12.add(jLabel5);
+        jLabel5.setBounds(488, 393, 130, 40);
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Valor Total:");
+        jPanel12.add(jLabel12);
+        jLabel12.setBounds(488, 333, 130, 40);
+
+        btnGuardar1.setBackground(new java.awt.Color(0, 154, 251));
+        btnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
+        btnGuardar1.setText("Guardar");
+        btnGuardar1.setBorder(null);
+        btnGuardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardar1MouseExited(evt);
+            }
+        });
+        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardar1ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnGuardar1);
+        btnGuardar1.setBounds(70, 340, 100, 35);
+
+        btnEliminar1.setBackground(new java.awt.Color(0, 154, 251));
+        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
+        btnEliminar1.setText("Eliminar");
+        btnEliminar1.setBorder(null);
+        btnEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminar1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEliminar1MouseExited(evt);
+            }
+        });
+        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar1ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnEliminar1);
+        btnEliminar1.setBounds(220, 340, 90, 35);
+
+        jPanel13.setBackground(new java.awt.Color(0, 154, 251));
+        jPanel13.setLayout(null);
+
+        jLabel22.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Nombre:");
+        jPanel13.add(jLabel22);
+        jLabel22.setBounds(10, 0, 100, 40);
+
+        jLabel23.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel23.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Valor:");
+        jPanel13.add(jLabel23);
+        jLabel23.setBounds(10, 140, 90, 40);
+
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Descripción:");
+        jPanel13.add(jLabel24);
+        jLabel24.setBounds(10, 50, 100, 40);
+
+        jPanel12.add(jPanel13);
+        jPanel13.setBounds(89, 53, 108, 179);
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtNombre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombre1ActionPerformed(evt);
+            }
+        });
+
+        txtDescripcion1.setColumns(20);
+        txtDescripcion1.setRows(5);
+        jScrollPane3.setViewportView(txtDescripcion1);
+
+        txtValor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValor1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtNombre1)
+                    .addComponent(txtValor1))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtValor1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel12.add(jPanel14);
+        jPanel14.setBounds(220, 50, 226, 187);
+
+        btnEditar1.setBackground(new java.awt.Color(0, 154, 251));
+        btnEditar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
+        btnEditar1.setText("Editar");
+        btnEditar1.setBorder(null);
+        btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditar1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditar1MouseExited(evt);
+            }
+        });
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnEditar1);
+        btnEditar1.setBounds(370, 340, 90, 35);
+
+        jPanel8.add(jPanel12);
+        jPanel12.setBounds(10, 20, 520, 440);
+
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 550, 480));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1190, 540));
@@ -905,6 +1081,68 @@ public class productos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void btnGuardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardar1MouseEntered
+        setColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardar1MouseEntered
+
+    private void btnGuardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardar1MouseExited
+        resetColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardar1MouseExited
+
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+        // TODO add your handling code here:
+        guardarProducto();
+        limpiarCampos();
+    }//GEN-LAST:event_btnGuardar1ActionPerformed
+
+    private void btnEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseClicked
+
+    }//GEN-LAST:event_btnEliminar1MouseClicked
+
+    private void btnEliminar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseEntered
+        setColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminar1MouseEntered
+
+    private void btnEliminar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseExited
+        resetColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminar1MouseExited
+
+    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+
+        eliminarPro();
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+    }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void txtNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombre1ActionPerformed
+
+    private void txtValor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValor1ActionPerformed
+
+    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseClicked
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_btnEditar1MouseClicked
+
+    private void btnEditar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseEntered
+        setColor(btnEditar);
+    }//GEN-LAST:event_btnEditar1MouseEntered
+
+    private void btnEditar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseExited
+        resetColor(btnEditar);
+    }//GEN-LAST:event_btnEditar1MouseExited
+
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        modificarPro();
+        limpiarCampos();
+        listarProductos("");
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
     //Metodos
     private void listarProductos(String nombreP) {
         productoI.listarProductos(jTable1, nombreP);
@@ -1063,8 +1301,11 @@ public class productos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnGuardar1;
     private javax.swing.JLabel btnHome;
     private javax.swing.JLabel btnHome4;
     private javax.swing.JButton btnLimpiar;
@@ -1072,6 +1313,7 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1081,8 +1323,12 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1090,6 +1336,9 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1100,6 +1349,7 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblExistencia;
@@ -1110,7 +1360,10 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextArea txtDescripcion1;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre1;
     private javax.swing.JFormattedTextField txtValor;
+    private javax.swing.JFormattedTextField txtValor1;
     // End of variables declaration//GEN-END:variables
 }

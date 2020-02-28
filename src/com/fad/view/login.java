@@ -217,8 +217,7 @@ public class login extends javax.swing.JFrame {
 
         } else {
 
-            Boolean valor = usuarioI.login(txtUser.getText(), txtPassword.getText());
-            if (valor == true) {
+            if (usuarioI.login(txtUser.getText(), txtPassword.getText())) {
 
                 JOptionPane.showMessageDialog(null, "Bienvenido " + txtUser.getText());
                 inicio ini = new inicio();
