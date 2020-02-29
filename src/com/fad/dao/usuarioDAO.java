@@ -46,11 +46,12 @@ public class usuarioDAO {
         }
     }
 
-    public void modificar(int id, String nombreU, String passwordU) {
+    public void modificar(int id, String nombreU, String passwordU, int rol) {
         try {
             usuario.setIdUsuario(id);
             usuario.setNombreUser(nombreU);
             usuario.setPasswordUser(passwordU);
+            usuario.setRolUser(rol);
             ujc.edit(usuario);
             System.out.println("Se ha modificado con exito!!!");
 

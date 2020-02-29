@@ -981,8 +981,9 @@ public class usuarios extends javax.swing.JFrame {
         int id = Integer.parseInt(getIdPro());
         String nombreU = txtNombre.getText();
         String password = txtPassword.getText();
+        int rol = cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getIdCategoria();
 
-        usuarioI.modificar(id, nombreU, password);
+        usuarioI.modificar(id, nombreU, password, rol);
 
         mensajeInfo("Se ha modificado el producto (" + nombreU + ").");
         listarUsuarios("");
