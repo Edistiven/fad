@@ -10,6 +10,7 @@ import com.fad.dao.categoriaDAO;
 import com.fad.view.existencia.*;
 import com.fad.dao.existenciaDAO;
 import com.fad.dao.productoDAO;
+import com.fad.dao.usuarioDAO;
 import com.fad.view.inicio;
 import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
@@ -41,16 +42,19 @@ public class productos extends javax.swing.JFrame {
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
+    usuarioDAO usuarioI = new usuarioDAO();
 
     public productos() {
 
         initComponents();
+        txtUserSession1.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
+        txtRolSession.setText(usuarioI.categoria(usuarioI.getUsuarioSession().getRolUser()));
         setIdPro("0");
         setLocationRelativeTo(null);
         this.setResizable(false);
         listarProductos("");
         //
-        txtValor = new JFormattedTextField(getMaskFormatter("######.##"));
+        //txtValor = new JFormattedTextField(getMaskFormatter("######.##"));
 
         //
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -58,6 +62,7 @@ public class productos extends javax.swing.JFrame {
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
         validarBtn();
+        
     }
 
     public void setColor(JButton b) {
@@ -117,43 +122,27 @@ public class productos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        txtNombre = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
-        txtValor = new javax.swing.JFormattedTextField();
         btnEditar = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        btnGuardar1 = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        txtNombre1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtDescripcion1 = new javax.swing.JTextArea();
-        txtValor1 = new javax.swing.JFormattedTextField();
-        btnEditar1 = new javax.swing.JButton();
+        txtDescripcion = new javax.swing.JTextArea();
+        txtValorU = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        btnHome4 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        txtUserSession1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        txtRolSession = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -482,23 +471,9 @@ public class productos extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(null);
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
-        jPanel9.setLayout(null);
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Existencia Inicial:");
-        jPanel9.add(jLabel3);
-        jLabel3.setBounds(488, 378, 130, 40);
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Valor Total:");
-        jPanel9.add(jLabel4);
-        jLabel4.setBounds(488, 318, 130, 40);
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
+        jPanel12.setLayout(null);
 
         btnGuardar.setBackground(new java.awt.Color(0, 154, 251));
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -518,8 +493,8 @@ public class productos extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel9.add(btnGuardar);
-        btnGuardar.setBounds(90, 350, 100, 35);
+        jPanel12.add(btnGuardar);
+        btnGuardar.setBounds(70, 340, 100, 35);
 
         btnEliminar.setBackground(new java.awt.Color(0, 154, 251));
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -542,79 +517,8 @@ public class productos extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel9.add(btnEliminar);
-        btnEliminar.setBounds(220, 350, 90, 35);
-
-        jPanel10.setBackground(new java.awt.Color(0, 154, 251));
-        jPanel10.setLayout(null);
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Nombre:");
-        jPanel10.add(jLabel6);
-        jLabel6.setBounds(10, 0, 100, 40);
-
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Valor:");
-        jPanel10.add(jLabel10);
-        jLabel10.setBounds(10, 140, 90, 40);
-
-        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel20.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Descripción:");
-        jPanel10.add(jLabel20);
-        jLabel20.setBounds(10, 50, 100, 40);
-
-        jPanel9.add(jPanel10);
-        jPanel10.setBounds(79, 37, 108, 179);
-
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setRows(5);
-        jScrollPane2.setViewportView(txtDescripcion);
-
-        txtValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(txtNombre)
-                    .addComponent(txtValor))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel9.add(jPanel11);
-        jPanel11.setBounds(199, 37, 226, 187);
+        jPanel12.add(btnEliminar);
+        btnEliminar.setBounds(220, 340, 90, 35);
 
         btnEditar.setBackground(new java.awt.Color(0, 154, 251));
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
@@ -637,74 +541,8 @@ public class productos extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel9.add(btnEditar);
-        btnEditar.setBounds(340, 350, 90, 35);
-
-        jPanel8.add(jPanel9);
-        jPanel9.setBounds(26, 30, 499, 0);
-
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
-        jPanel12.setLayout(null);
-
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Existencia Inicial:");
-        jPanel12.add(jLabel5);
-        jLabel5.setBounds(488, 393, 130, 40);
-
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Valor Total:");
-        jPanel12.add(jLabel12);
-        jLabel12.setBounds(488, 333, 130, 40);
-
-        btnGuardar1.setBackground(new java.awt.Color(0, 154, 251));
-        btnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
-        btnGuardar1.setText("Guardar");
-        btnGuardar1.setBorder(null);
-        btnGuardar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardar1MouseExited(evt);
-            }
-        });
-        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardar1ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(btnGuardar1);
-        btnGuardar1.setBounds(70, 340, 100, 35);
-
-        btnEliminar1.setBackground(new java.awt.Color(0, 154, 251));
-        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
-        btnEliminar1.setText("Eliminar");
-        btnEliminar1.setBorder(null);
-        btnEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminar1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEliminar1MouseExited(evt);
-            }
-        });
-        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar1ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(btnEliminar1);
-        btnEliminar1.setBounds(220, 340, 90, 35);
+        jPanel12.add(btnEditar);
+        btnEditar.setBounds(370, 340, 90, 35);
 
         jPanel13.setBackground(new java.awt.Color(0, 154, 251));
         jPanel13.setLayout(null);
@@ -735,19 +573,19 @@ public class productos extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtNombre1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombre1ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
 
-        txtDescripcion1.setColumns(20);
-        txtDescripcion1.setRows(5);
-        jScrollPane3.setViewportView(txtDescripcion1);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane3.setViewportView(txtDescripcion);
 
-        txtValor1.addActionListener(new java.awt.event.ActionListener() {
+        txtValorU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValor1ActionPerformed(evt);
+                txtValorUActionPerformed(evt);
             }
         });
 
@@ -757,49 +595,25 @@ public class productos extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(txtNombre1)
-                    .addComponent(txtValor1))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtValorU, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtValor1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtValorU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel12.add(jPanel14);
         jPanel14.setBounds(220, 50, 226, 187);
-
-        btnEditar1.setBackground(new java.awt.Color(0, 154, 251));
-        btnEditar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        btnEditar1.setText("Editar");
-        btnEditar1.setBorder(null);
-        btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditar1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditar1MouseExited(evt);
-            }
-        });
-        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditar1ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(btnEditar1);
-        btnEditar1.setBounds(370, 340, 90, 35);
 
         jPanel8.add(jPanel12);
         jPanel12.setBounds(10, 20, 520, 440);
@@ -811,49 +625,52 @@ public class productos extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnHome4.setBackground(new java.awt.Color(255, 255, 255));
-        btnHome4.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
-        btnHome4.setForeground(new java.awt.Color(255, 255, 255));
-        btnHome4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/administrator-32 (1).png"))); // NOI18N
-        btnHome4.setOpaque(true);
-        btnHome4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHome4MouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnHome4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 40, 40));
+        jLabel25.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
+        jLabel25.setText("Bienvenido:");
+        jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
-        jLabel13.setText("Bienvenido:");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        txtUserSession1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtUserSession1.setForeground(new java.awt.Color(102, 102, 102));
+        txtUserSession1.setText("Nombre");
+        jPanel5.add(txtUserSession1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 110, -1));
 
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 40));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, 40));
 
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/group-16.png"))); // NOI18N
         jLabel11.setText("Rol:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
+
+        txtRolSession.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtRolSession.setForeground(new java.awt.Color(102, 102, 102));
+        txtRolSession.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtRolSession.setText("Rol");
+        jPanel5.add(txtRolSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 160, -1));
 
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 40));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, -1, 40));
 
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
-        jLabel9.setText("Cerrar Sesión");
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel27.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
+        jLabel27.setText("Cerrar Sesión");
+        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                jLabel27MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gear-2-16.png"))); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1190, 40));
 
@@ -861,10 +678,6 @@ public class productos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnHome4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHome4MouseClicked
 
     private void lblProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductoMouseClicked
 
@@ -940,48 +753,11 @@ public class productos extends javax.swing.JFrame {
         setIdPro((String) jTable1.getValueAt(select, 0));
         txtNombre.setText((String) jTable1.getValueAt(select, 1));
         txtDescripcion.setText((String) jTable1.getValueAt(select, 2));
-        txtValor.setText((String) jTable1.getValueAt(select, 3));
+        txtValorU.setText((String)jTable1.getValueAt(select, 3));
+        txtValorU.enable(false);
         validarBtn();
-        //System.out.println(getIdPro());
+     
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        guardarProducto();
-        limpiarCampos();
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-
-    }//GEN-LAST:event_btnEliminarMouseClicked
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        eliminarPro();
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValorActionPerformed
-
-    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        // TODO add your handling code here:
-        limpiarCampos();
-    }//GEN-LAST:event_btnEditarMouseClicked
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        modificarPro();
-        limpiarCampos();
-        listarProductos("");
-    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
         setColor(btnLimpiar);
@@ -990,30 +766,6 @@ public class productos extends javax.swing.JFrame {
     private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
         resetColor(btnLimpiar);
     }//GEN-LAST:event_btnLimpiarMouseExited
-
-    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
-        setColor(btnGuardar);
-    }//GEN-LAST:event_btnGuardarMouseEntered
-
-    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
-        resetColor(btnGuardar);
-    }//GEN-LAST:event_btnGuardarMouseExited
-
-    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
-        setColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminarMouseEntered
-
-    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
-        resetColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminarMouseExited
-
-    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
-        setColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseEntered
-
-    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
-        resetColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseExited
 
     private void lblInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseEntered
         setColorLabel(lblInicio);
@@ -1071,7 +823,65 @@ public class productos extends javax.swing.JFrame {
         setColorLabel(lblReporte);
     }//GEN-LAST:event_lblReporteMouseExited
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        setColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardarMouseEntered
+
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        resetColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardarMouseExited
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        guardarProducto();
+        limpiarCampos();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
+        setColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseEntered
+
+    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
+        resetColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseExited
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        eliminarPro();
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_btnEditarMouseClicked
+
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
+        setColor(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseEntered
+
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
+        resetColor(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseExited
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        modificarPro();
+        limpiarCampos();
+        listarProductos("");
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
         int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         System.out.println("opcion:" + option);
         if (option == 0) {
@@ -1079,69 +889,11 @@ public class productos extends javax.swing.JFrame {
             log.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_jLabel9MouseClicked
+    }//GEN-LAST:event_jLabel27MouseClicked
 
-    private void btnGuardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardar1MouseEntered
-        setColor(btnGuardar);
-    }//GEN-LAST:event_btnGuardar1MouseEntered
-
-    private void btnGuardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardar1MouseExited
-        resetColor(btnGuardar);
-    }//GEN-LAST:event_btnGuardar1MouseExited
-
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+    private void txtValorUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorUActionPerformed
         // TODO add your handling code here:
-        guardarProducto();
-        limpiarCampos();
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
-
-    private void btnEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseClicked
-
-    }//GEN-LAST:event_btnEliminar1MouseClicked
-
-    private void btnEliminar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseEntered
-        setColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminar1MouseEntered
-
-    private void btnEliminar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseExited
-        resetColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminar1MouseExited
-
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-
-        eliminarPro();
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
-
-    private void txtNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombre1ActionPerformed
-
-    private void txtValor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValor1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValor1ActionPerformed
-
-    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseClicked
-        // TODO add your handling code here:
-        limpiarCampos();
-    }//GEN-LAST:event_btnEditar1MouseClicked
-
-    private void btnEditar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseEntered
-        setColor(btnEditar);
-    }//GEN-LAST:event_btnEditar1MouseEntered
-
-    private void btnEditar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseExited
-        resetColor(btnEditar);
-    }//GEN-LAST:event_btnEditar1MouseExited
-
-    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        modificarPro();
-        limpiarCampos();
-        listarProductos("");
-    }//GEN-LAST:event_btnEditar1ActionPerformed
+    }//GEN-LAST:event_txtValorUActionPerformed
 
     //Metodos
     private void listarProductos(String nombreP) {
@@ -1153,7 +905,7 @@ public class productos extends javax.swing.JFrame {
         txtBusqueda.setText("");
         txtNombre.setText("");
         txtDescripcion.setText("");
-        txtValor.setText("");
+        txtValorU.setText("");
 
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1167,7 +919,7 @@ public class productos extends javax.swing.JFrame {
         //Setteo De valores
         String nombrePro = txtNombre.getText();
         String descripcion = txtDescripcion.getText();
-        String valorStr = txtValor.getText();
+        String valorStr = txtValorU.getText();
         valorStr = valorStr.replace(",", ".");
         System.out.println("Este es el valor: " + valorStr);
         double valor = Double.valueOf(valorStr);
@@ -1183,7 +935,7 @@ public class productos extends javax.swing.JFrame {
         int id = Integer.parseInt(getIdPro());
         String nombrePro = txtNombre.getText();
         String descripcion = txtDescripcion.getText();
-        double valor = Double.valueOf(txtValor.getText());
+        double valor = Double.valueOf(txtValorU.getText());
         productoI.modificar(id, nombrePro, descripcion, valor);
 
         mensajeInfo("Se ha modificado el producto (" + nombrePro + ").");
@@ -1289,6 +1041,102 @@ public class productos extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1301,41 +1149,28 @@ public class productos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnGuardar1;
     private javax.swing.JLabel btnHome;
-    private javax.swing.JLabel btnHome4;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -1346,9 +1181,7 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCategoria;
@@ -1360,10 +1193,9 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextArea txtDescripcion1;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JFormattedTextField txtValor;
-    private javax.swing.JFormattedTextField txtValor1;
+    private javax.swing.JLabel txtRolSession;
+    private javax.swing.JLabel txtUserSession1;
+    private javax.swing.JTextField txtValorU;
     // End of variables declaration//GEN-END:variables
 }

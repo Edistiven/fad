@@ -8,6 +8,7 @@ package com.fad.view.categoria;
 import com.fad.dao.categoriaDAO;
 import com.fad.view.existencia.*;
 import com.fad.dao.existenciaDAO;
+import com.fad.dao.usuarioDAO;
 import com.fad.view.inicio;
 import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
@@ -26,7 +27,7 @@ import rojerusan.RSNotifyFade;
  */
 public class categorias extends javax.swing.JFrame {
 
-    private categoriaDAO usuarioI = new categoriaDAO();
+    private categoriaDAO catI = new categoriaDAO();
 
     private String idPro;
 
@@ -37,15 +38,19 @@ public class categorias extends javax.swing.JFrame {
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
+    private usuarioDAO usuarioI = new usuarioDAO();
 
     public categorias() {
 
         initComponents();
+        txtUserSession1.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
+        txtRolSession.setText(usuarioI.categoria(usuarioI.getUsuarioSession().getRolUser()));
         setLocationRelativeTo(null);
         this.setResizable(false);
         setIdPro("0");
         listarCategorias("");
         validarBtn();
+        
     }
 
     public void setColor(JButton b) {
@@ -120,9 +125,11 @@ public class categorias extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnHome4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtUserSession1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtRolSession = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -659,24 +666,38 @@ public class categorias extends javax.swing.JFrame {
         });
         jPanel5.add(btnHome4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 40, 40));
 
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/group-16.png"))); // NOI18N
-        jLabel11.setText("Rol:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
+        jLabel20.setText("Bienvenido:");
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+
+        txtUserSession1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtUserSession1.setForeground(new java.awt.Color(102, 102, 102));
+        txtUserSession1.setText("Nombre");
+        jPanel5.add(txtUserSession1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 110, -1));
 
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 40));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, 40));
 
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
-        jLabel13.setText("Bienvenido:");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/group-16.png"))); // NOI18N
+        jLabel11.setText("Rol:");
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
+
+        txtRolSession.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtRolSession.setForeground(new java.awt.Color(102, 102, 102));
+        txtRolSession.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtRolSession.setText("Rol");
+        jPanel5.add(txtRolSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 160, -1));
 
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 40));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, -1, 40));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
         jLabel9.setText("Cerrar Sesión");
@@ -685,11 +706,12 @@ public class categorias extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gear-2-16.png"))); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1190, 40));
 
@@ -764,7 +786,7 @@ public class categorias extends javax.swing.JFrame {
         txtNombre.setText((String) jTable1.getValueAt(select, 1));
         txtDescripcion1.setText((String) jTable1.getValueAt(select, 2));
         txtSigla.setText((String) jTable1.getValueAt(select, 3));
-
+        txtSigla.enable(false);
         validarBtn();
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -838,16 +860,6 @@ public class categorias extends javax.swing.JFrame {
         resetColor(btnEditar);
     }//GEN-LAST:event_btnEditarMouseExited
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
-        System.out.println("opcion:" + option);
-        if (option == 0) {
-            login log = new login();
-            log.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_jLabel9MouseClicked
-
     private void lblInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseEntered
         setColorLabel(lblInicio);
     }//GEN-LAST:event_lblInicioMouseEntered
@@ -901,8 +913,18 @@ public class categorias extends javax.swing.JFrame {
     }//GEN-LAST:event_lblReporteMouseEntered
 
     private void lblReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReporteMouseExited
-        resetColorLabel(lblReporte);        
+        resetColorLabel(lblReporte);
     }//GEN-LAST:event_lblReporteMouseExited
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        System.out.println("opcion:" + option);
+        if (option == 0) {
+            login log = new login();
+            log.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel9MouseClicked
 
     /**
      * Metodos*
@@ -916,7 +938,7 @@ public class categorias extends javax.swing.JFrame {
     }
 
     private void listarCategorias(String nombreU) {
-        usuarioI.listarCategorias(jTable1, nombreU);
+        catI.listarCategorias(jTable1, nombreU);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -955,6 +977,7 @@ public class categorias extends javax.swing.JFrame {
         txtNombre.setText("");
         txtDescripcion1.setText("");
         txtSigla.setText("");
+        txtSigla.enable(true);
         listarCategorias("");
         validarBtn();
     }
@@ -965,7 +988,7 @@ public class categorias extends javax.swing.JFrame {
         String descripcion = txtDescripcion1.getText();
         String sigla = txtSigla.getText();
 
-        usuarioI.insertar(nombre, descripcion, sigla);
+        catI.insertar(nombre, descripcion, sigla);
 
         mensajeInfo("Se ha guardado el Usuario (" + nombre + ").");
 
@@ -979,7 +1002,7 @@ public class categorias extends javax.swing.JFrame {
         String descripcion = txtDescripcion1.getText();
         String sigla = txtSigla.getText();
 
-        usuarioI.modificar(id, nombre, descripcion, sigla);
+        catI.modificar(id, nombre, descripcion, sigla);
 
         mensajeInfo("Se ha modificado la categoria(" + nombre + ").");
         listarCategorias("");
@@ -990,7 +1013,7 @@ public class categorias extends javax.swing.JFrame {
 
         int id = Integer.parseInt(getIdPro());
         String nombre = txtNombre.getText();
-        usuarioI.eliminar(id);
+        catI.eliminar(id);
         mensajeInfo("Se ha eliminado el producto (" + nombre + ").");
         listarCategorias("");
         limpiarCampos();
@@ -1029,6 +1052,30 @@ public class categorias extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1050,13 +1097,13 @@ public class categorias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel6;
@@ -1087,6 +1134,8 @@ public class categorias extends javax.swing.JFrame {
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextArea txtDescripcion1;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JLabel txtRolSession;
     private javax.swing.JTextField txtSigla;
+    private javax.swing.JLabel txtUserSession1;
     // End of variables declaration//GEN-END:variables
 }

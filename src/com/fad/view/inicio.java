@@ -14,7 +14,6 @@ import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
 import com.fad.view.user.usuarios;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyFade;
@@ -37,6 +36,7 @@ public class inicio extends javax.swing.JFrame {
         
         this.setResizable(false);
 
+        
     }
 
     public void setColor(JLabel j) {
@@ -321,14 +321,16 @@ public class inicio extends javax.swing.JFrame {
         });
         jPanel5.add(btnHome4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 40, 40));
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gear-2-16.png"))); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, -1, -1));
 
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 40));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, 40));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
         jLabel9.setText("Cerrar Sesión");
@@ -337,29 +339,34 @@ public class inicio extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, -1, -1));
 
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/group-16.png"))); // NOI18N
         jLabel11.setText("Rol:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
 
+        txtRolSession.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txtRolSession.setForeground(new java.awt.Color(102, 102, 102));
-        txtRolSession.setText("Bienvenido:");
-        jPanel5.add(txtRolSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+        txtRolSession.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtRolSession.setText("Rol");
+        jPanel5.add(txtRolSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 160, -1));
 
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 40));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, -1, 40));
 
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(102, 102, 102));
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
         jLabel20.setText("Bienvenido:");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
+        txtUserSession1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txtUserSession1.setForeground(new java.awt.Color(102, 102, 102));
-        txtUserSession1.setText("Bienvenido:");
-        jPanel5.add(txtUserSession1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
+        txtUserSession1.setText("Nombre");
+        jPanel5.add(txtUserSession1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 110, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1190, 40));
 
@@ -518,6 +525,102 @@ public class inicio extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

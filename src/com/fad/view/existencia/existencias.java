@@ -6,6 +6,7 @@
 package com.fad.view.existencia;
 
 import com.fad.dao.existenciaDAO;
+import com.fad.dao.usuarioDAO;
 import com.fad.entities.Categoria;
 import com.fad.view.categoria.categorias;
 import com.fad.view.inicio;
@@ -37,10 +38,13 @@ public class existencias extends javax.swing.JFrame {
     public static String nombrePro;
     private static String valorU;
     private String idEx;
+    usuarioDAO usuarioI = new usuarioDAO();
 
     public existencias() {
         initComponents();
         /*Init de valores para el registro*/
+        txtUserSession1.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
+        txtRolSession.setText(usuarioI.categoria(usuarioI.getUsuarioSession().getRolUser()));
         setIdEx("");
         listaProductos p = new listaProductos();
         txtValorIni.setText(getValorIni());
@@ -59,6 +63,7 @@ public class existencias extends javax.swing.JFrame {
 
         validarBtn();
         listarExistencias("");
+        
     }
 
     public void setColor(JButton b) {
@@ -119,9 +124,9 @@ public class existencias extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -130,8 +135,6 @@ public class existencias extends javax.swing.JFrame {
         txtValorActual = new javax.swing.JTextField();
         txtValorIni = new javax.swing.JTextField();
         txtValorT = new javax.swing.JTextField();
-        btnEditar = new javax.swing.JButton();
-        btnProducto = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -139,11 +142,13 @@ public class existencias extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         txtNombrePro = new javax.swing.JTextField();
         cmbCategoria = new javax.swing.JComboBox<Categoria>();
+        btnProducto = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        btnHome4 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtUserSession1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        txtRolSession = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -468,13 +473,6 @@ public class existencias extends javax.swing.JFrame {
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
         jPanel9.setLayout(null);
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Valor Total:");
-        jPanel9.add(jLabel4);
-        jLabel4.setBounds(542, 30, 130, 40);
-
         btnGuardar.setBackground(new java.awt.Color(0, 154, 251));
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
@@ -514,6 +512,30 @@ public class existencias extends javax.swing.JFrame {
         });
         jPanel9.add(btnEliminar);
         btnEliminar.setBounds(170, 190, 90, 40);
+
+        btnEditar.setBackground(new java.awt.Color(0, 154, 251));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setBorder(null);
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarMouseExited(evt);
+            }
+        });
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel9.add(btnEditar);
+        btnEditar.setBounds(290, 190, 90, 40);
 
         jPanel10.setBackground(new java.awt.Color(0, 154, 251));
         jPanel10.setLayout(null);
@@ -591,46 +613,8 @@ public class existencias extends javax.swing.JFrame {
         jPanel9.add(jPanel11);
         jPanel11.setBounds(190, 30, 199, 144);
 
-        btnEditar.setBackground(new java.awt.Color(0, 154, 251));
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.setBorder(null);
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarMouseExited(evt);
-            }
-        });
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel9.add(btnEditar);
-        btnEditar.setBounds(290, 190, 90, 40);
-
         jPanel8.add(jPanel9);
         jPanel9.setBounds(61, 200, 409, 250);
-
-        btnProducto.setText("Agregar");
-        btnProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnProductoMouseClicked(evt);
-            }
-        });
-        btnProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductoActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnProducto);
-        btnProducto.setBounds(210, 10, 76, 32);
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
@@ -707,6 +691,20 @@ public class existencias extends javax.swing.JFrame {
         jPanel8.add(jPanel13);
         jPanel13.setBounds(100, 60, 330, 120);
 
+        btnProducto.setText("Agregar");
+        btnProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductoMouseClicked(evt);
+            }
+        });
+        btnProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductoActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnProducto);
+        btnProducto.setBounds(220, 20, 100, 32);
+
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 550, 470));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1190, 540));
@@ -714,36 +712,38 @@ public class existencias extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnHome4.setBackground(new java.awt.Color(255, 255, 255));
-        btnHome4.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
-        btnHome4.setForeground(new java.awt.Color(255, 255, 255));
-        btnHome4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/administrator-32 (1).png"))); // NOI18N
-        btnHome4.setOpaque(true);
-        btnHome4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHome4MouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnHome4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 40, 40));
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
+        jLabel22.setText("Bienvenido:");
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-16.png"))); // NOI18N
-        jLabel13.setText("Bienvenido:");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        txtUserSession1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtUserSession1.setForeground(new java.awt.Color(102, 102, 102));
+        txtUserSession1.setText("Nombre");
+        jPanel5.add(txtUserSession1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 110, -1));
 
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 40));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, 40));
 
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/group-16.png"))); // NOI18N
         jLabel11.setText("Rol:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
+
+        txtRolSession.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtRolSession.setForeground(new java.awt.Color(102, 102, 102));
+        txtRolSession.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtRolSession.setText("Rol");
+        jPanel5.add(txtRolSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 160, -1));
 
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/line.png"))); // NOI18N
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 40));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, -1, 40));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
         jLabel9.setText("Cerrar Sesión");
@@ -752,11 +752,12 @@ public class existencias extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gear-2-16.png"))); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1190, 40));
 
@@ -764,10 +765,6 @@ public class existencias extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnHome4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHome4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHome4MouseClicked
 
     private void lblProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductoMouseClicked
         productos pro = new productos();
@@ -1138,6 +1135,12 @@ public class existencias extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1153,7 +1156,6 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnHome;
-    private javax.swing.JLabel btnHome4;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnProducto;
     private javax.swing.JComboBox<Categoria> cmbCategoria;
@@ -1161,7 +1163,6 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1170,9 +1171,9 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1202,6 +1203,8 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtNombrePro;
+    private javax.swing.JLabel txtRolSession;
+    private javax.swing.JLabel txtUserSession1;
     private javax.swing.JTextField txtValorActual;
     private javax.swing.JTextField txtValorIni;
     private javax.swing.JTextField txtValorT;
