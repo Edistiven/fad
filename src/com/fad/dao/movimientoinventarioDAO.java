@@ -9,6 +9,7 @@ import com.fad.entities.Existencia;
 import com.fad.entities.Movimientoinventario;
 import com.fad.entities.Ordeninventario;
 import com.fad.entities.Tipordeninv;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -105,20 +106,19 @@ public class movimientoinventarioDAO {
         model = new DefaultTableModel(null, titulosU);
         ordenInventarios = (ArrayList<Ordeninventario>) buscarOrden(id);
 
-        String[] datosO = new String[4];
+        String[] datosO = new String[5];
 
         for (Ordeninventario o : ordenInventarios) {
             datosO[0] = o.getIdOrdeninventario();
-            datosO[1] = o.getResponsableOi();
-            datosO[2] = o.getFechaOi() + "";
-            datosO[3] = o.getDescripcionOi();
+            datosO[1] = o.getIdTipordeninv().getNombreToi();
+            datosO[2] = o.getResponsableOi();
+            datosO[3] = cambioFecha(o.getFechaOi());
+            datosO[4] = o.getDescripcionOi();
 
             model.addRow(datosO);
         }
         tablaOI.setModel(model);
     }
-
-
 
     public void insertarMov() {
 
@@ -154,8 +154,8 @@ public class movimientoinventarioDAO {
         }
 
     }
-    
-        public void listarExistenciasByCategoria(JTable tablaE, String producto) {
+
+    public void listarExistenciasByCategoria(JTable tablaE, String producto) {
         DefaultTableModel model;
         String[] titulosU = {"Id", "Producto", "Descripcion", "Categoría", "Existencia Inicial", "Existencia Actual", "V/U", "V/T"};
         model = new DefaultTableModel(null, titulosU);
@@ -259,6 +259,19 @@ public class movimientoinventarioDAO {
         }
     }
 
+    public String cambioFecha(Date fecha) {
+        if (fecha == null) {
+            return "No registrada";
+        } else {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            String fechaFinal = format.format(fecha);
+
+            return fechaFinal;
+        }
+
+    }
+
     /**
      * Consultas SQL*
      */
@@ -278,7 +291,7 @@ public class movimientoinventarioDAO {
         EntityManager em = ejc.getEntityManager(); //
         Query sql = em.createQuery("SELECT e FROM Existencia e WHERE e.idProducto.nombrePro LIKE :pro AND e.idCategoria.idCategoria = :id ORDER BY e.idProducto.nombrePro");
         sql.setParameter("pro", producto + "%");
-        sql.setParameter("id", getCategoria().getIdCategoria() );
+        sql.setParameter("id", getCategoria().getIdCategoria());
         List<Existencia> lista = sql.getResultList();
 
         return lista;
