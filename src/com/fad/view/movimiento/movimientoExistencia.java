@@ -5,6 +5,7 @@
  */
 package com.fad.view.movimiento;
 
+import com.fad.dao.movimientoinventarioDAO;
 import com.fad.view.movimiento.movimientoExistencia;
 
 import java.awt.Color;
@@ -18,6 +19,7 @@ import rojerusan.RSNotifyFade;
 public class movimientoExistencia extends javax.swing.JFrame {
 
     private String idPro;
+    movimientoinventarioDAO movI = new movimientoinventarioDAO();
 
     public String getIdPro() {
         return idPro;
@@ -30,6 +32,7 @@ public class movimientoExistencia extends javax.swing.JFrame {
     public movimientoExistencia() {
 
         initComponents();
+        movI.listarExistenciasByCategoria(tablaE, "");
         setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -61,7 +64,7 @@ public class movimientoExistencia extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTextField11 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaE = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -110,15 +113,13 @@ public class movimientoExistencia extends javax.swing.JFrame {
 
         jButton2.setText("Buscar");
 
-        jTextField11.setBackground(new java.awt.Color(255, 255, 255));
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
             }
         });
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -137,9 +138,9 @@ public class movimientoExistencia extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable2.setGridColor(new java.awt.Color(186, 197, 206));
-        jTable2.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane3.setViewportView(jTable2);
+        tablaE.setGridColor(new java.awt.Color(186, 197, 206));
+        tablaE.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane3.setViewportView(tablaE);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -194,21 +195,18 @@ public class movimientoExistencia extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
             }
         });
 
-        jTextField10.setBackground(new java.awt.Color(255, 255, 255));
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField10ActionPerformed(evt);
             }
         });
 
-        jTextField12.setBackground(new java.awt.Color(255, 255, 255));
         jTextField12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField12ActionPerformed(evt);
@@ -219,14 +217,12 @@ public class movimientoExistencia extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField13.setBackground(new java.awt.Color(255, 255, 255));
         jTextField13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField13ActionPerformed(evt);
             }
         });
 
-        jTextField14.setBackground(new java.awt.Color(255, 255, 255));
         jTextField14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField14ActionPerformed(evt);
@@ -776,7 +772,6 @@ public class movimientoExistencia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -784,5 +779,6 @@ public class movimientoExistencia extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tablaE;
     // End of variables declaration//GEN-END:variables
 }
