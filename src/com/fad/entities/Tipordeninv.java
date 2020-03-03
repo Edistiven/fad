@@ -109,7 +109,7 @@ public class Tipordeninv implements Serializable {
 
     @Override
     public String toString() {
-        return "com.fad.entities.Tipordeninv[ idTipordeninv=" + idTipordeninv + " ]";
+        return nombreToi;
     }
     
 }

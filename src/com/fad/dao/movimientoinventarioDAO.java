@@ -42,22 +42,22 @@ public class movimientoinventarioDAO {
      * Variables *
      */
     /* Orden de Inventario */
-    Ordeninventario ordenInventario = new Ordeninventario();
-    ArrayList<Ordeninventario> ordenInventarios = new ArrayList<>();
+    private static Ordeninventario ordenInventario = new Ordeninventario();
+    private static List<Ordeninventario> ordenInventarios = new ArrayList<>();
 
     /* Mov de Inventario */
-    Movimientoinventario movimientoInventario = new Movimientoinventario();
-    ArrayList<Movimientoinventario> movimientoInventariosTemp = new ArrayList<>();
+    private static Movimientoinventario movimientoInventario = new Movimientoinventario();
+    private static List<Movimientoinventario> movimientoInventariosTemp = new ArrayList<>();
 
     /* Existencias */
-    Existencia existencia = new Existencia();
-    ArrayList<Existencia> existencias = new ArrayList<>();
+    private static Existencia existencia = new Existencia();
+    private static List<Existencia> existencias = new ArrayList<>();
 
     /* Tipo de Inventario */
-    Tipordeninv tipordeninv = new Tipordeninv();
+    private static Tipordeninv tipordeninv = new Tipordeninv();
 
     /* Categoria */
-    Categoria categoria = new Categoria();
+    private static Categoria categoria = new Categoria();
 
     /* responsable */
     /**
@@ -104,7 +104,7 @@ public class movimientoinventarioDAO {
         DefaultTableModel model;
         String[] titulosU = {"Id", "Responsable", "Fecha", "Descripcion"};
         model = new DefaultTableModel(null, titulosU);
-        ordenInventarios = (ArrayList<Ordeninventario>) buscarOrden(id);
+        ordenInventarios = buscarOrden(id);
 
         String[] datosO = new String[5];
 
@@ -286,14 +286,14 @@ public class movimientoinventarioDAO {
 
     }
 
-    private List<Existencia> buscarExistenciasByCategoria(String producto) {
+    public List<Existencia> buscarExistenciasByCategoria(String producto) {
 
         EntityManager em = ejc.getEntityManager(); //
         Query sql = em.createQuery("SELECT e FROM Existencia e WHERE e.idProducto.nombrePro LIKE :pro AND e.idCategoria.idCategoria = :id ORDER BY e.idProducto.nombrePro");
         sql.setParameter("pro", producto + "%");
         sql.setParameter("id", getCategoria().getIdCategoria());
         List<Existencia> lista = sql.getResultList();
-
+        System.out.println("Este es la categoria: " + categoria.getNombreCat());
         return lista;
 
     }
@@ -321,52 +321,68 @@ public class movimientoinventarioDAO {
     /**
      * GET AND SET*
      */
-    public Ordeninventario getOrdenInventario() {
+    public static Ordeninventario getOrdenInventario() {
         return ordenInventario;
     }
 
-    public void setOrdenInventario(Ordeninventario ordenInventario) {
-        this.ordenInventario = ordenInventario;
+    public static void setOrdenInventario(Ordeninventario ordenInventario) {
+        movimientoinventarioDAO.ordenInventario = ordenInventario;
     }
 
-    public ArrayList<Ordeninventario> getOrdenInventarios() {
+    public static List<Ordeninventario> getOrdenInventarios() {
         return ordenInventarios;
     }
 
-    public void setOrdenInventarios(ArrayList<Ordeninventario> ordenInventarios) {
-        this.ordenInventarios = ordenInventarios;
+    public static void setOrdenInventarios(List<Ordeninventario> ordenInventarios) {
+        movimientoinventarioDAO.ordenInventarios = ordenInventarios;
     }
 
-    public Movimientoinventario getMovimientoInventario() {
+    public static Movimientoinventario getMovimientoInventario() {
         return movimientoInventario;
     }
 
-    public void setMovimientoInventario(Movimientoinventario movimientoInventario) {
-        this.movimientoInventario = movimientoInventario;
+    public static void setMovimientoInventario(Movimientoinventario movimientoInventario) {
+        movimientoinventarioDAO.movimientoInventario = movimientoInventario;
     }
 
-    public ArrayList<Movimientoinventario> getMovimientoInventariosTemp() {
+    public static List<Movimientoinventario> getMovimientoInventariosTemp() {
         return movimientoInventariosTemp;
     }
 
-    public void setMovimientoInventariosTemp(ArrayList<Movimientoinventario> movimientoInventariosTemp) {
-        this.movimientoInventariosTemp = movimientoInventariosTemp;
+    public static void setMovimientoInventariosTemp(List<Movimientoinventario> movimientoInventariosTemp) {
+        movimientoinventarioDAO.movimientoInventariosTemp = movimientoInventariosTemp;
     }
 
-    public Tipordeninv getTipordeninv() {
+    public static Existencia getExistencia() {
+        return existencia;
+    }
+
+    public static void setExistencia(Existencia existencia) {
+        movimientoinventarioDAO.existencia = existencia;
+    }
+
+    public static List<Existencia> getExistencias() {
+        return existencias;
+    }
+
+    public static void setExistencias(List<Existencia> existencias) {
+        movimientoinventarioDAO.existencias = existencias;
+    }
+
+    public static Tipordeninv getTipordeninv() {
         return tipordeninv;
     }
 
-    public void setTipordeninv(Tipordeninv tipordeninv) {
-        this.tipordeninv = tipordeninv;
+    public static void setTipordeninv(Tipordeninv tipordeninv) {
+        movimientoinventarioDAO.tipordeninv = tipordeninv;
     }
 
-    public Categoria getCategoria() {
+    public static Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public static void setCategoria(Categoria categoria) {
+        movimientoinventarioDAO.categoria = categoria;
     }
 
 }

@@ -9,7 +9,11 @@ import com.fad.view.categoria.*;
 import com.fad.dao.categoriaDAO;
 import com.fad.view.existencia.*;
 import com.fad.dao.existenciaDAO;
+import com.fad.dao.movimientoinventarioDAO;
 import com.fad.dao.usuarioDAO;
+import com.fad.entities.Categoria;
+import com.fad.entities.Ordeninventario;
+import com.fad.entities.Tipordeninv;
 import com.fad.view.inicio;
 import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
@@ -17,6 +21,7 @@ import com.fad.view.producto.productos;
 import com.fad.view.reporte.reportes;
 import com.fad.view.user.usuarios;
 import java.awt.Color;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,16 +43,32 @@ public class movimientos extends javax.swing.JFrame {
         this.idPro = idPro;
     }
     usuarioDAO usuarioI = new usuarioDAO();
+    movimientoinventarioDAO movI = new movimientoinventarioDAO();
+    Ordeninventario o = new Ordeninventario();
 
     public movimientos() {
 
         initComponents();
         txtFechaIngreso.setEnabled(false);
+        txtResponsable.setEnabled(false);
+
+        //Variables de Sesion
         txtUserSession1.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
         txtRolSession.setText(usuarioI.categoria(usuarioI.getUsuarioSession().getRolUser()));
+
+        //Mov Inv
+        movI.listarOrdenesInventarios(tablaOI, "");
+        o.setFechaOi(new Date());
+        txtFechaIngreso.setText(movI.cambioFecha(o.getFechaOi()));
+        txtResponsable.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
+
+        //combos
+        movI.getRolCmb(cmbCategoria);
+        movI.getTipoOICmb(cmbTipoOI);
+
         setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
     }
 
     public void setColor(JButton b) {
@@ -105,7 +126,7 @@ public class movimientos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTextField11 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaOI = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
@@ -122,8 +143,8 @@ public class movimientos extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        cmbCategoria = new javax.swing.JComboBox<>();
+        cmbTipoOI = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -366,15 +387,13 @@ public class movimientos extends javax.swing.JFrame {
 
         jButton2.setText("Buscar");
 
-        jTextField11.setBackground(new java.awt.Color(255, 255, 255));
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
             }
         });
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaOI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -393,9 +412,9 @@ public class movimientos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable2.setGridColor(new java.awt.Color(186, 197, 206));
-        jTable2.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane3.setViewportView(jTable2);
+        tablaOI.setGridColor(new java.awt.Color(186, 197, 206));
+        tablaOI.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane3.setViewportView(tablaOI);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -438,7 +457,7 @@ public class movimientos extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +477,7 @@ public class movimientos extends javax.swing.JFrame {
         jPanel9.setLayout(null);
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Orden inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Orden inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 154, 251))); // NOI18N
         jPanel14.setLayout(null);
 
         jPanel12.setBackground(new java.awt.Color(0, 154, 251));
@@ -491,7 +510,6 @@ public class movimientos extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
         txtFechaIngreso.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         txtFechaIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -500,7 +518,6 @@ public class movimientos extends javax.swing.JFrame {
         });
         jPanel11.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 130, 40));
 
-        txtResponsable.setBackground(new java.awt.Color(255, 255, 255));
         txtResponsable.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         txtResponsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -542,13 +559,11 @@ public class movimientos extends javax.swing.JFrame {
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel13.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 140, 40));
+        cmbCategoria.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        jPanel13.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 140, 40));
 
-        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel13.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
+        cmbTipoOI.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        jPanel13.add(cmbTipoOI, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
         jPanel14.add(jPanel13);
         jPanel13.setBounds(450, 40, 150, 160);
@@ -557,9 +572,8 @@ public class movimientos extends javax.swing.JFrame {
         jPanel14.setBounds(10, 10, 610, 210);
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movimiento de Inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movimiento de Inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -588,6 +602,9 @@ public class movimientos extends javax.swing.JFrame {
         jButton6.setText("Agregar");
         jButton6.setBorder(null);
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton6MouseEntered(evt);
             }
@@ -656,7 +673,7 @@ public class movimientos extends javax.swing.JFrame {
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -832,8 +849,9 @@ public class movimientos extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         movimientoExistencia movEx = new movimientoExistencia();
+        cambioCat();
         movEx.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
@@ -942,6 +960,10 @@ public class movimientos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6MouseClicked
+
     /**
      * Metodos*
      */
@@ -949,8 +971,26 @@ public class movimientos extends javax.swing.JFrame {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
 
+    private void cambioCat() {
+        movI.setCategoria(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
+        System.out.println("Categoria: " + movI.getCategoria().getNombreCat());
+        movI.buscarExistenciasByCategoria("");
+        System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
+        
+
+    }
+
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
+    }
+
+    /*Set and get**/
+    public Ordeninventario getO() {
+        return o;
+    }
+
+    public void setO(Ordeninventario o) {
+        this.o = o;
     }
 
     /**
@@ -1117,14 +1157,14 @@ public class movimientos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnHome;
+    private javax.swing.JComboBox<Categoria> cmbCategoria;
+    private javax.swing.JComboBox<Tipordeninv> cmbTipoOI;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1163,7 +1203,6 @@ public class movimientos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblExistencia;
@@ -1172,6 +1211,7 @@ public class movimientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblReporte;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JTable tablaOI;
     private javax.swing.JTextField txtFechaIngreso;
     private javax.swing.JTextField txtResponsable;
     private javax.swing.JLabel txtRolSession;
