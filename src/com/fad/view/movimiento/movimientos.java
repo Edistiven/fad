@@ -848,8 +848,10 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        movimientoExistencia movEx = new movimientoExistencia();
+        
         cambioCat();
+        
+        movimientoExistencia movEx = new movimientoExistencia();
         movEx.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -974,10 +976,9 @@ public class movimientos extends javax.swing.JFrame {
     private void cambioCat() {
         movI.setCategoria(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat());
-        movI.buscarExistenciasByCategoria("");
+        movI.setExistencias(movI.buscarExistenciasByCategoria(""));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
         
-
     }
 
     private void mensajeError(String mensaje) {

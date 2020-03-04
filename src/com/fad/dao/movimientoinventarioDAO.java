@@ -52,6 +52,7 @@ public class movimientoinventarioDAO {
     /* Existencias */
     private static Existencia existencia = new Existencia();
     private static List<Existencia> existencias = new ArrayList<>();
+    private static List<Existencia> existenciasTemp = new ArrayList<>();
 
     /* Tipo de Inventario */
     private static Tipordeninv tipordeninv = new Tipordeninv();
@@ -159,7 +160,9 @@ public class movimientoinventarioDAO {
         DefaultTableModel model;
         String[] titulosU = {"Id", "Producto", "Descripcion", "Categoría", "Existencia Inicial", "Existencia Actual", "V/U", "V/T"};
         model = new DefaultTableModel(null, titulosU);
-        List<Existencia> existencias = buscarExistenciasByCategoria(producto);
+        //List<Existencia> existencias = buscarExistenciasByCategoria(producto);
+        
+        System.out.println("esta es la lista a llenar: " + getExistencias().size());
 
         String[] datosE = new String[8];
 
