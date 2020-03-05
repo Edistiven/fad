@@ -58,6 +58,7 @@ public class movimientos extends javax.swing.JFrame {
 
         //Mov Inv
         movI.listarOrdenesInventarios(tablaOI, "");
+        movI.listarMovInventarios(tablaMov);
         o.setFechaOi(new Date());
         txtFechaIngreso.setText(movI.cambioFecha(o.getFechaOi()));
         txtResponsable.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
@@ -65,6 +66,11 @@ public class movimientos extends javax.swing.JFrame {
         //combos
         movI.getRolCmb(cmbCategoria);
         movI.getTipoOICmb(cmbTipoOI);
+
+        cmbCategoria.setSelectedIndex(buscarComboCat());
+        cmbTipoOI.setSelectedIndex(buscarComboTipo());
+        
+        validarCombos();
 
         setLocationRelativeTo(null);
         this.setResizable(false);
@@ -147,7 +153,7 @@ public class movimientos extends javax.swing.JFrame {
         cmbTipoOI = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaMov = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -574,7 +580,7 @@ public class movimientos extends javax.swing.JFrame {
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movimiento de Inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMov.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -593,9 +599,9 @@ public class movimientos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(186, 197, 206));
-        jTable1.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane1.setViewportView(jTable1);
+        tablaMov.setGridColor(new java.awt.Color(186, 197, 206));
+        tablaMov.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane1.setViewportView(tablaMov);
 
         jButton6.setBackground(new java.awt.Color(0, 154, 251));
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -848,9 +854,9 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         cambioCat();
-        
+
         movimientoExistencia movEx = new movimientoExistencia();
         movEx.setVisible(true);
         this.setVisible(false);
@@ -975,10 +981,51 @@ public class movimientos extends javax.swing.JFrame {
 
     private void cambioCat() {
         movI.setCategoria(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
+        movI.setTipordeninv(cmbTipoOI.getItemAt(cmbTipoOI.getSelectedIndex()));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat());
         movI.setExistencias(movI.buscarExistenciasByCategoria(""));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
-        
+
+    }
+
+    private int buscarComboCat() {
+        Categoria c;
+        int n = 0;
+        for (int i = 0; i < cmbCategoria.getItemCount(); i++) {
+            c = (Categoria) cmbCategoria.getItemAt(i);
+            if (c.getNombreCat().equals(movI.getCategoria().getNombreCat())) {
+                n = i;
+                break;
+            } else {
+                n = 0;
+            }
+        }
+        return n;
+    }
+
+    private int buscarComboTipo() {
+        Tipordeninv t;
+        int n = 0;
+        for (int i = 0; i < cmbTipoOI.getItemCount(); i++) {
+            t = (Tipordeninv) cmbTipoOI.getItemAt(i);
+            if (t.getNombreToi().equals(movI.getTipordeninv().getNombreToi())) {
+                n = i;
+                break;
+            } else {
+                n = 0;
+            }
+        }
+        return n;
+    }
+    
+    private void validarCombos(){
+        if(movI.getMovimientoInventariosTemp().size() == 0){
+            cmbCategoria.setEnabled(true);
+            cmbTipoOI.setEnabled(true);
+        }else{
+            cmbCategoria.setEnabled(false);
+            cmbTipoOI.setEnabled(false);
+        }
     }
 
     private void mensajeError(String mensaje) {
@@ -1203,7 +1250,6 @@ public class movimientos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblExistencia;
@@ -1212,6 +1258,7 @@ public class movimientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblReporte;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JTable tablaMov;
     private javax.swing.JTable tablaOI;
     private javax.swing.JTextField txtFechaIngreso;
     private javax.swing.JTextField txtResponsable;

@@ -17,35 +17,36 @@ import rojerusan.RSNotifyFade;
  * @author edist
  */
 public class movimientoExistencia extends javax.swing.JFrame {
-
+    
     private String idPro;
+    private static String VU;
     movimientoinventarioDAO movI = new movimientoinventarioDAO();
-
+    
     public String getIdPro() {
         return idPro;
     }
-
+    
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
-
+    
     public movimientoExistencia() {
-
+        
         initComponents();
-
+        
         movI.listarExistenciasByCategoria(tablaE, "");
-
+        
         setLocationRelativeTo(null);
         this.setResizable(false);
     }
-
+    
     public void setColor(JButton b) {
-
+        
         b.setBackground(new Color(51, 102, 255));
     }
-
+    
     public void resetColor(JButton bu) {
-
+        
         bu.setBackground(new Color(0, 154, 251));
     }
 
@@ -70,13 +71,13 @@ public class movimientoExistencia extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
-        txtIdExistencia = new javax.swing.JTextField();
-        txtCantidadE = new javax.swing.JTextField();
         txtCantidadMov = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
-        txtExistenciaA = new javax.swing.JTextField();
-        txtValorT = new javax.swing.JTextField();
+        txtCantidadE = new javax.swing.JLabel();
+        txtIdExistencia = new javax.swing.JLabel();
+        txtValorT = new javax.swing.JLabel();
+        txtCantidadA = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -202,21 +203,15 @@ public class movimientoExistencia extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtIdExistencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdExistenciaActionPerformed(evt);
-            }
-        });
-
-        txtCantidadE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadEActionPerformed(evt);
-            }
-        });
-
+        txtCantidadMov.setEnabled(false);
         txtCantidadMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadMovActionPerformed(evt);
+            }
+        });
+        txtCantidadMov.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadMovKeyTyped(evt);
             }
         });
 
@@ -224,17 +219,17 @@ public class movimientoExistencia extends javax.swing.JFrame {
         txtObservaciones.setRows(5);
         jScrollPane1.setViewportView(txtObservaciones);
 
-        txtExistenciaA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtExistenciaAActionPerformed(evt);
-            }
-        });
+        txtCantidadE.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtCantidadE.setText("No se ha seleccionado Existencia");
 
-        txtValorT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorTActionPerformed(evt);
-            }
-        });
+        txtIdExistencia.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtIdExistencia.setText("No se ha seleccionado Existencia");
+
+        txtValorT.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtValorT.setText("No se ha seleccionado Existencia");
+
+        txtCantidadA.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtCantidadA.setText("No se ha seleccionado Existencia");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -243,27 +238,28 @@ public class movimientoExistencia extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtExistenciaA, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtIdExistencia)
-                    .addComponent(txtCantidadE)
+                    .addComponent(txtCantidadE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCantidadMov)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                    .addComponent(txtValorT))
+                    .addComponent(jScrollPane1)
+                    .addComponent(txtValorT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdExistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCantidadA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(txtIdExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtCantidadE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(txtIdExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(txtCantidadE, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(txtCantidadMov, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtCantidadA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtExistenciaA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtValorT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(txtValorT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -394,7 +390,7 @@ public class movimientoExistencia extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 450, 480));
@@ -407,6 +403,7 @@ public class movimientoExistencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        guargarMov();
         movimientos mov = new movimientos();
         mov.setVisible(true);
         this.dispose();
@@ -416,14 +413,6 @@ public class movimientoExistencia extends javax.swing.JFrame {
     private void txtCantidadMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMovActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadMovActionPerformed
-
-    private void txtCantidadEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadEActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadEActionPerformed
-
-    private void txtIdExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdExistenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdExistenciaActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
         // TODO add your handling code here:
@@ -449,30 +438,69 @@ public class movimientoExistencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSeleccionar1ActionPerformed
 
-    private void txtExistenciaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExistenciaAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtExistenciaAActionPerformed
-
-    private void txtValorTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValorTActionPerformed
-
     private void tablaEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEMouseClicked
         // TODO add your handling code here:
         int select = tablaE.getSelectedRow();
         txtIdExistencia.setText((String) tablaE.getValueAt(select, 0));
         txtCantidadE.setText((String) tablaE.getValueAt(select, 5));
+        txtCantidadA.setText((String) tablaE.getValueAt(select, 5));
+        VU = (String) tablaE.getValueAt(select, 6);
+        txtValorT.setText((String) tablaE.getValueAt(select, 7));
+        txtCantidadMov.setText("");
+        txtCantidadMov.setEnabled(true);
 
         //cmbCategoria.setSelectedIndex(buscarCombo((String) jTable1.getValueAt(select, 3)));
     }//GEN-LAST:event_tablaEMouseClicked
 
+    private void txtCantidadMovKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMovKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String s = Character.toString(c);
+        if (!s.matches("[0-9]+")) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        } else {
+            int cantidadMov = Integer.valueOf(s);
+            int cantidadE = Integer.valueOf(txtCantidadE.getText());
+            int cantidadA = 0;
+            double valorT = 0;
+            double valorU = new Double(VU);
+
+            if (movI.getTipordeninv().getIdTipordeninv() == 1) {
+                cantidadA = cantidadMov + cantidadE;
+                valorT = valorU * cantidadA;
+            } else {
+                if (cantidadMov > cantidadE) {
+                    evt.consume();
+                    mensajeError("La cantidad es mayor a la existencia actual");
+                } else {
+                    cantidadA = cantidadE - cantidadMov;
+                    valorT = valorU * cantidadA;
+                }
+            }
+
+            txtCantidadA.setText(cantidadA + "");
+            txtValorT.setText(valorT + "");
+        }
+    }//GEN-LAST:event_txtCantidadMovKeyTyped
+
     /**
      * Metodos*
      */
+    
+    private void guargarMov(){
+        String idExistencia = txtIdExistencia.getText();
+        String cantidadMov = txtCantidadMov.getText();
+        String cantidadA = txtCantidadA.getText();
+        String valorT = txtValorT.getText();
+        String observaciones = txtObservaciones.getText();
+        movI.addMovimientosInv(idExistencia, cantidadMov, cantidadA, valorT, observaciones);
+    }
+    
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
-
+    
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
@@ -790,11 +818,11 @@ public class movimientoExistencia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTable tablaE;
-    private javax.swing.JTextField txtCantidadE;
+    private javax.swing.JLabel txtCantidadA;
+    private javax.swing.JLabel txtCantidadE;
     private javax.swing.JTextField txtCantidadMov;
-    private javax.swing.JTextField txtExistenciaA;
-    private javax.swing.JTextField txtIdExistencia;
+    private javax.swing.JLabel txtIdExistencia;
     private javax.swing.JTextArea txtObservaciones;
-    private javax.swing.JTextField txtValorT;
+    private javax.swing.JLabel txtValorT;
     // End of variables declaration//GEN-END:variables
 }
