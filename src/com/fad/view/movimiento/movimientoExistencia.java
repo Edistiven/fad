@@ -17,36 +17,36 @@ import rojerusan.RSNotifyFade;
  * @author edist
  */
 public class movimientoExistencia extends javax.swing.JFrame {
-    
+
     private String idPro;
     private static String VU;
     movimientoinventarioDAO movI = new movimientoinventarioDAO();
-    
+
     public String getIdPro() {
         return idPro;
     }
-    
+
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
-    
+
     public movimientoExistencia() {
-        
+
         initComponents();
-        
+
         movI.listarExistenciasByCategoria(tablaE, "");
-        
+
         setLocationRelativeTo(null);
         this.setResizable(false);
     }
-    
+
     public void setColor(JButton b) {
-        
+
         b.setBackground(new Color(51, 102, 255));
     }
-    
+
     public void resetColor(JButton bu) {
-        
+
         bu.setBackground(new Color(0, 154, 251));
     }
 
@@ -210,6 +210,12 @@ public class movimientoExistencia extends javax.swing.JFrame {
             }
         });
         txtCantidadMov.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadMovKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCantidadMovKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadMovKeyTyped(evt);
             }
@@ -436,18 +442,25 @@ public class movimientoExistencia extends javax.swing.JFrame {
 
     private void btnSeleccionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionar1ActionPerformed
         // TODO add your handling code here:
+        movimientos mov = new movimientos();
+        mov.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSeleccionar1ActionPerformed
 
     private void tablaEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEMouseClicked
         // TODO add your handling code here:
         int select = tablaE.getSelectedRow();
-        txtIdExistencia.setText((String) tablaE.getValueAt(select, 0));
-        txtCantidadE.setText((String) tablaE.getValueAt(select, 5));
-        txtCantidadA.setText((String) tablaE.getValueAt(select, 5));
-        VU = (String) tablaE.getValueAt(select, 6);
-        txtValorT.setText((String) tablaE.getValueAt(select, 7));
-        txtCantidadMov.setText("");
-        txtCantidadMov.setEnabled(true);
+        if (movI.buscarMovimiento((String) tablaE.getValueAt(select, 0))) {
+            mensajeError("Ya esta registrado la existencia (" + (String) tablaE.getValueAt(select, 0) + ")");
+        } else {
+            txtIdExistencia.setText((String) tablaE.getValueAt(select, 0));
+            txtCantidadE.setText((String) tablaE.getValueAt(select, 5));
+            txtCantidadA.setText((String) tablaE.getValueAt(select, 5));
+            VU = (String) tablaE.getValueAt(select, 6);
+            txtValorT.setText((String) tablaE.getValueAt(select, 7));
+            txtCantidadMov.setText("");
+            txtCantidadMov.setEnabled(true);
+        }
 
         //cmbCategoria.setSelectedIndex(buscarCombo((String) jTable1.getValueAt(select, 3)));
     }//GEN-LAST:event_tablaEMouseClicked
@@ -456,39 +469,56 @@ public class movimientoExistencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         String s = Character.toString(c);
-        if (!s.matches("[0-9]+")) {
+        String specialCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`´´'{|}~";
+
+        if (s.matches("[a-zA-Z]")) {
             evt.consume();
             mensajeError("Solo ingrese numeros");
-        } else {
-            int cantidadMov = Integer.valueOf(s);
-            int cantidadE = Integer.valueOf(txtCantidadE.getText());
-            int cantidadA = 0;
-            double valorT = 0;
-            double valorU = new Double(VU);
+        } else if (specialCharacters.contains(s)) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        }
 
-            if (movI.getTipordeninv().getIdTipordeninv() == 1) {
-                cantidadA = cantidadMov + cantidadE;
-                valorT = valorU * cantidadA;
-            } else {
-                if (cantidadMov > cantidadE) {
-                    evt.consume();
-                    mensajeError("La cantidad es mayor a la existencia actual");
-                } else {
-                    cantidadA = cantidadE - cantidadMov;
-                    valorT = valorU * cantidadA;
-                }
-            }
 
+    }//GEN-LAST:event_txtCantidadMovKeyTyped
+
+    private void txtCantidadMovKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMovKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtCantidadMovKeyPressed
+
+    private void txtCantidadMovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMovKeyReleased
+        // TODO add your handling code here:
+        int cantidadMov = Integer.valueOf(txtCantidadMov.getText());
+        int cantidadE = Integer.valueOf(txtCantidadE.getText());
+        int cantidadA = 0;
+        double valorT = 0;
+        double valorU = new Double(VU);
+
+        if (movI.getTipordeninv().getIdTipordeninv() == 1) {
+            cantidadA = cantidadMov + cantidadE;
+            valorT = valorU * cantidadA;
             txtCantidadA.setText(cantidadA + "");
             txtValorT.setText(valorT + "");
+        } else {
+            if (cantidadMov > cantidadE) {
+                evt.consume();
+                mensajeError("La cantidad es mayor a la existencia actual");
+            } else {
+                cantidadA = cantidadE - cantidadMov;
+                valorT = valorU * cantidadA;
+                txtCantidadA.setText(cantidadA + "");
+                txtValorT.setText(valorT + "");
+            }
         }
-    }//GEN-LAST:event_txtCantidadMovKeyTyped
+
+
+    }//GEN-LAST:event_txtCantidadMovKeyReleased
 
     /**
      * Metodos*
      */
-    
-    private void guargarMov(){
+    private void guargarMov() {
         String idExistencia = txtIdExistencia.getText();
         String cantidadMov = txtCantidadMov.getText();
         String cantidadA = txtCantidadA.getText();
@@ -496,11 +526,11 @@ public class movimientoExistencia extends javax.swing.JFrame {
         String observaciones = txtObservaciones.getText();
         movI.addMovimientosInv(idExistencia, cantidadMov, cantidadA, valorT, observaciones);
     }
-    
+
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
-    
+
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
