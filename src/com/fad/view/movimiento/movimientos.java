@@ -32,22 +32,23 @@ import rojerusan.RSNotifyFade;
  * @author edist
  */
 public class movimientos extends javax.swing.JFrame {
-
+    
     private String idPro;
-
+    private static int botonV = 0;
+    
     public String getIdPro() {
         return idPro;
     }
-
+    
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
     usuarioDAO usuarioI = new usuarioDAO();
     movimientoinventarioDAO movI = new movimientoinventarioDAO();
     Ordeninventario o = new Ordeninventario();
-
+    
     public movimientos() {
-
+        
         initComponents();
         txtFechaIngreso.setEnabled(false);
         txtResponsable.setEnabled(false);
@@ -66,34 +67,35 @@ public class movimientos extends javax.swing.JFrame {
         //combos
         movI.getRolCmb(cmbCategoria);
         movI.getTipoOICmb(cmbTipoOI);
-
+        
         cmbCategoria.setSelectedIndex(buscarComboCat());
         cmbTipoOI.setSelectedIndex(buscarComboTipo());
         
         validarCombos();
-
+        validarBotones();
+        
         setLocationRelativeTo(null);
         this.setResizable(false);
-
+        
     }
-
+    
     public void setColor(JButton b) {
-
+        
         b.setBackground(new Color(51, 102, 255));
     }
-
+    
     public void resetColor(JButton bu) {
-
+        
         bu.setBackground(new Color(0, 154, 251));
     }
-
+    
     public void setColorLabel(JLabel j) {
-
+        
         j.setBackground(new Color(2, 183, 243));
     }
-
+    
     public void resetColorLabel(JLabel jl) {
-
+        
         jl.setBackground(new Color(0, 154, 251));
     }
 
@@ -128,7 +130,7 @@ public class movimientos extends javax.swing.JFrame {
         lblReporte = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField11 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -144,7 +146,7 @@ public class movimientos extends javax.swing.JFrame {
         txtFechaIngreso = new javax.swing.JTextField();
         txtResponsable = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtaDescripcion = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -155,9 +157,9 @@ public class movimientos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMov = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtUserSession1 = new javax.swing.JLabel();
@@ -372,22 +374,22 @@ public class movimientos extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movimientos de Inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        jButton4.setBackground(new java.awt.Color(0, 154, 251));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
-        jButton4.setText("Limpiar");
-        jButton4.setBorder(null);
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLimpiar.setBackground(new java.awt.Color(0, 154, 251));
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(null);
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton4MouseEntered(evt);
+                btnLimpiarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton4MouseExited(evt);
+                btnLimpiarMouseExited(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
 
@@ -439,7 +441,7 @@ public class movimientos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(215, 215, 215))
         );
         jPanel7Layout.setVerticalGroup(
@@ -452,7 +454,7 @@ public class movimientos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
@@ -532,10 +534,10 @@ public class movimientos extends javax.swing.JFrame {
         });
         jPanel11.add(txtResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 58, 130, 40));
 
-        txtaDescripcion.setColumns(20);
-        txtaDescripcion.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        txtaDescripcion.setRows(5);
-        jScrollPane2.setViewportView(txtaDescripcion);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        txtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcion);
 
         jPanel11.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 104, 130, 52));
 
@@ -601,6 +603,11 @@ public class movimientos extends javax.swing.JFrame {
         });
         tablaMov.setGridColor(new java.awt.Color(186, 197, 206));
         tablaMov.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        tablaMov.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMovMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaMov);
 
         jButton6.setBackground(new java.awt.Color(0, 154, 251));
@@ -624,37 +631,47 @@ public class movimientos extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(0, 154, 251));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        jButton5.setText("Editar");
-        jButton5.setBorder(null);
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditar.setBackground(new java.awt.Color(0, 154, 251));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setBorder(null);
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                btnEditarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton5MouseEntered(evt);
+                btnEditarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton5MouseExited(evt);
+                btnEditarMouseExited(evt);
+            }
+        });
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 154, 251));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
-        jButton1.setText("Eliminar");
-        jButton1.setBorder(null);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEliminar.setBackground(new java.awt.Color(0, 154, 251));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBorder(null);
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnEliminarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                btnEliminarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                btnEliminarMouseExited(evt);
+            }
+        });
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -672,8 +689,8 @@ public class movimientos extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -685,35 +702,35 @@ public class movimientos extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
 
         jPanel9.add(jPanel15);
         jPanel15.setBounds(10, 230, 610, 210);
 
-        jButton3.setBackground(new java.awt.Color(0, 154, 251));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
-        jButton3.setText("Guardar");
-        jButton3.setBorder(null);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGuardar.setBackground(new java.awt.Color(0, 154, 251));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar (1).png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setBorder(null);
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
+                btnGuardarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton3MouseExited(evt);
+                btnGuardarMouseExited(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton3);
-        jButton3.setBounds(270, 450, 90, 35);
+        jPanel9.add(btnGuardar);
+        btnGuardar.setBounds(270, 450, 90, 35);
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 630, 490));
 
@@ -823,23 +840,30 @@ public class movimientos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lblCategoriaMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        movI.limpiar();
+        limpiarFormulario();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        nuevoOI();
+        movI.insertar();
+        mensajeInfo("Se ha guardado con exito con el id: " + movI.getOrdenInventario().getIdOrdeninventario());
+        movI.limpiar();
+        limpiarFormulario();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         movimientos ex = new movimientos();
         ex.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void txtFechaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaIngresoActionPerformed
         // TODO add your handling code here:
@@ -849,50 +873,50 @@ public class movimientos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtResponsableActionPerformed
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_btnEditarMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
+        
         cambioCat();
-
+        
         movimientoExistencia movEx = new movimientoExistencia();
         movEx.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        resetColor(jButton4);
-    }//GEN-LAST:event_jButton4MouseExited
+    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
+        resetColor(btnLimpiar);
+    }//GEN-LAST:event_btnLimpiarMouseExited
 
-    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
-        setColor(jButton4);
-    }//GEN-LAST:event_jButton4MouseEntered
+    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
+        setColor(btnLimpiar);
+    }//GEN-LAST:event_btnLimpiarMouseEntered
 
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        setColor(jButton3);
-    }//GEN-LAST:event_jButton3MouseEntered
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        setColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardarMouseEntered
 
-    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
-        resetColor(jButton3);
-    }//GEN-LAST:event_jButton3MouseExited
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        resetColor(btnGuardar);
+    }//GEN-LAST:event_btnGuardarMouseExited
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        setColor(jButton1);
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
+        setColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseEntered
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        resetColor(jButton1);
-    }//GEN-LAST:event_jButton1MouseExited
+    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
+        resetColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseExited
 
-    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
-        setColor(jButton5);
-    }//GEN-LAST:event_jButton5MouseEntered
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
+        setColor(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseEntered
 
-    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
-        resetColor(jButton5);
-    }//GEN-LAST:event_jButton5MouseExited
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
+        resetColor(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseExited
 
     private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
         setColor(jButton6);
@@ -972,22 +996,53 @@ public class movimientos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6MouseClicked
 
+    private void tablaMovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMovMouseClicked
+        // TODO add your handling code here:
+        int select = tablaMov.getSelectedRow();
+        idPro = (String) tablaMov.getValueAt(select, 0);
+        botonV = 1;
+        validarBotones();
+        //txtIdExistencia.setText((String) tablaE.getValueAt(select, 0));
+
+    }//GEN-LAST:event_tablaMovMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        movI.removeMovimientosInv(idPro);
+        mensajeInfo("Se ha eliminado el movimiento con la existencia " + idPro);
+        movI.listarMovInventarios(tablaMov);
+        botonV = 0;
+        validarBotones();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     /**
      * Metodos*
      */
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
-
+    
     private void cambioCat() {
         movI.setCategoria(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
         movI.setTipordeninv(cmbTipoOI.getItemAt(cmbTipoOI.getSelectedIndex()));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat());
         movI.setExistencias(movI.buscarExistenciasByCategoria(""));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
-
+        
     }
-
+    
+    private void nuevoOI() {
+        movI.getOrdenInventario().setIdTipordeninv(movI.getTipordeninv());
+        movI.getOrdenInventario().setDescripcionOi(txtDescripcion.getText());
+        movI.getOrdenInventario().setFechaOi(new Date());
+        movI.getOrdenInventario().setResponsableOi(txtResponsable.getText());
+        movI.getOrdenInventario().setIdUsuario(movI.buscarUsuario(usuarioI.getUsuarioSession().getNombreUser()));
+    }
+    
     private int buscarComboCat() {
         Categoria c;
         int n = 0;
@@ -1002,7 +1057,7 @@ public class movimientos extends javax.swing.JFrame {
         }
         return n;
     }
-
+    
     private int buscarComboTipo() {
         Tipordeninv t;
         int n = 0;
@@ -1018,16 +1073,43 @@ public class movimientos extends javax.swing.JFrame {
         return n;
     }
     
-    private void validarCombos(){
-        if(movI.getMovimientoInventariosTemp().size() == 0){
+    private void validarCombos() {
+        if (movI.getMovimientoInventariosTemp().size() == 0) {
             cmbCategoria.setEnabled(true);
             cmbTipoOI.setEnabled(true);
-        }else{
+        } else {
             cmbCategoria.setEnabled(false);
             cmbTipoOI.setEnabled(false);
         }
     }
+    
+    private void validarBotones() {
+        if (botonV == 1) {
+            btnEliminar.setEnabled(true);
+            btnEditar.setEnabled(true);
+        } else {
+            btnEliminar.setEnabled(false);
+            btnEditar.setEnabled(false);
+        }
+    }
+    
+    private void limpiarFormulario(){
+        //Mov Inv
+        movI.listarOrdenesInventarios(tablaOI, "");
+        movI.listarMovInventarios(tablaMov);
+        o.setFechaOi(new Date());
+        txtFechaIngreso.setText(movI.cambioFecha(o.getFechaOi()));
+        txtResponsable.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
+        txtDescripcion.setText("");
 
+        //combos
+        cmbCategoria.setSelectedIndex(buscarComboCat());
+        cmbTipoOI.setSelectedIndex(buscarComboTipo());
+        
+        validarCombos();
+        validarBotones();
+    }
+    
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
@@ -1036,7 +1118,7 @@ public class movimientos extends javax.swing.JFrame {
     public Ordeninventario getO() {
         return o;
     }
-
+    
     public void setO(Ordeninventario o) {
         this.o = o;
     }
@@ -1204,14 +1286,14 @@ public class movimientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnHome;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Categoria> cmbCategoria;
     private javax.swing.JComboBox<Tipordeninv> cmbTipoOI;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
@@ -1260,10 +1342,10 @@ public class movimientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTable tablaMov;
     private javax.swing.JTable tablaOI;
+    private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtFechaIngreso;
     private javax.swing.JTextField txtResponsable;
     private javax.swing.JLabel txtRolSession;
     private javax.swing.JLabel txtUserSession1;
-    private javax.swing.JTextArea txtaDescripcion;
     // End of variables declaration//GEN-END:variables
 }
