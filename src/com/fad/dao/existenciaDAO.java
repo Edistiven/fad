@@ -177,12 +177,50 @@ public class existenciaDAO {
         }
         tablaE.setModel(model);
     }
+    
+    public void listarExistenciasReporte(JTable tablaE, Categoria c) {
+        DefaultTableModel model;
+        String[] titulosU = {"Id", "Producto", "Descripcion", "Categoría", "Existencia Inicial", "Existencia Actual", "V/U", "V/T"};
+        model = new DefaultTableModel(null, titulosU);
+        List<Existencia> existencias = buscarExistenciasReport(c.getNombreCat());
+
+        String[] datosE = new String[8];
+
+        for (Existencia e : existencias) {
+            datosE[0] = e.getIdExistencia();
+            datosE[1] = e.getIdProducto().getNombrePro();
+            datosE[2] = e.getIdProducto().getDescripcionPro();
+            datosE[3] = e.getIdCategoria().getNombreCat();
+            datosE[4] = e.getExistenciaIniE().toString();
+            datosE[5] = e.getExistenciaActualE().toString();
+            datosE[6] = e.getIdProducto().getValorUnitPro().toString();
+            datosE[7] = e.getValorTotalE().toString();
+
+            model.addRow(datosE);
+        }
+        tablaE.setModel(model);
+    }
 
     private List<Existencia> buscarExistencias(String producto) {
 
         EntityManager em = ejc.getEntityManager(); //
         Query sql = em.createQuery("SELECT e FROM Existencia e WHERE e.idProducto.nombrePro LIKE :pro ORDER BY e.idProducto.nombrePro");
         sql.setParameter("pro", producto + "%");
+        List<Existencia> lista = sql.getResultList();
+
+        return lista;
+
+    }
+    
+    private List<Existencia> buscarExistenciasReport(String nombreCat) {
+        
+        if(nombreCat.equals("Todo")){
+            nombreCat = "";
+        }
+
+        EntityManager em = ejc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT e FROM Existencia e WHERE e.idCategoria.nombreCat LIKE :nombreCat ORDER BY e.idCategoria.idCategoria, e.idExistencia");
+        sql.setParameter("nombreCat", nombreCat + "%");
         List<Existencia> lista = sql.getResultList();
 
         return lista;
@@ -241,6 +279,30 @@ public class existenciaDAO {
                 categoria = (Categoria) it.next();
                 cmbCategoria.addItem(categoria);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("No pudo cargar el combo");
+        }
+
+    }
+    
+    public void getRolCmbReport(JComboBox<Categoria> cmbCategoria) {
+        EntityManager em = ejc.getEntityManager(); //
+        Iterator it = em.createQuery("SELECT c FROM Categoria c").getResultList().iterator();
+        Categoria categoria;
+        
+        Categoria c = new Categoria();
+        c.setIdCategoria(Integer.valueOf(0));
+        c.setNombreCat("Todo");
+        c.setDescripcionCat("Trae todo");
+        cmbCategoria.addItem(c);
+        
+        try {
+            while (it.hasNext()) {
+                categoria = (Categoria) it.next();
+                cmbCategoria.addItem(categoria);
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("No pudo cargar el combo");
