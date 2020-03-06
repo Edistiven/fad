@@ -42,7 +42,7 @@ public class existenciaDAO {
             existencia.setIdExistencia(obtenerId(categoria));
             existencia.setExistenciaActualE(BigInteger.valueOf(existenciaAct));
             existencia.setExistenciaIniE(BigInteger.valueOf(existenciaIni));
-            existencia.setValorTotalE(BigInteger.valueOf(valorTotal));
+            existencia.setValorTotalE(Double.valueOf(valorTotal));
 
             ejc.create(existencia);
 
@@ -62,7 +62,7 @@ public class existenciaDAO {
 
             existencia.setExistenciaActualE(BigInteger.valueOf(existenciaAct));
             existencia.setExistenciaIniE(BigInteger.valueOf(existenciaIni));
-            existencia.setValorTotalE(BigInteger.valueOf(valorTotal));
+            existencia.setValorTotalE(Double.valueOf(valorTotal));
 
             ejc.edit(existencia);
 

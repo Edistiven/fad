@@ -62,7 +62,7 @@ public class productos extends javax.swing.JFrame {
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
         validarBtn();
-        
+
     }
 
     public void setColor(JButton b) {
@@ -454,7 +454,7 @@ public class productos extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -588,6 +588,11 @@ public class productos extends javax.swing.JFrame {
                 txtValorUActionPerformed(evt);
             }
         });
+        txtValorU.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorUKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -613,7 +618,7 @@ public class productos extends javax.swing.JFrame {
         );
 
         jPanel12.add(jPanel14);
-        jPanel14.setBounds(270, 70, 226, 187);
+        jPanel14.setBounds(270, 70, 230, 185);
 
         jPanel8.add(jPanel12);
         jPanel12.setBounds(10, 20, 600, 480);
@@ -753,10 +758,9 @@ public class productos extends javax.swing.JFrame {
         setIdPro((String) jTable1.getValueAt(select, 0));
         txtNombre.setText((String) jTable1.getValueAt(select, 1));
         txtDescripcion.setText((String) jTable1.getValueAt(select, 2));
-        txtValorU.setText((String)jTable1.getValueAt(select, 3));
-        txtValorU.enable(false);
+        txtValorU.setText((String) jTable1.getValueAt(select, 3));
         validarBtn();
-     
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
@@ -895,6 +899,35 @@ public class productos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void txtValorUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorUKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+        String s = Character.toString(c);
+        String specialCharacters = " !#$%&'()*+,-/:;<=>?@[]^_`´´'{|}~";
+
+        if (s.matches("[a-zA-Z]")) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        } else if (specialCharacters.contains(s)) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        }
+
+        char text[];
+        int count = 0;
+        text = txtValorU.getText().toCharArray();
+        for (int i = 0; i < text.length; i++) {
+            if (text[i] == '.') {
+                count++;
+            }
+        }
+        if (count >= 1 && evt.getKeyChar() == '.') {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtValorUKeyTyped
+
     //Metodos
     private void listarProductos(String nombreP) {
         productoI.listarProductos(jTable1, nombreP);
@@ -920,7 +953,6 @@ public class productos extends javax.swing.JFrame {
         String nombrePro = txtNombre.getText();
         String descripcion = txtDescripcion.getText();
         String valorStr = txtValorU.getText();
-        valorStr = valorStr.replace(",", ".");
         System.out.println("Este es el valor: " + valorStr);
         double valor = Double.valueOf(valorStr);
 
@@ -945,9 +977,11 @@ public class productos extends javax.swing.JFrame {
 
         int id = Integer.parseInt(getIdPro());
         String nombrePro = txtNombre.getText();
-        productoI.eliminar(id);
-
-        mensajeInfo("Se ha eliminado el producto (" + nombrePro + ").");
+        if (productoI.eliminar(id)) {
+            mensajeInfo("Se ha eliminado el producto (" + nombrePro + ").");
+        } else {
+            mensajeError("El producto ya esta relacionado con una existencia");
+        }
 
         limpiarCampos();
         listarProductos("");

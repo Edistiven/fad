@@ -188,7 +188,7 @@ public class movimientoinventarioDAO {
     public void addMovimientosInv(String idExistencia, String cantidadMov, String cantidadA, String valorT, String observaciones) {
         setExistencia(buscarExistencia(idExistencia));
         getExistencia().setExistenciaActualE(BigInteger.valueOf(Integer.valueOf(cantidadA)));
-        getExistencia().setValorTotalE(BigInteger.valueOf(0));
+        getExistencia().setValorTotalE(Double.valueOf(valorT));
 
         movimientoInventario.setIdExistencia(getExistencia());
         movimientoInventario.setCantidadMov(BigInteger.valueOf(Integer.valueOf(cantidadA)));
