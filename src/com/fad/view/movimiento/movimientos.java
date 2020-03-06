@@ -32,23 +32,23 @@ import rojerusan.RSNotifyFade;
  * @author edist
  */
 public class movimientos extends javax.swing.JFrame {
-    
+
     private String idPro;
     private static int botonV = 0;
-    
+
     public String getIdPro() {
         return idPro;
     }
-    
+
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
     usuarioDAO usuarioI = new usuarioDAO();
     movimientoinventarioDAO movI = new movimientoinventarioDAO();
     Ordeninventario o = new Ordeninventario();
-    
+
     public movimientos() {
-        
+
         initComponents();
         txtFechaIngreso.setEnabled(false);
         txtResponsable.setEnabled(false);
@@ -67,35 +67,35 @@ public class movimientos extends javax.swing.JFrame {
         //combos
         movI.getRolCmb(cmbCategoria);
         movI.getTipoOICmb(cmbTipoOI);
-        
+
         cmbCategoria.setSelectedIndex(buscarComboCat());
         cmbTipoOI.setSelectedIndex(buscarComboTipo());
-        
+
         validarCombos();
         validarBotones();
-        
+
         setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
     }
-    
+
     public void setColor(JButton b) {
-        
+
         b.setBackground(new Color(51, 102, 255));
     }
-    
+
     public void resetColor(JButton bu) {
-        
+
         bu.setBackground(new Color(0, 154, 251));
     }
-    
+
     public void setColorLabel(JLabel j) {
-        
+
         j.setBackground(new Color(2, 183, 243));
     }
-    
+
     public void resetColorLabel(JLabel jl) {
-        
+
         jl.setBackground(new Color(0, 154, 251));
     }
 
@@ -809,9 +809,13 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblInicioMouseClicked
 
     private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
-        usuarios user = new usuarios();
-        user.setVisible(true);
-        this.dispose();
+        if (usuarioI.getUsuarioSession().getIdUsuario() == 1) {
+            usuarios user = new usuarios();
+            user.setVisible(true);
+            this.dispose();
+        } else {
+            mensajeError("No tiene los permisos para ingresar a esta interfaz");
+        }
     }//GEN-LAST:event_lblUsuarioMouseClicked
 
     private void lblExistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExistenciaMouseClicked
@@ -835,9 +839,13 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void lblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCategoriaMouseClicked
-        categorias cat = new categorias();
-        cat.setVisible(true);
-        this.dispose();
+        if (usuarioI.getUsuarioSession().getIdUsuario() == 1) {
+            categorias cat = new categorias();
+            cat.setVisible(true);
+            this.dispose();
+        } else {
+            mensajeError("No tiene los permisos para ingresar a esta interfaz");
+        }
     }//GEN-LAST:event_lblCategoriaMouseClicked
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -878,9 +886,9 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         cambioCat();
-        
+
         movimientoExistencia movEx = new movimientoExistencia();
         movEx.setVisible(true);
         this.setVisible(false);
@@ -1025,16 +1033,16 @@ public class movimientos extends javax.swing.JFrame {
     private void mensajeInfo(String mensaje) {
         new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
-    
+
     private void cambioCat() {
         movI.setCategoria(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
         movI.setTipordeninv(cmbTipoOI.getItemAt(cmbTipoOI.getSelectedIndex()));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat());
         movI.setExistencias(movI.buscarExistenciasByCategoria(""));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
-        
+
     }
-    
+
     private void nuevoOI() {
         movI.getOrdenInventario().setIdTipordeninv(movI.getTipordeninv());
         movI.getOrdenInventario().setDescripcionOi(txtDescripcion.getText());
@@ -1042,7 +1050,7 @@ public class movimientos extends javax.swing.JFrame {
         movI.getOrdenInventario().setResponsableOi(txtResponsable.getText());
         movI.getOrdenInventario().setIdUsuario(movI.buscarUsuario(usuarioI.getUsuarioSession().getNombreUser()));
     }
-    
+
     private int buscarComboCat() {
         Categoria c;
         int n = 0;
@@ -1057,7 +1065,7 @@ public class movimientos extends javax.swing.JFrame {
         }
         return n;
     }
-    
+
     private int buscarComboTipo() {
         Tipordeninv t;
         int n = 0;
@@ -1072,7 +1080,7 @@ public class movimientos extends javax.swing.JFrame {
         }
         return n;
     }
-    
+
     private void validarCombos() {
         if (movI.getMovimientoInventariosTemp().size() == 0) {
             cmbCategoria.setEnabled(true);
@@ -1082,7 +1090,7 @@ public class movimientos extends javax.swing.JFrame {
             cmbTipoOI.setEnabled(false);
         }
     }
-    
+
     private void validarBotones() {
         if (botonV == 1) {
             btnEliminar.setEnabled(true);
@@ -1092,8 +1100,8 @@ public class movimientos extends javax.swing.JFrame {
             btnEditar.setEnabled(false);
         }
     }
-    
-    private void limpiarFormulario(){
+
+    private void limpiarFormulario() {
         //Mov Inv
         movI.listarOrdenesInventarios(tablaOI, "");
         movI.listarMovInventarios(tablaMov);
@@ -1105,11 +1113,11 @@ public class movimientos extends javax.swing.JFrame {
         //combos
         cmbCategoria.setSelectedIndex(buscarComboCat());
         cmbTipoOI.setSelectedIndex(buscarComboTipo());
-        
+
         validarCombos();
         validarBotones();
     }
-    
+
     private void mensajeError(String mensaje) {
         new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
@@ -1118,7 +1126,7 @@ public class movimientos extends javax.swing.JFrame {
     public Ordeninventario getO() {
         return o;
     }
-    
+
     public void setO(Ordeninventario o) {
         this.o = o;
     }

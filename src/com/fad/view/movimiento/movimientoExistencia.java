@@ -479,7 +479,6 @@ public class movimientoExistencia extends javax.swing.JFrame {
             mensajeError("Solo ingrese numeros");
         }
 
-
     }//GEN-LAST:event_txtCantidadMovKeyTyped
 
     private void txtCantidadMovKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMovKeyPressed

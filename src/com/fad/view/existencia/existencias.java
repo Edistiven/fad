@@ -8,6 +8,7 @@ package com.fad.view.existencia;
 import com.fad.dao.existenciaDAO;
 import com.fad.dao.usuarioDAO;
 import com.fad.entities.Categoria;
+import com.fad.entities.Producto;
 import com.fad.view.categoria.categorias;
 import com.fad.view.inicio;
 import com.fad.view.login;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import rojerusan.RSNotifyFade;
 
 /**
  *
@@ -63,7 +65,7 @@ public class existencias extends javax.swing.JFrame {
 
         validarBtn();
         listarExistencias("");
-        
+
     }
 
     public void setColor(JButton b) {
@@ -125,8 +127,6 @@ public class existencias extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -134,14 +134,14 @@ public class existencias extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         txtValorActual = new javax.swing.JTextField();
         txtValorIni = new javax.swing.JTextField();
-        txtValorT = new javax.swing.JTextField();
+        txtValorT = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         txtNombrePro = new javax.swing.JTextField();
-        cmbCategoria = new javax.swing.JComboBox<Categoria>();
+        cmbCategoria = new javax.swing.JComboBox<>();
         btnProducto = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -357,7 +357,6 @@ public class existencias extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Existencias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        jTableE.setBackground(new java.awt.Color(255, 255, 255));
         jTableE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -388,7 +387,6 @@ public class existencias extends javax.swing.JFrame {
 
         btnBuscar.setText("Buscar");
 
-        txtBusqueda.setBackground(new java.awt.Color(255, 255, 255));
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBusquedaActionPerformed(evt);
@@ -492,50 +490,7 @@ public class existencias extends javax.swing.JFrame {
             }
         });
         jPanel9.add(btnGuardar);
-        btnGuardar.setBounds(120, 240, 90, 40);
-
-        btnEliminar.setBackground(new java.awt.Color(0, 154, 251));
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete-24.png"))); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(null);
-        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseExited(evt);
-            }
-        });
-        jPanel9.add(btnEliminar);
-        btnEliminar.setBounds(250, 240, 90, 40);
-
-        btnEditar.setBackground(new java.awt.Color(0, 154, 251));
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.setBorder(null);
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarMouseExited(evt);
-            }
-        });
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel9.add(btnEditar);
-        btnEditar.setBounds(370, 240, 90, 40);
+        btnGuardar.setBounds(260, 220, 120, 40);
 
         jPanel10.setBackground(new java.awt.Color(0, 154, 251));
         jPanel10.setLayout(null);
@@ -566,26 +521,36 @@ public class existencias extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtValorActual.setBackground(new java.awt.Color(255, 255, 255));
         txtValorActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorActualActionPerformed(evt);
             }
         });
+        txtValorActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtValorActualKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtValorActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorActualKeyTyped(evt);
+            }
+        });
 
-        txtValorIni.setBackground(new java.awt.Color(255, 255, 255));
         txtValorIni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorIniActionPerformed(evt);
             }
         });
-
-        txtValorT.setBackground(new java.awt.Color(255, 255, 255));
-        txtValorT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorTActionPerformed(evt);
+        txtValorIni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorIniKeyTyped(evt);
             }
         });
+
+        txtValorT.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtValorT.setText("0");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -594,9 +559,11 @@ public class existencias extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtValorT, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                    .addComponent(txtValorIni)
-                    .addComponent(txtValorActual))
+                    .addComponent(txtValorIni, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtValorActual)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtValorT, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -605,13 +572,13 @@ public class existencias extends javax.swing.JFrame {
                 .addComponent(txtValorIni, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtValorActual, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtValorT, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtValorT, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel9.add(jPanel11);
-        jPanel11.setBounds(280, 50, 199, 144);
+        jPanel11.setBounds(280, 50, 203, 142);
 
         jPanel8.add(jPanel9);
         jPanel9.setBounds(20, 220, 600, 290);
@@ -638,7 +605,6 @@ public class existencias extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtNombrePro.setBackground(new java.awt.Color(255, 255, 255));
         txtNombrePro.setEnabled(false);
         txtNombrePro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -784,9 +750,13 @@ public class existencias extends javax.swing.JFrame {
     }//GEN-LAST:event_lblInicioMouseClicked
 
     private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
-        usuarios user = new usuarios();
-        user.setVisible(true);
-        this.dispose();
+        if (usuarioI.getUsuarioSession().getIdUsuario() == 1) {
+            usuarios user = new usuarios();
+            user.setVisible(true);
+            this.dispose();
+        } else {
+            mensajeError("No tiene los permisos para ingresar a esta interfaz");
+        }
     }//GEN-LAST:event_lblUsuarioMouseClicked
 
     private void lblExistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExistenciaMouseClicked
@@ -819,14 +789,6 @@ public class existencias extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnHomeMouseClicked
 
-    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarMouseClicked
-
-    private void txtValorTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValorTActionPerformed
-
     private void txtValorIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorIniActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorIniActionPerformed
@@ -835,16 +797,9 @@ public class existencias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorActualActionPerformed
 
-    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        existencias ex = new existencias();
-        ex.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnEliminarMouseClicked
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         guardar();
-        limpiarCampos();
         listarExistencias("");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -853,9 +808,14 @@ public class existencias extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreProActionPerformed
 
     private void lblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCategoriaMouseClicked
-        categorias cat = new categorias();
-        cat.setVisible(true);
-        this.dispose();
+
+        if (usuarioI.getUsuarioSession().getIdUsuario() == 1) {
+            categorias cat = new categorias();
+            cat.setVisible(true);
+            this.dispose();
+        } else {
+            mensajeError("No tiene los permisos para ingresar a esta interfaz");
+        }
     }//GEN-LAST:event_lblCategoriaMouseClicked
 
     private void btnProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductoMouseClicked
@@ -884,11 +844,6 @@ public class existencias extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableEMouseClicked
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-        limpiarCampos();
-    }//GEN-LAST:event_btnEditarActionPerformed
-
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
         setColor(btnLimpiar);
     }//GEN-LAST:event_btnLimpiarMouseEntered
@@ -904,22 +859,6 @@ public class existencias extends javax.swing.JFrame {
     private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
         resetColor(btnGuardar);
     }//GEN-LAST:event_btnGuardarMouseExited
-
-    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
-        setColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminarMouseEntered
-
-    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
-        resetColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminarMouseExited
-
-    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
-        setColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseEntered
-
-    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
-        resetColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseExited
 
     private void lblInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseEntered
         setColorLabel(lblInicio);
@@ -987,6 +926,49 @@ public class existencias extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void txtValorIniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorIniKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String s = Character.toString(c);
+        String specialCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`´´'{|}~";
+
+        if (s.matches("[a-zA-Z]")) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        } else if (specialCharacters.contains(s)) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        }
+    }//GEN-LAST:event_txtValorIniKeyTyped
+
+    private void txtValorActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorActualKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String s = Character.toString(c);
+        String specialCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`´´'{|}~";
+
+        if (s.matches("[a-zA-Z]")) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        } else if (specialCharacters.contains(s)) {
+            evt.consume();
+            mensajeError("Solo ingrese numeros");
+        }
+    }//GEN-LAST:event_txtValorActualKeyTyped
+
+    private void txtValorActualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorActualKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtValorActualKeyPressed
+
+    private void txtValorActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorActualKeyReleased
+        // TODO add your handling code here:
+        Producto p = existenciaI.buscarProducto(Integer.valueOf(idPro));
+        int valorA = Integer.valueOf(txtValorActual.getText());
+        double resultado = valorA * p.getValorUnitPro();
+        txtValorT.setText(resultado + "");
+    }//GEN-LAST:event_txtValorActualKeyReleased
+
     /**
      * Metodos*
      */
@@ -1007,14 +989,20 @@ public class existencias extends javax.swing.JFrame {
     private void guardar() {
 
         System.out.println(idPro);
+        Producto p = existenciaI.buscarProducto(Integer.valueOf(idPro));
 
         int idProducto = Integer.valueOf(idPro);
         int idCategoria = cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getIdCategoria();
         int valorInicial = Integer.valueOf(txtValorIni.getText());
         int valorActual = Integer.valueOf(txtValorActual.getText());
-        int valorTotal = Integer.valueOf(txtValorT.getText());
+        double valorTotal = Double.valueOf(txtValorT.getText());
 
-        existenciaI.insertar(idProducto, idCategoria, valorInicial, valorInicial, valorTotal);
+        if (existenciaI.insertar(idProducto, idCategoria, valorInicial, valorInicial, valorTotal)) {
+            mensajeInfo("Se ha guardado correctamente la existencia");
+            limpiarCampos();
+        } else {
+            mensajeError("El producto " + p.getNombrePro() + " ya esta registrado en el area " + cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getNombreCat());
+        }
 
     }
 
@@ -1033,15 +1021,12 @@ public class existencias extends javax.swing.JFrame {
             btnGuardar.setEnabled(true);
             btnProducto.setEnabled(true);
             cmbCategoria.enable();
-            btnEditar.setEnabled(false);
-            btnEliminar.setEnabled(false);
+
         } else {
 
             btnGuardar.setEnabled(false);
             btnProducto.setEnabled(false);
             cmbCategoria.disable();
-            btnEditar.setEnabled(true);
-            btnEliminar.setEnabled(true);
 
         }
     }
@@ -1059,6 +1044,14 @@ public class existencias extends javax.swing.JFrame {
             }
         }
         return n;
+    }
+
+    private void mensajeInfo(String mensaje) {
+        new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
+    }
+
+    private void mensajeError(String mensaje) {
+        new rojerusan.RSNotifyFade("Error", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
     }
 
     public String getIdEx() {
@@ -1157,8 +1150,6 @@ public class existencias extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnHome;
     private javax.swing.JButton btnLimpiar;
@@ -1212,6 +1203,6 @@ public class existencias extends javax.swing.JFrame {
     private javax.swing.JLabel txtUserSession1;
     private javax.swing.JTextField txtValorActual;
     private javax.swing.JTextField txtValorIni;
-    private javax.swing.JTextField txtValorT;
+    private javax.swing.JLabel txtValorT;
     // End of variables declaration//GEN-END:variables
 }

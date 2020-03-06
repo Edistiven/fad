@@ -6,6 +6,7 @@ import com.fad.entities.Existencia;
 import com.fad.entities.Producto;
 import com.fad.entities.Usuario;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -28,41 +29,51 @@ public class existenciaDAO {
     private Existencia existencia = new Existencia();
     private Producto producto = new Producto();
     private Categoria categoria = new Categoria();
+    private static List<Existencia> existencias = new ArrayList<>();
 
     /**
      * Funciones basicas CRUD*
      */
-    public void insertar(int idPro, int idCat, int existenciaIni, int existenciaAct, int valorTotal) {
+    public boolean insertar(int idPro, int idCat, int existenciaIni, int existenciaAct, double valorTotal) {
         try {
-            producto = buscarProducto(idPro);
-            categoria = buscarCategoria(idCat);
+            existencias = buscarExistenciaByPro(idPro, idCat);
 
-            existencia.setIdProducto(producto);
-            existencia.setIdCategoria(categoria);
-            existencia.setIdExistencia(obtenerId(categoria));
-            existencia.setExistenciaActualE(BigInteger.valueOf(existenciaAct));
-            existencia.setExistenciaIniE(BigInteger.valueOf(existenciaIni));
-            existencia.setValorTotalE(Double.valueOf(valorTotal));
+            if (existencias.size() == 0) {
+                producto = buscarProducto(idPro);
+                categoria = buscarCategoria(idCat);
 
-            ejc.create(existencia);
+                existencia.setIdProducto(producto);
+                existencia.setIdCategoria(categoria);
+                existencia.setIdExistencia(obtenerId(categoria));
+                existencia.setExistenciaActualE(BigInteger.valueOf(existenciaAct));
+                existencia.setExistenciaIniE(BigInteger.valueOf(existenciaIni));
+                existencia.setValorTotalE(valorTotal);
 
-            System.out.println("Se ha guardado con exito!!!");
+                ejc.create(existencia);
+
+                System.out.println("Se ha guardado con exito!!!");
+
+                return true;
+            } else {
+                return false;
+            }
 
             //tipordeninv = new Tipordeninv();
         } catch (Exception e) {
             System.out.println("Ha ocurrido un error!!!: ");
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void modificar(String id, int existenciaIni, int existenciaAct, int valorTotal) {
+    public void modificar(String id, int existenciaIni, int existenciaAct, double valorTotal) {
         try {
 
             existencia = buscarExistencia(id);
 
             existencia.setExistenciaActualE(BigInteger.valueOf(existenciaAct));
             existencia.setExistenciaIniE(BigInteger.valueOf(existenciaIni));
-            existencia.setValorTotalE(Double.valueOf(valorTotal));
+            existencia.setValorTotalE(valorTotal);
 
             ejc.edit(existencia);
 
@@ -102,7 +113,7 @@ public class existenciaDAO {
             } else {
                 estructura = ("FAD." + c.getSiglaCat() + "." + c.getIdCategoria() + ".");
             }
-            
+
             System.out.println("Este es el id que trae: " + codigoAux);
 
             String separador = Pattern.quote(".");
@@ -133,7 +144,7 @@ public class existenciaDAO {
                 default:
                     break;
             }
-            
+
             System.out.println("Este es el id: " + codigoAux);
 
         }
@@ -178,7 +189,17 @@ public class existenciaDAO {
 
     }
 
-    private Producto buscarProducto(int id) {
+    private List<Existencia> buscarExistenciaByPro(int idProducto, int idCategoria) {
+        EntityManager em = ejc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT e FROM Existencia e WHERE e.idProducto.idProducto = :idProducto AND e.idCategoria.idCategoria = :idCategoria");
+        sql.setParameter("idProducto", idProducto);
+        sql.setParameter("idCategoria", idCategoria);
+        List<Existencia> lista = sql.getResultList();
+
+        return lista;
+    }
+
+    public Producto buscarProducto(int id) {
 
         EntityManager em = ejc.getEntityManager(); //
         Query sql = em.createQuery("SELECT p FROM Producto p WHERE p.idProducto = :idPro");
@@ -254,4 +275,13 @@ public class existenciaDAO {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    public static List<Existencia> getExistencias() {
+        return existencias;
+    }
+
+    public static void setExistencias(List<Existencia> existencias) {
+        existenciaDAO.existencias = existencias;
+    }
+
 }

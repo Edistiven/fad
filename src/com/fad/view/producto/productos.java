@@ -695,9 +695,13 @@ public class productos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblInicioMouseClicked
 
     private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
-        usuarios user = new usuarios();
-        user.setVisible(true);
-        this.dispose();
+        if (usuarioI.getUsuarioSession().getIdUsuario() == 1) {
+            usuarios user = new usuarios();
+            user.setVisible(true);
+            this.dispose();
+        } else {
+            mensajeError("No tiene los permisos para ingresar a esta interfaz");
+        }
     }//GEN-LAST:event_lblUsuarioMouseClicked
 
     private void lblExistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExistenciaMouseClicked
@@ -723,9 +727,13 @@ public class productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void lblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCategoriaMouseClicked
-        categorias cat = new categorias();
-        cat.setVisible(true);
-        this.dispose();
+        if (usuarioI.getUsuarioSession().getIdUsuario() == 1) {
+            categorias cat = new categorias();
+            cat.setVisible(true);
+            this.dispose();
+        } else {
+            mensajeError("No tiene los permisos para ingresar a esta interfaz");
+        }
     }//GEN-LAST:event_lblCategoriaMouseClicked
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
