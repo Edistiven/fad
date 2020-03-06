@@ -12,6 +12,8 @@ import com.fad.view.existencia.*;
 import com.fad.dao.existenciaDAO;
 import com.fad.dao.productoDAO;
 import com.fad.dao.usuarioDAO;
+import com.fad.entities.Categoria;
+import com.fad.reportes.generarReportes;
 import com.fad.view.inicio;
 import com.fad.view.login;
 import com.fad.view.movimiento.movimientos;
@@ -21,6 +23,7 @@ import com.fad.view.user.usuarios;
 import java.awt.Color;
 import java.text.ParseException;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,14 +37,19 @@ import rojerusan.RSNotifyFade;
 public class reportes extends javax.swing.JFrame {
 
     usuarioDAO usuarioI = new usuarioDAO();
+    existenciaDAO existenciaI = new existenciaDAO();
+    generarReportes reportes = new generarReportes();
 
     public reportes() {
         initComponents();
         txtUserSession1.setText(usuarioI.getUsuarioSession().getNombreUser().toUpperCase());
         txtRolSession.setText(usuarioI.categoria(usuarioI.getUsuarioSession().getRolUser()));
+        getCmbCategoria(cmbCategoria);
+
+        listarExistencias(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
         setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
     }
 
     public void setColor(JButton b) {
@@ -95,11 +103,10 @@ public class reportes extends javax.swing.JFrame {
         lblReporte = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        btnLimpiar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
-        txtBusqueda = new javax.swing.JTextField();
+        cmbCategoria = new javax.swing.JComboBox<>();
+        btnReporte = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaE = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         btnHome4 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -311,43 +318,47 @@ public class reportes extends javax.swing.JFrame {
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1210, 30));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setLayout(null);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Symbol", 1, 12), new java.awt.Color(0, 154, 251))); // NOI18N
 
-        btnLimpiar.setBackground(new java.awt.Color(0, 154, 251));
-        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.setBorder(null);
-        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+        cmbCategoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCategoriaItemStateChanged(evt);
+            }
+        });
+        cmbCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cmbCategoriaMouseReleased(evt);
+            }
+        });
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
+
+        btnReporte.setBackground(new java.awt.Color(0, 154, 251));
+        btnReporte.setForeground(new java.awt.Color(255, 255, 255));
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
+        btnReporte.setText("Generar Reporte");
+        btnReporte.setBorder(null);
+        btnReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLimpiarMouseEntered(evt);
+                btnReporteMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLimpiarMouseExited(evt);
+                btnReporteMouseExited(evt);
             }
         });
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                btnReporteActionPerformed(evt);
             }
         });
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusquedaActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -373,66 +384,48 @@ public class reportes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(186, 197, 206));
-        jTable1.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaE.setGridColor(new java.awt.Color(186, 197, 206));
+        tablaE.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        tablaE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tablaEMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaE);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(371, 371, 371))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(479, 479, 479))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(460, 460, 460)
+                        .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(493, 493, 493)
+                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(558, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1220, 510));
+        jPanel6.add(jPanel7);
+        jPanel7.setBounds(34, 30, 1691, 451);
+
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1220, 520));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1260, 590));
 
@@ -561,32 +554,15 @@ public class reportes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblCategoriaMouseClicked
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
+        reportes.reporteExistencia(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()).getNombreCat());
+    }//GEN-LAST:event_btnReporteActionPerformed
 
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        if (txtBusqueda.getText().equals("")) {
-            listarProductos("");
-        } else {
-            listarProductos(txtBusqueda.getText());
-        }
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBusquedaActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tablaEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEMouseClicked
 
         //System.out.println(getIdPro());
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tablaEMouseClicked
 
     private void lblInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseEntered
         setColorLabel(lblInicio);
@@ -644,13 +620,13 @@ public class reportes extends javax.swing.JFrame {
         resetColorLabel(lblReporte);
     }//GEN-LAST:event_lblReporteMouseExited
 
-    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
-        setColor(btnLimpiar);
-    }//GEN-LAST:event_btnLimpiarMouseEntered
+    private void btnReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseEntered
+        setColor(btnReporte);
+    }//GEN-LAST:event_btnReporteMouseEntered
 
-    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
-        resetColor(btnLimpiar);
-    }//GEN-LAST:event_btnLimpiarMouseExited
+    private void btnReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseExited
+        resetColor(btnReporte);
+    }//GEN-LAST:event_btnReporteMouseExited
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
@@ -662,9 +638,27 @@ public class reportes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel9MouseClicked
 
-    //Metodos
-    private void listarProductos(String nombreP) {
+    private void cmbCategoriaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCategoriaMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriaMouseReleased
 
+    private void cmbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategoriaItemStateChanged
+        // TODO add your handling code here:
+        //System.out.println("com.fad.view.reporte.reportes.cmbCategoriaItemStateChanged()");
+    }//GEN-LAST:event_cmbCategoriaItemStateChanged
+
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+        // TODO add your handling code here:
+        listarExistencias(cmbCategoria.getItemAt(cmbCategoria.getSelectedIndex()));
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    //Metodos
+    private void listarExistencias(Categoria c) {
+        existenciaI.listarExistenciasReporte(tablaE, c);
+    }
+
+    private void getCmbCategoria(JComboBox cmbCategoria) {
+        existenciaI.getRolCmbReport(cmbCategoria);
     }
 
     private void mensajeInfo(String mensaje) {
@@ -1222,10 +1216,10 @@ public class reportes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnHome;
     private javax.swing.JLabel btnHome4;
-    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnReporte;
+    private javax.swing.JComboBox<Categoria> cmbCategoria;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -1248,7 +1242,6 @@ public class reportes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblExistencia;
     private javax.swing.JLabel lblInicio;
@@ -1256,7 +1249,7 @@ public class reportes extends javax.swing.JFrame {
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblReporte;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JTable tablaE;
     private javax.swing.JLabel txtRolSession;
     private javax.swing.JLabel txtUserSession1;
     // End of variables declaration//GEN-END:variables
