@@ -46,7 +46,7 @@ public class Existencia implements Serializable {
     @Column(name = "existencia_actual_e")
     private BigInteger existenciaActualE;
     @Column(name = "valor_total_e")
-    private BigInteger valorTotalE;
+    private Double valorTotalE;
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     @ManyToOne
     private Categoria idCategoria;
@@ -87,11 +87,11 @@ public class Existencia implements Serializable {
         this.existenciaActualE = existenciaActualE;
     }
 
-    public BigInteger getValorTotalE() {
+    public Double getValorTotalE() {
         return valorTotalE;
     }
 
-    public void setValorTotalE(BigInteger valorTotalE) {
+    public void setValorTotalE(Double valorTotalE) {
         this.valorTotalE = valorTotalE;
     }
 
