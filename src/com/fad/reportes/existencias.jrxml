@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="3.797498335832416"/>
+	<property name="ireport.x" value="1079"/>
+	<property name="ireport.y" value="479"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="nombre_cat" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -23,119 +24,258 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="117" y="19" width="383" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FUNDACIÓN DE ATENCIÓN AL DISCAPACITADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="57" width="134" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUITO - ECUADOR]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="98" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\edist\\Downloads\\logo fad.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="182" y="39" width="267" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección: Av. Teniente Hugo Ortiz y Diego Mejía]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="15" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="37" splitType="Stretch">
+		<band height="71" splitType="Stretch">
 			<staticText>
-				<reportElement x="25" y="0" width="92" height="20"/>
+				<reportElement mode="Opaque" x="6" y="34" width="92" height="37" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="217" y="0" width="100" height="20"/>
+				<reportElement mode="Opaque" x="198" y="34" width="110" height="37" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="317" y="0" width="63" height="20"/>
+				<reportElement mode="Opaque" x="98" y="34" width="100" height="37" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[ Existencia ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="117" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="0" width="62" height="20"/>
+				<reportElement mode="Opaque" x="490" y="34" width="41" height="37" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Existencia]]></text>
+				<text><![CDATA[V/T]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="317" y="17" width="63" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+				<reportElement x="205" y="0" width="209" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Inicial]]></text>
+				<text><![CDATA[REPORTE DE EXISTENCIAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="17" width="62" height="20"/>
+				<reportElement mode="Opaque" x="449" y="34" width="41" height="37" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Actual]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="442" y="0" width="42" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[V/U]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="484" y="0" width="29" height="20"/>
+				<reportElement mode="Opaque" x="378" y="34" width="71" height="37" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[V/T]]></text>
+				<text><![CDATA[Existencia Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="308" y="34" width="70" height="37" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Existencia Inicial ]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="27" splitType="Stretch">
+		<band height="24" splitType="Stretch">
 			<textField>
-				<reportElement x="25" y="4" width="92" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="6" y="0" width="92" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{id_existencia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="217" y="3" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="198" y="0" width="110" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion_pro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="317" y="3" width="63" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="308" y="0" width="70" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{existencia_ini_e}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="4" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="98" y="0" width="100" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_pro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="3" width="62" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="378" y="0" width="71" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{existencia_actual_e}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="442" y="4" width="42" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="449" y="0" width="41" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valor_unit_pro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="484" y="4" width="29" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="490" y="0" width="41" height="24"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valor_total_e}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="531" y="0" width="24" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
