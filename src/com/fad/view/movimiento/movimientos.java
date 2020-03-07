@@ -162,6 +162,7 @@ public class movimientos extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtUserSession1 = new javax.swing.JLabel();
@@ -194,7 +195,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(26, 120, 174));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("SISTEMA DE GESTIÃ“N DE INVENTARIOS \"FAD\"");
+        jLabel1.setText("SISTEMA DE GESTIÓN DE INVENTARIOS \"FAD\"");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 870, 50));
 
         btnHome.setBackground(new java.awt.Color(24, 45, 49));
@@ -332,7 +333,7 @@ public class movimientos extends javax.swing.JFrame {
         lblCategoria.setBackground(new java.awt.Color(0, 154, 251));
         lblCategoria.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         lblCategoria.setForeground(new java.awt.Color(255, 255, 255));
-        lblCategoria.setText("CategorÃ­as");
+        lblCategoria.setText("Categorías");
         lblCategoria.setOpaque(true);
         lblCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -411,7 +412,7 @@ public class movimientos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "ObservaciÃ³n", "Cantidad"
+                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "Observación", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
@@ -520,7 +521,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("DescripciÃ³n:");
+        jLabel13.setText("Descripción:");
         jPanel12.add(jLabel13);
         jLabel13.setBounds(10, 110, 90, 40);
 
@@ -569,7 +570,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("CategorÃ­a:");
+        jLabel20.setText("Categoría:");
         jPanel10.add(jLabel20);
         jLabel20.setBounds(10, 60, 100, 40);
 
@@ -602,7 +603,7 @@ public class movimientos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "ObservaciÃ³n", "Cantidad"
+                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "Observación", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
@@ -746,6 +747,9 @@ public class movimientos extends javax.swing.JFrame {
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 630, 490));
 
+        jLabel2.setText("caóc");
+        jPanel8.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, -1, -1));
+
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 660, 520));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1260, 580));
@@ -787,7 +791,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
-        jLabel9.setText("Cerrar SesiÃ³n");
+        jLabel9.setText("Cerrar Sesión");
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -865,6 +869,7 @@ public class movimientos extends javax.swing.JFrame {
         movI.limpiar();
         limpiarFormulario();
         btnGuardar.setEnabled(true);
+        txtDescripcion.setEnabled(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -1004,7 +1009,7 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblReporteMouseExited
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        int option = JOptionPane.showConfirmDialog(null, "Â¿Desea Cerrar su SesiÃ³n?", "Cerrar SesiÃ³n", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         System.out.println("opcion:" + option);
         if (option == 0) {
             login log = new login();
@@ -1066,7 +1071,7 @@ public class movimientos extends javax.swing.JFrame {
      * Metodos*
      */
     private void mensajeInfo(String mensaje) {
-        new rojerusan.RSNotifyFade("InformaciÃ³n", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
+        new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
 
     private void cambioCat() {
@@ -1353,6 +1358,7 @@ public class movimientos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
