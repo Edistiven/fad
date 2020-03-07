@@ -141,7 +141,7 @@ public class movimientoinventarioDAO {
 
         String[] datosM = new String[5];
 
-        System.out.println("Este es el tamaÃ±o de la lista" + movimientoInventariosTemp.size());
+        System.out.println("Este es el tamaño de la lista" + movimientoInventariosTemp.size());
 
         for (Movimientoinventario m : movimientoInventariosTemp) {
             datosM[0] = m.getIdExistencia().getIdExistencia();
@@ -278,7 +278,7 @@ public class movimientoinventarioDAO {
 
     public void listarExistenciasByCategoria(JTable tablaE, String producto) {
         DefaultTableModel model;
-        String[] titulosU = {"Id", "Producto", "Descripcion", "CategorÃ­a", "Existencia Inicial", "Existencia Actual", "V/U", "V/T"};
+        String[] titulosU = {"Id", "Producto", "Descripcion", "Categoría", "Existencia Inicial", "Existencia Actual", "V/U", "V/T"};
         model = new DefaultTableModel(null, titulosU);
         //List<Existencia> existencias = buscarExistenciasByCategoria(producto);
 
@@ -509,6 +509,33 @@ public class movimientoinventarioDAO {
 
         return e;
 
+    }
+    
+    public int allExistencias() {
+
+        EntityManager em = ejc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT e FROM Existencia e");
+        List<Existencia> lista = sql.getResultList();
+
+        return lista.size();
+    }
+    
+    public int allMovimientos() {
+
+        EntityManager em = ejc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT m FROM Movimientoinventario m");
+        List<Movimientoinventario> lista = sql.getResultList();
+
+        return lista.size();
+    }
+    
+    public int allUsuarios() {
+
+        EntityManager em = ejc.getEntityManager(); //
+        Query sql = em.createQuery("SELECT u FROM Usuario u");
+        List<Usuario> lista = sql.getResultList();
+
+        return lista.size();
     }
 
     public Usuario buscarUsuario(String nombre) {
