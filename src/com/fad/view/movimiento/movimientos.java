@@ -70,8 +70,6 @@ public class movimientos extends javax.swing.JFrame {
 
         cmbCategoria.setSelectedIndex(buscarComboCat());
         cmbTipoOI.setSelectedIndex(buscarComboTipo());
-        
-        botonV = 0;
 
         validarCombos();
         validarBotones();
@@ -424,16 +422,6 @@ public class movimientos extends javax.swing.JFrame {
         });
         tablaOI.setGridColor(new java.awt.Color(186, 197, 206));
         tablaOI.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        tablaOI.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaOIMouseClicked(evt);
-            }
-        });
-        tablaOI.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tablaOIKeyPressed(evt);
-            }
-        });
         jScrollPane3.setViewportView(tablaOI);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -864,7 +852,6 @@ public class movimientos extends javax.swing.JFrame {
         // TODO add your handling code here:
         movI.limpiar();
         limpiarFormulario();
-        btnGuardar.setEnabled(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -1038,29 +1025,7 @@ public class movimientos extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        llenarMov();
-        movimientoExistenciaEdit edit = new movimientoExistenciaEdit();
-        edit.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void tablaOIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaOIKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablaOIKeyPressed
-
-    private void tablaOIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOIMouseClicked
-        // TODO add your handling code here:
-        int select = tablaOI.getSelectedRow();
-        btnGuardar.setEnabled(false);
-        cmbCategoria.setEnabled(false);
-        cmbTipoOI.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-        
-        movI.cargarView((String) tablaOI.getValueAt(select, 0));
-        movI.listarMovInventarios(tablaMov);
-        txtDescripcion.setText(movI.getOrdenInventario().getDescripcionOi());
-        txtFechaIngreso.setText(movI.cambioFecha(movI.getOrdenInventario().getFechaOi()));
-    }//GEN-LAST:event_tablaOIMouseClicked
 
     /**
      * Metodos*
@@ -1076,10 +1041,6 @@ public class movimientos extends javax.swing.JFrame {
         movI.setExistencias(movI.buscarExistenciasByCategoria(""));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
 
-    }
-
-    private void llenarMov() {
-        movI.buscarMovEdit(idPro);
     }
 
     private void nuevoOI() {

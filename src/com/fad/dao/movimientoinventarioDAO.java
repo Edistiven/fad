@@ -52,12 +52,10 @@ public class movimientoinventarioDAO {
 
     /* Mov de Inventario */
     private static Movimientoinventario movimientoInventario = new Movimientoinventario();
-    private static Movimientoinventario movimientoInventarioEdit = new Movimientoinventario();
     private static List<Movimientoinventario> movimientoInventariosTemp = new ArrayList<>();
 
     /* Existencias */
     private static Existencia existencia = new Existencia();
-    private static Existencia existenciaEdit = new Existencia();
     private static List<Existencia> existencias = new ArrayList<>();
     private static List<Existencia> existenciasTemp = new ArrayList<>();
 
@@ -192,56 +190,12 @@ public class movimientoinventarioDAO {
         movimientoInventario = new Movimientoinventario();
         existencia = new Existencia();
     }
-    
-    public void editMovimientosInv(String idExistencia, String cantidadMov, String cantidadA, String valorT, String observaciones) {
-        setExistencia(buscarExistencia(idExistencia));
-        getExistencia().setExistenciaActualE(BigInteger.valueOf(Integer.valueOf(cantidadA)));
-        getExistencia().setValorTotalE(roundDecimal(Double.valueOf(valorT)));
-
-        movimientoInventarioEdit.setIdExistencia(getExistencia());
-        movimientoInventarioEdit.setCantidadMov(BigInteger.valueOf(Integer.valueOf(cantidadA)));
-        if (tipordeninv.getIdTipordeninv() == 2) {
-            movimientoInventarioEdit.setDismMov(new BigInteger(cantidadA));
-            movimientoInventarioEdit.setIncremMov(BigInteger.valueOf(0));
-        } else {
-            movimientoInventarioEdit.setIncremMov(BigInteger.valueOf(Integer.valueOf(cantidadA)));
-            movimientoInventarioEdit.setDismMov(BigInteger.valueOf(0));
-        }
-        movimientoInventarioEdit.setFechaMov(new Date());
-        movimientoInventarioEdit.setObservacionMov(observaciones);
-
-        editMovimientosInvTemp(movimientoInventarioEdit);
-        movimientoInventarioEdit = new Movimientoinventario();
-        existencia = new Existencia();
-    }
-    
-    public void editMovimientosInvTemp(Movimientoinventario mov) {
-        int i = 0;
-        for (Movimientoinventario m : movimientoInventariosTemp) {
-            if (m.getIdExistencia().getIdExistencia().equals(mov.getIdExistencia().getIdExistencia())) {
-                movimientoInventariosTemp.set(i, mov);
-                break;
-            }else{
-                i++;
-            }
-        }
-    }
 
     public void removeMovimientosInv(String idExistencia) {
 
         for (Movimientoinventario m : movimientoInventariosTemp) {
             if (m.getIdExistencia().getIdExistencia().equals(idExistencia)) {
                 movimientoInventariosTemp.remove(m);
-                break;
-            }
-        }
-    }
-    
-    public void buscarMovEdit(String idExistencia) {
-
-        for (Movimientoinventario m : movimientoInventariosTemp) {
-            if (m.getIdExistencia().getIdExistencia().equals(idExistencia)) {
-                setMovimientoInventarioEdit(m);
                 break;
             }
         }
@@ -454,11 +408,6 @@ public class movimientoinventarioDAO {
         }
 
     }
-    
-    public void cargarView(String idOrden){
-        movimientoInventariosTemp = buscarMov(idOrden);
-        ordenInventario = buscarOI(idOrden);
-    }
 
     public Double roundDecimal(Double val) {
         return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
@@ -475,28 +424,6 @@ public class movimientoinventarioDAO {
         List<Ordeninventario> lista = sql.getResultList();
 
         return lista;
-
-    }
-    
-    private List<Movimientoinventario> buscarMov(String idOrdeninventario) {
-
-        EntityManager em = mjc.getEntityManager(); // SELECT o FROM Ordeninventario o WHERE o.idOrdeninventario = :idOrdeninventario
-        Query sql = em.createQuery("SELECT m FROM Movimientoinventario m WHERE m.idOrdeninventario.idOrdeninventario = :idOrdeninventario");
-        sql.setParameter("idOrdeninventario", idOrdeninventario);
-        List<Movimientoinventario> lista = sql.getResultList();
-
-        return lista;
-
-    }
-    
-    private Ordeninventario buscarOI(String idOrdeninventario) {
-
-        EntityManager em = ejc.getEntityManager(); //
-        Query sql = em.createQuery("SELECT o FROM Ordeninventario o WHERE o.idOrdeninventario = :idOrdeninventario");
-        sql.setParameter("idOrdeninventario", idOrdeninventario);
-        Ordeninventario o = (Ordeninventario) sql.getSingleResult();
-
-        return o;
 
     }
 
@@ -641,12 +568,4 @@ public class movimientoinventarioDAO {
         movimientoinventarioDAO.categoria = categoria;
     }
 
-    public static Movimientoinventario getMovimientoInventarioEdit() {
-        return movimientoInventarioEdit;
-    }
-
-    public static void setMovimientoInventarioEdit(Movimientoinventario movimientoInventarioEdit) {
-        movimientoinventarioDAO.movimientoInventarioEdit = movimientoInventarioEdit;
-    }
-    
 }

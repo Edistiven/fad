@@ -59,10 +59,12 @@ public class login extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Usuario");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Contraseña");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
 
@@ -76,7 +78,6 @@ public class login extends javax.swing.JFrame {
 
         btnIngresar.setBackground(new java.awt.Color(0, 154, 251));
         btnIngresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Iniciar Sesión");
         btnIngresar.setBorder(null);
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
