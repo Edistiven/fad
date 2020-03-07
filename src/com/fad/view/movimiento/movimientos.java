@@ -70,6 +70,8 @@ public class movimientos extends javax.swing.JFrame {
 
         cmbCategoria.setSelectedIndex(buscarComboCat());
         cmbTipoOI.setSelectedIndex(buscarComboTipo());
+        
+        botonV = 0;
 
         validarCombos();
         validarBotones();
@@ -192,7 +194,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(26, 120, 174));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("SISTEMA DE GESTIÓN DE INVENTARIOS \"FAD\"");
+        jLabel1.setText("SISTEMA DE GESTIÃ“N DE INVENTARIOS \"FAD\"");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 870, 50));
 
         btnHome.setBackground(new java.awt.Color(24, 45, 49));
@@ -330,7 +332,7 @@ public class movimientos extends javax.swing.JFrame {
         lblCategoria.setBackground(new java.awt.Color(0, 154, 251));
         lblCategoria.setFont(new java.awt.Font("Segoe UI Symbol", 1, 16)); // NOI18N
         lblCategoria.setForeground(new java.awt.Color(255, 255, 255));
-        lblCategoria.setText("Categorías");
+        lblCategoria.setText("CategorÃ­as");
         lblCategoria.setOpaque(true);
         lblCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -409,7 +411,7 @@ public class movimientos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "Observación", "Cantidad"
+                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "ObservaciÃ³n", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
@@ -422,6 +424,16 @@ public class movimientos extends javax.swing.JFrame {
         });
         tablaOI.setGridColor(new java.awt.Color(186, 197, 206));
         tablaOI.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        tablaOI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaOIMouseClicked(evt);
+            }
+        });
+        tablaOI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaOIKeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablaOI);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -508,7 +520,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Descripción:");
+        jLabel13.setText("DescripciÃ³n:");
         jPanel12.add(jLabel13);
         jLabel13.setBounds(10, 110, 90, 40);
 
@@ -557,7 +569,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Categoría:");
+        jLabel20.setText("CategorÃ­a:");
         jPanel10.add(jLabel20);
         jLabel20.setBounds(10, 60, 100, 40);
 
@@ -590,7 +602,7 @@ public class movimientos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "Observación", "Cantidad"
+                "ID Existencia", "ID Orden Inv.", "Fecha Mov.", "ObservaciÃ³n", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
@@ -775,7 +787,7 @@ public class movimientos extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout-16.png"))); // NOI18N
-        jLabel9.setText("Cerrar Sesión");
+        jLabel9.setText("Cerrar SesiÃ³n");
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -852,6 +864,7 @@ public class movimientos extends javax.swing.JFrame {
         // TODO add your handling code here:
         movI.limpiar();
         limpiarFormulario();
+        btnGuardar.setEnabled(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -991,7 +1004,7 @@ public class movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblReporteMouseExited
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        int option = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar su Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Â¿Desea Cerrar su SesiÃ³n?", "Cerrar SesiÃ³n", JOptionPane.YES_NO_OPTION);
         System.out.println("opcion:" + option);
         if (option == 0) {
             login log = new login();
@@ -1025,13 +1038,35 @@ public class movimientos extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        llenarMov();
+        movimientoExistenciaEdit edit = new movimientoExistenciaEdit();
+        edit.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tablaOIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaOIKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaOIKeyPressed
+
+    private void tablaOIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOIMouseClicked
+        // TODO add your handling code here:
+        int select = tablaOI.getSelectedRow();
+        btnGuardar.setEnabled(false);
+        cmbCategoria.setEnabled(false);
+        cmbTipoOI.setEnabled(false);
+        txtDescripcion.setEnabled(false);
+        
+        movI.cargarView((String) tablaOI.getValueAt(select, 0));
+        movI.listarMovInventarios(tablaMov);
+        txtDescripcion.setText(movI.getOrdenInventario().getDescripcionOi());
+        txtFechaIngreso.setText(movI.cambioFecha(movI.getOrdenInventario().getFechaOi()));
+    }//GEN-LAST:event_tablaOIMouseClicked
 
     /**
      * Metodos*
      */
     private void mensajeInfo(String mensaje) {
-        new rojerusan.RSNotifyFade("Información", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
+        new rojerusan.RSNotifyFade("InformaciÃ³n", mensaje, 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
     }
 
     private void cambioCat() {
@@ -1041,6 +1076,10 @@ public class movimientos extends javax.swing.JFrame {
         movI.setExistencias(movI.buscarExistenciasByCategoria(""));
         System.out.println("Categoria: " + movI.getCategoria().getNombreCat() + "AND " + movI.getExistencias().size());
 
+    }
+
+    private void llenarMov() {
+        movI.buscarMovEdit(idPro);
     }
 
     private void nuevoOI() {
