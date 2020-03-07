@@ -5,7 +5,9 @@ import com.fad.entities.Categoria;
 import com.fad.entities.Existencia;
 import com.fad.entities.Producto;
 import com.fad.entities.Usuario;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +49,7 @@ public class existenciaDAO {
                 existencia.setIdExistencia(obtenerId(categoria));
                 existencia.setExistenciaActualE(BigInteger.valueOf(existenciaAct));
                 existencia.setExistenciaIniE(BigInteger.valueOf(existenciaIni));
-                existencia.setValorTotalE(valorTotal);
+                existencia.setValorTotalE(roundDecimal(valorTotal));
 
                 ejc.create(existencia);
 
@@ -150,6 +152,10 @@ public class existenciaDAO {
         }
 
         return codigoAux;
+    }
+    
+    public Double roundDecimal(Double val) {
+        return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     /**

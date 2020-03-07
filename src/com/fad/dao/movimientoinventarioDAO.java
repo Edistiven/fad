@@ -11,7 +11,9 @@ import com.fad.entities.Ordeninventario;
 import com.fad.entities.Producto;
 import com.fad.entities.Tipordeninv;
 import com.fad.entities.Usuario;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,24 +87,6 @@ public class movimientoinventarioDAO {
         } catch (Exception e) {
             System.out.println("Ha ocurrido un error!!!: ");
             e.printStackTrace();
-        }
-    }
-
-    public void modificar(int ids, String nombreToi, String descripcionToi) {
-        try {
-
-            //tipordeninv = new Tipordeninv();
-        } catch (Exception e) {
-            System.out.println("Ha ocurrido un error!!!" + e);
-            e.printStackTrace();
-        }
-    }
-
-    public void eliminar(int id) {
-        try {
-
-        } catch (Exception e) {
-
         }
     }
 
@@ -188,7 +172,7 @@ public class movimientoinventarioDAO {
     public void addMovimientosInv(String idExistencia, String cantidadMov, String cantidadA, String valorT, String observaciones) {
         setExistencia(buscarExistencia(idExistencia));
         getExistencia().setExistenciaActualE(BigInteger.valueOf(Integer.valueOf(cantidadA)));
-        getExistencia().setValorTotalE(Double.valueOf(valorT));
+        getExistencia().setValorTotalE(roundDecimal(Double.valueOf(valorT)));
 
         movimientoInventario.setIdExistencia(getExistencia());
         movimientoInventario.setCantidadMov(BigInteger.valueOf(Integer.valueOf(cantidadA)));
@@ -425,6 +409,10 @@ public class movimientoinventarioDAO {
 
     }
 
+    public Double roundDecimal(Double val) {
+        return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+    }
+
     /**
      * Consultas SQL*
      */
@@ -449,7 +437,7 @@ public class movimientoinventarioDAO {
         return e;
 
     }
-    
+
     public Usuario buscarUsuario(String nombre) {
 
         EntityManager em = ejc.getEntityManager(); //

@@ -6,7 +6,9 @@ import com.fad.controller.TipordeninvJpaController;
 import com.fad.entities.Existencia;
 import com.fad.entities.Producto;
 import com.fad.entities.Tipordeninv;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,7 +37,7 @@ public class productoDAO {
             producto.setIdProducto(Integer.BYTES);
             producto.setNombrePro(nombreP);
             producto.setDescripcionPro(descripcionP);
-            producto.setValorUnitPro(valorP);
+            producto.setValorUnitPro(roundDecimal(valorP));
             pjc.create(producto);
 
             System.out.println("Se ha guardado con exito!!!");
@@ -75,7 +77,7 @@ public class productoDAO {
         System.out.println("Producto " + producto.getNombrePro());
 
         for (Existencia e : existencias) {
-            e.setValorTotalE(valorP * e.getExistenciaActualE().intValue());
+            e.setValorTotalE(roundDecimal(valorP * e.getExistenciaActualE().intValue()));
             e.setIdProducto(producto);
             try {
                 ejc.edit(e);
@@ -119,6 +121,10 @@ public class productoDAO {
             model.addRow(datosP);
         }
         tablaP.setModel(model);
+    }
+
+    public Double roundDecimal(Double val) {
+        return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     /**
