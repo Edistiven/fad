@@ -24,41 +24,42 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
-				<reportElement x="117" y="19" width="383" height="20"/>
+				<reportElement x="95" y="52" width="383" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FUNDACIÓN DE ATENCIÓN AL DISCAPACITADO]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="108" height="52"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
 			<staticText>
-				<reportElement x="244" y="57" width="134" height="20"/>
+				<reportElement x="206" y="18" width="134" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[QUITO - ECUADOR]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="98" height="50"/>
-				<imageExpression class="java.lang.String"><![CDATA["logo.jpg"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="182" y="39" width="267" height="20"/>
+				<reportElement x="144" y="0" width="267" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dirección: Av. Teniente Hugo Ortiz y Diego Mejía]]></text>
 			</staticText>
 		</band>
-	</title>
-	<pageHeader>
-		<band height="15" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="71" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="6" y="34" width="92" height="37" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="0" y="34" width="105" height="37" forecolor="#000000" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -72,7 +73,7 @@
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="198" y="34" width="110" height="37" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="205" y="34" width="110" height="37" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -86,7 +87,7 @@
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="98" y="34" width="100" height="37" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="105" y="34" width="100" height="37" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -100,7 +101,7 @@
 				<text><![CDATA[Producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="490" y="34" width="41" height="37" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="497" y="34" width="58" height="37" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -114,14 +115,14 @@
 				<text><![CDATA[V/T]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="205" y="0" width="209" height="20"/>
-				<textElement textAlignment="Center">
+				<reportElement x="163" y="0" width="209" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE EXISTENCIAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="449" y="34" width="41" height="37" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="456" y="34" width="41" height="37" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -135,7 +136,7 @@
 				<text><![CDATA[V/U]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="378" y="34" width="71" height="37" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="385" y="34" width="71" height="37" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -149,7 +150,7 @@
 				<text><![CDATA[Existencia Actual]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="308" y="34" width="70" height="37" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="315" y="34" width="70" height="37" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -167,7 +168,7 @@
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField>
-				<reportElement x="6" y="0" width="92" height="24"/>
+				<reportElement x="0" y="0" width="105" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -181,7 +182,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{id_existencia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="198" y="0" width="110" height="24"/>
+				<reportElement x="205" y="0" width="110" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -195,7 +196,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion_pro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="308" y="0" width="70" height="24"/>
+				<reportElement x="315" y="0" width="70" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -209,7 +210,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{existencia_ini_e}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="98" y="0" width="100" height="24"/>
+				<reportElement x="105" y="0" width="100" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -223,7 +224,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_pro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="378" y="0" width="71" height="24"/>
+				<reportElement x="385" y="0" width="71" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -237,7 +238,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{existencia_actual_e}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="449" y="0" width="41" height="24"/>
+				<reportElement x="456" y="0" width="41" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -251,7 +252,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valor_unit_pro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="490" y="0" width="41" height="24"/>
+				<reportElement x="497" y="0" width="58" height="24"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -269,7 +270,7 @@
 	<columnFooter>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="531" y="0" width="24" height="20"/>
+				<reportElement x="538" y="0" width="24" height="20"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
